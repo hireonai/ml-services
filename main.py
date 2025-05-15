@@ -1,11 +1,5 @@
-from fastapi import FastAPI
-from routes.CVJobAIAnalyzer import router as cv_job_ai_analyzer_router
+import uvicorn
+from app import app
 
-app = FastAPI()
-
-app.include_router(cv_job_ai_analyzer_router)
-
-
-@app.get("/")
-def read_root():
-    return {"message": "Hello World"}
+if __name__ == "__main__":
+    uvicorn.run("app:app", host="0.0.0.0", port=8000, reload=True)

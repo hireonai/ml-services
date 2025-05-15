@@ -24,7 +24,7 @@ from starlette import status
 from typing import List
 from google.cloud import storage
 
-from utils.system_prompt import CV_JOB_ANALYSIS_SYSTEM_PROMPT
+from app.utils.system_prompt import CV_JOB_ANALYSIS_SYSTEM_PROMPT
 
 load_dotenv()
 
@@ -55,8 +55,6 @@ router = APIRouter(
 
 
 class JobDetails(BaseModel):
-    url: str
-    company_profile_src: str
     company_name: str
     job_position: str
     employment_type: str
@@ -74,9 +72,40 @@ class CVJobAnalysisRequest(BaseModel):
     
     class Config:
         arbitrary_types_allowed = True
+        json_schema_extra = {
+            "example": {
+                "job_details": {
+                    "company_name": "Dexa Group",
+                    "job_position": "Data Scientist",
+                    "employment_type": "Penuh waktu",
+                    "working_location_type": "On-site",
+                    "working_location": "Tangerang Selatan",
+                    "min_experience": "Min. 1 years of experience",
+                    "salary": "Negotiable",
+                    "job_desc_list": [
+                        "Processing and analyzing various types of data or raw information to discover patterns, gather insights, and achieve business objectives.",
+                        "Build predictive analytics and optimization models to drive actionable insights that improve business performance or related key metrics.",
+                        "Explore and develop AI use cases aimed at enhancing productivity, automating processes, and adopting new technologies within the organization.",
+                        "Work closely with cross-functional teams, including business stakeholders, to understand their needs, communicate findings effectively, and implement data-driven solutions.",
+                        "Engage in continuous learning and stay updated on data science methods, use cases, and technology advancements."
+                    ],
+                    "job_qualification_list": [
+                        "Bachelor in Mathematics, Statistics, or Information Technology from a top university.",
+                        "Minimum of 1 year of working or internship experience as a Data Scientist or a related project portfolio.",
+                        "Fresh graduates are welcome to apply",
+                        "Strong analytical and statistical skills with a high sense of logical thinking.",
+                        "Experience in big data analysis, data warehousing, and business intelligence.",
+                        "Proficient in using R and Python to build machine learning models.",
+                        "Experience with Hadoop, Spark, Graph DB, and Gen-AI use cases is an advantage.",
+                        "Ability to work both individually and as part of a team",
+                        "Willing to work on site & full time in Head Office Bintaro"
+                    ]
+                },
+                "cv_cloud_path": "user_cv/CV EVAN - CAPSTONE.pdf"
+            }
+        }
 
 
-# TODO: Add Course Recommender and Download Logic from Cloud Storage
 @router.post("/", status_code=status.HTTP_200_OK)
 async def get_cv_job_analysis_flash(
     request: Request, 
