@@ -1,51 +1,61 @@
-name: Deploy to Cloud Run
+   name: Deploy to Cloud Run
 
-on:
-  push:
-    branches: [ main ]
+   on:
+     push:
+       branches: [ main ]
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    
-    steps:
-    - uses: actions/checkout@v3
+   jobs:
+     deploy:
+       runs-on: ubuntu-latest
+       
+       steps:
+       - uses: actions/checkout@v3
 
-    # Auth to Google Cloud - langkah wajib pertama
-    - id: 'auth'
-      name: 'Authenticate to Google Cloud'
-      uses: 'google-github-actions/auth@v1'
-      with:
-        credentials_json: '${{ secrets.GCP_SA_KEY }}'
+       # Auth ke Google Cloud
+       - id: 'auth'
+         name: 'Authenticate to Google Cloud'
+         uses: 'google-github-actions/auth@v1'
+         with:
+           credentials_json: '${{ secrets.GCP_SA_KEY }}'
 
-    # Setup gcloud CLI tanpa parameter tambahan
-    - name: 'Set up Cloud SDK'
-      uses: 'google-github-actions/setup-gcloud@v1'
+       # Setup gcloud CLI
+       - name: 'Set up Cloud SDK'
+         uses: 'google-github-actions/setup-gcloud@v1'
 
-    # Menggunakan Artifact Registry alih-alih Container Registry
-    - name: 'Configure Docker for Artifact Registry'
-      run: |
-        gcloud auth configure-docker REGION-docker.pkg.dev
+       # Buat repository Artifact Registry jika belum ada
+       - name: 'Create Artifact Registry repository'
+         run: |
+           if ! gcloud artifacts repositories describe ml-services --location=${{ secrets.GCP_REGION }}; then
+             gcloud artifacts repositories create ml-services \
+               --repository-format=docker \
+               --location=${{ secrets.GCP_REGION }} \
+               --description="ML Services container images"
+           fi
 
-    # Setup files
-    - name: 'Setup credentials'
-      run: |
-        mkdir -p credentials
-        echo '${{ secrets.GOOGLE_CLOUD_STORAGE_SERVICE_ACCOUNT }}' > credentials/google_cloud_storage_service_account.json
-        echo "GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}" >> .env
-        echo "GOOGLE_CLOUD_STORAGE_SERVICE_ACCOUNT_PATH=credentials/google_cloud_storage_service_account.json" >> .env
+       # Configure Docker
+       - name: 'Configure Docker'
+         run: |
+           gcloud auth configure-docker ${{ secrets.GCP_REGION }}-docker.pkg.dev
 
-    # Build dan push Docker image ke Artifact Registry
-    - name: 'Build and push'
-      run: |
-        docker build -t ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/ml-services/api:${{ github.sha }} .
-        docker push ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/ml-services/api:${{ github.sha }}
+       # Setup files
+       - name: 'Setup credentials'
+         run: |
+           mkdir -p credentials
+           echo '${{ secrets.GOOGLE_CLOUD_STORAGE_SERVICE_ACCOUNT }}' > credentials/google_cloud_storage_service_account.json
+           echo "GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}" >> .env
+           echo "GOOGLE_CLOUD_STORAGE_SERVICE_ACCOUNT_PATH=credentials/google_cloud_storage_service_account.json" >> .env
 
-    # Deploy ke Cloud Run
-    - name: 'Deploy to Cloud Run'
-      run: |
-        gcloud run deploy ml-services \
-          --image ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/ml-services/api:${{ github.sha }} \
-          --platform managed \
-          --region ${{ secrets.GCP_REGION }} \
-          --allow-unauthenticated
+       # Build dan push Docker image
+       - name: 'Build and push'
+         run: |
+           docker build -t ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/ml-services/api:${{ github.sha }} .
+           docker push ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/ml-services/api:${{ github.sha }}
+
+       # Deploy ke Cloud Run
+       - name: 'Deploy to Cloud Run'
+         run: |
+           gcloud run deploy ml-services \
+             --image ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/ml-services/api:${{ github.sha }} \
+             --platform managed \
+             --region ${{ secrets.GCP_REGION }} \
+             --allow-unauthenticated
