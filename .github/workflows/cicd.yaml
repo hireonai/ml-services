@@ -22,14 +22,6 @@
        - name: 'Set up Cloud SDK'
          uses: 'google-github-actions/setup-gcloud@v2'
 
-       # Grant service account access
-       - name: Grant service account access
-         run: |
-           gcloud iam service-accounts add-iam-policy-binding \
-             1041613229637-compute@developer.gserviceaccount.com \
-             --member="serviceAccount:gi-action-cicd@${{ secrets.GCP_PROJECT_ID }}.iam.gserviceaccount.com" \
-             --role="roles/iam.serviceAccountUser"
-
        # Buat repository Artifact Registry jika belum ada
        - name: 'Create Artifact Registry repository'
          run: |
