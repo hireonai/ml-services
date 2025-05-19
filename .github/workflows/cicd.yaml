@@ -11,23 +11,33 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    # Auth to Google Cloud - langkah wajib pertama
+    # Auth to Google Cloud
     - id: 'auth'
       name: 'Authenticate to Google Cloud'
       uses: 'google-github-actions/auth@v1'
       with:
         credentials_json: '${{ secrets.GCP_SA_KEY }}'
 
-    # Setup gcloud CLI tanpa parameter tambahan
+    # Setup gcloud CLI
     - name: 'Set up Cloud SDK'
       uses: 'google-github-actions/setup-gcloud@v1'
 
-    # Menggunakan Artifact Registry alih-alih Container Registry
+    # Create repository if needed
+    - name: 'Create Artifact Registry repository'
+      run: |
+        if ! gcloud artifacts repositories describe ml-services --location=${{ secrets.GCP_REGION }}; then
+          gcloud artifacts repositories create ml-services \
+            --repository-format=docker \
+            --location=${{ secrets.GCP_REGION }} \
+            --description="ML Services container images"
+        fi
+
+    # Configure Docker with correct syntax
     - name: 'Configure Docker for Artifact Registry'
       run: |
-        gcloud auth configure-docker REGION-docker.pkg.dev
+        gcloud auth configure-docker ${{ secrets.GCP_REGION }}-docker.pkg.dev --quiet
 
-    # Setup files
+    # Setup credentials and env
     - name: 'Setup credentials'
       run: |
         mkdir -p credentials
@@ -35,13 +45,13 @@ jobs:
         echo "GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}" >> .env
         echo "GOOGLE_CLOUD_STORAGE_SERVICE_ACCOUNT_PATH=credentials/google_cloud_storage_service_account.json" >> .env
 
-    # Build dan push Docker image ke Artifact Registry
+    # Build and push Docker image
     - name: 'Build and push'
       run: |
         docker build -t ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/ml-services/api:${{ github.sha }} .
         docker push ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/ml-services/api:${{ github.sha }}
 
-    # Deploy ke Cloud Run
+    # Deploy to Cloud Run
     - name: 'Deploy to Cloud Run'
       run: |
         gcloud run deploy ml-services \
