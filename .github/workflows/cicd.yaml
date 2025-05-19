@@ -37,11 +37,9 @@ jobs:
       run: |
         gcloud auth configure-docker ${{ secrets.GCP_REGION }}-docker.pkg.dev --quiet
 
-    # Setup credentials and env
-    - name: 'Setup credentials'
+    # Create .env file
+    - name: 'Setup .env file'
       run: |
-        mkdir -p credentials
-        echo '${{ secrets.GOOGLE_CLOUD_STORAGE_SERVICE_ACCOUNT }}' > credentials/google_cloud_storage_service_account.json
         echo "GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}" >> .env
         echo "GOOGLE_CLOUD_STORAGE_SERVICE_ACCOUNT_PATH=credentials/google_cloud_storage_service_account.json" >> .env
 
@@ -58,6 +56,5 @@ jobs:
           --image ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/ml-services/api:${{ github.sha }} \
           --platform managed \
           --region ${{ secrets.GCP_REGION }} \
-          --set-env-vars="GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }},GOOGLE_CLOUD_STORAGE_SERVICE_ACCOUNT_PATH=/secrets/service-account/latest" \
-          --update-secrets="/secrets/service-account=google-cloud-storage-service-account:latest" \
+          --set-env-vars="GOOGLE_CLOUD_STORAGE_SERVICE_ACCOUNT_PATH=credentials/google_cloud_storage_service_account.json,GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}" \
           --allow-unauthenticated
