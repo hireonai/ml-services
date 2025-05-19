@@ -32,10 +32,16 @@ jobs:
             --description="ML Services container images"
         fi
 
-    # Configure Docker with correct syntax
+    # Configure Docker
     - name: 'Configure Docker for Artifact Registry'
       run: |
         gcloud auth configure-docker ${{ secrets.GCP_REGION }}-docker.pkg.dev --quiet
+
+    # Create credentials directory and file
+    - name: 'Setup credentials'
+      run: |
+        mkdir -p credentials
+        echo '${{ secrets.GOOGLE_CLOUD_STORAGE_SERVICE_ACCOUNT }}' > credentials/google_cloud_storage_service_account.json
 
     # Create .env file
     - name: 'Setup .env file'
@@ -56,5 +62,5 @@ jobs:
           --image ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/ml-services/api:${{ github.sha }} \
           --platform managed \
           --region ${{ secrets.GCP_REGION }} \
-          --set-env-vars="GOOGLE_CLOUD_STORAGE_SERVICE_ACCOUNT_PATH=credentials/google_cloud_storage_service_account.json,GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}" \
+          --set-env-vars="GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}" \
           --allow-unauthenticated
