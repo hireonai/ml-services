@@ -26,9 +26,15 @@ from app.utils.system_prompt import CV_JOB_ANALYSIS_SYSTEM_PROMPT
 load_dotenv()
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.getenv(
-    "GOOGLE_CLOUD_STORAGE_SERVICE_ACCOUNT_PATH"
-)
+if os.getenv("GOOGLE_CLOUD_STORAGE_SERVICE_ACCOUNT_PATH"):
+    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.getenv(
+        "GOOGLE_CLOUD_STORAGE_SERVICE_ACCOUNT_PATH"
+    )
+else:
+    # Default path inside container
+    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = (
+        "credentials/google_cloud_storage_service_account.json"
+    )
 
 
 @asynccontextmanager
