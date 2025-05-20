@@ -9,6 +9,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 # Create credentials directory
 RUN mkdir -p credentials
+COPY credentials/ ./credentials
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
@@ -30,9 +31,6 @@ COPY .env.example ./.env.example
 # Set permissions
 RUN chown -R appuser:appuser /app
 USER appuser
-
-# Health check using PORT variable
-HEALTHCHECK CMD curl --fail http://localhost:${PORT:-8080}/health || exit 1
 
 # Run the application with PORT environment variable
 CMD ["sh", "-c", "uvicorn main:app --host 0.0.0.0 --port ${PORT:-8080}"]

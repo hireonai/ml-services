@@ -1,11 +1,8 @@
 __pycache__/
 *.py[cod]
 *$py.class
-.env
 .git
 .gitignore
 .venv
-credentials/*
-!credentials/.gitkeep
 data/*
 !data/.gitkeep
