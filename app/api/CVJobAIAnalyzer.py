@@ -11,6 +11,7 @@ import time
 import re
 import json
 import asyncio
+import logging
 from typing import List
 
 from fastapi import APIRouter, Request, Body
@@ -48,7 +49,7 @@ async def lifespan(application: APIRouter):
     # Startup logic
     application.state.client = genai.Client(api_key=GEMINI_API_KEY)
     application.state.storage_client = storage.Client()
-    print("Gemini client and storage client initialized")
+    logging.info("Gemini client and storage client initialized")
     yield
     # Shutdown logic
 
@@ -130,14 +131,14 @@ async def get_cv_job_analysis_flash(
 
     try:
         # Get file directly from Google Cloud Storage asynchronously
-        print(f"Fetching file from GCS path: {data.cv_cloud_path}")
+        logging.info("Fetching file from GCS path: %s", data.cv_cloud_path)
         storage_client = request.app.state.storage_client
         bucket = storage_client.bucket("main-storage-hireon")
         blob = bucket.blob(data.cv_cloud_path)
 
         # Download file content as bytes asynchronously
         user_cv_content = await asyncio.to_thread(blob.download_as_bytes)
-        print(f"Downloaded {len(user_cv_content)} bytes from Cloud Storage")
+        logging.info("Downloaded %d bytes from Cloud Storage", len(user_cv_content))
 
         # Format job details as formatted text for the model
         formatted_job_details = f"""
@@ -188,5 +189,5 @@ async def get_cv_job_analysis_flash(
 
         return result
     except Exception as e:
-        print(f"Error occurred: {str(e)}")
+        logging.info("Error occurred: %s", str(e))
         raise
