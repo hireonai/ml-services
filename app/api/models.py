@@ -4,8 +4,42 @@ API data models.
 This module defines Pydantic models for request/response data validation and serialization.
 """
 
-from typing import List
-from pydantic import BaseModel
+from typing import List, Dict, Optional, Any, Union
+from pydantic import BaseModel, HttpUrl, Field
+
+
+# Response model untuk CV Job Analysis
+class SkillSuggestion(BaseModel):
+    keypoint: str
+    penjelasan: str
+
+
+class CVJobAnalysisResponse(BaseModel):
+    cv_relevance_score: int = Field(
+        ..., description="Score indicating relevance of CV to job (0-100)"
+    )
+    explaination: List[str] = Field(
+        ..., description="List of key insights about CV's relevance to job"
+    )
+    skill_identification_dict: Dict[str, int] = Field(
+        ..., description="Dictionary of skills with scores (0-100)"
+    )
+    suggestions: List[SkillSuggestion] = Field(
+        ..., description="Personalized suggestions for CV improvement"
+    )
+    processing_time_seconds: float = Field(
+        ..., description="Time taken to process request in seconds"
+    )
+    model: str = Field(..., description="AI model used for analysis")
+
+
+class CoverLetterResponse(BaseModel):
+    pdf_url: HttpUrl = Field(..., description="Public URL to access the generated PDF")
+    pdf_cloud_path: str = Field(..., description="Cloud storage path to the PDF file")
+    processing_time_seconds: float = Field(
+        ..., description="Time taken to process request in seconds"
+    )
+    model: str = Field(..., description="AI model used for generation")
 
 
 class CoverLetterJobDetails(BaseModel):
