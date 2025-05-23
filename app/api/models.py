@@ -1,0 +1,62 @@
+"""
+API data models.
+
+This module defines Pydantic models for request/response data validation and serialization.
+"""
+
+from typing import List
+from pydantic import BaseModel
+
+
+class JobDetails(BaseModel):
+    """
+    Job details model containing position information and requirements.
+    """
+
+    job_position: str
+    min_experience: str
+    job_desc_list: List[str]
+    job_qualification_list: List[str]
+
+
+class CVJobAnalysisRequest(BaseModel):
+    """
+    Request model for CV analysis against job details.
+    """
+
+    job_details: JobDetails
+    cv_cloud_path: str  # Path to the file in GCS bucket (e.g., "user_cv/filename.pdf")
+
+    class Config:
+        """
+        Configuration for the CVJobAnalysisRequest model with example data.
+        """
+
+        arbitrary_types_allowed = True
+        json_schema_extra = {
+            "example": {
+                "job_details": {
+                    "cv_cloud_path": "user_cv/CV EVAN - CAPSTONE.pdf",
+                    "job_position": "Data Scientist",
+                    "min_experience": "Min. 1 years of experience",
+                    "job_desc_list": [
+                        "Processing and analyzing various types of data or raw information to discover patterns, gather insights, and achieve business objectives.",
+                        "Build predictive analytics and optimization models to drive actionable insights that improve business performance or related key metrics.",
+                        "Explore and develop AI use cases aimed at enhancing productivity, automating processes, and adopting new technologies within the organization.",
+                        "Work closely with cross-functional teams, including business stakeholders, to understand their needs, communicate findings effectively, and implement data-driven solutions.",
+                        "Engage in continuous learning and stay updated on data science methods, use cases, and technology advancements.",
+                    ],
+                    "job_qualification_list": [
+                        "Bachelor in Mathematics, Statistics, or Information Technology from a top university.",
+                        "Minimum of 1 year of working or internship experience as a Data Scientist or a related project portfolio.",
+                        "Fresh graduates are welcome to apply",
+                        "Strong analytical and statistical skills with a high sense of logical thinking.",
+                        "Experience in big data analysis, data warehousing, and business intelligence.",
+                        "Proficient in using R and Python to build machine learning models.",
+                        "Experience with Hadoop, Spark, Graph DB, and Gen-AI use cases is an advantage.",
+                        "Ability to work both individually and as part of a team",
+                        "Willing to work on site & full time in Head Office Bintaro",
+                    ],
+                },
+            }
+        }

@@ -1,3 +1,9 @@
+"""
+System prompts for AI models.
+
+This module contains system prompts used to guide AI models in generating specific responses.
+"""
+
 CV_JOB_ANALYSIS_SYSTEM_PROMPT = """
 **Tugas CV Matching Analyst**
 Anda adalah senior HR professional dengan 20+ tahun pengalaman di berbagai industri. Analisis CV dan Job Description dengan ketat menggunakan parameter:

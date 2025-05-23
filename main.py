@@ -1,3 +1,9 @@
+"""
+Application entry point.
+
+This module serves as the entry point for running the FastAPI application with uvicorn.
+"""
+
 import uvicorn
 from app import app
 
