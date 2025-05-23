@@ -44,10 +44,10 @@ def format_job_details(job_details):
     Experience Required: {job_details.min_experience}
     
     Job Description:
-    {"\n".join(f"- {item}" for item in job_details.job_desc_list)}
+    {chr(10).join(f"- {item}" for item in job_details.job_desc_list)}
     
     Qualifications:
-    {"\n".join(f"- {item}" for item in job_details.job_qualification_list)}
+    {chr(10).join(f"- {item}" for item in job_details.job_qualification_list)}
     """
 
 
