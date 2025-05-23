@@ -126,7 +126,7 @@ async def cover_letter_generator(
         )
 
         # Format the response into HTML
-        html_content = format_cover_letter_response(response)
+        html_content = format_cover_letter_response(response.text)
 
         # Generate PDF and upload to Cloud Storage
         pdf_result = await generate_and_upload_pdf(
