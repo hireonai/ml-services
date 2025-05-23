@@ -189,6 +189,8 @@ OUTPUT ADALAH DOKUMEN HTML LENGKAP DAN VALID: Hasil akhir harus berupa string HT
 
 PERHATIKAN DETAIL JSON: Manfaatkan semua field yang relevan dari input JSON Detail Pekerjaan untuk personalisasi maksimal.
 
+BERIKAN OUTPUT LANGSUNG RAW TEKS HTML SAJA, TANPA TAGS HTML\"\"\"\"\"\" SEPERTI YANG KAMU KELUARKAN
+
 Template HTML Surat Lamaran (Wajib Digunakan)
 {CV_TEMPLATE_HTML}
 """
