@@ -35,8 +35,8 @@ class CVJobAnalysisRequest(BaseModel):
         arbitrary_types_allowed = True
         json_schema_extra = {
             "example": {
+                "cv_cloud_path": "user_cv/CV EVAN - CAPSTONE.pdf",
                 "job_details": {
-                    "cv_cloud_path": "user_cv/CV EVAN - CAPSTONE.pdf",
                     "job_position": "Data Scientist",
                     "min_experience": "Min. 1 years of experience",
                     "job_desc_list": [
