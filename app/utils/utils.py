@@ -129,114 +129,18 @@ def format_cover_letter_response(response_text):
     Returns:
         str: Formatted HTML content ready for PDF conversion
     """
-    # Extract just the content from the response
-    content = (
-        response_text.text if hasattr(response_text, "text") else str(response_text)
-    )
 
-    # Use double curly braces to escape them in the template
-    html_template = """<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cover Letter</title>
-    <style>
-        @font-face {{
-            font-family: 'Arial';
-            src: local('Arial');
-        }}
-        
-        @page {{
-            size: A4;
-            margin: 0;
-        }}
-        
-        body {{
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background-color: #fff;
-        }}
+    # Remove markdown code block formatting if present
+    # This will remove ```html at the start and ``` at the end
+    content = response_text.strip()
+    if content.startswith("```html"):
+        content = content[7:]  # Remove ```html
+    elif content.startswith("```"):
+        content = content[3:]  # Remove ```
 
-        .cover-letter {{
-            background-color: #fff;
-            padding: 30px;
-            width: 210mm; /* A4 width */
-            height: 297mm; /* A4 height */
-            box-sizing: border-box;
-            font-size: 11pt; /* Base font size */
-        }}
+    if content.endswith("```"):
+        content = content[:-3]  # Remove trailing ```
 
-        .sender-info {{
-            margin-bottom: 20px;
-        }}
+    content = content.strip()  # Remove any extra whitespace
 
-        .sender-info h1 {{
-            font-size: 24pt; /* Larger font for name */
-            font-weight: bold;
-            margin: 0 0 5px 0;
-            color: #333;
-        }}
-
-        .sender-info p {{
-            margin: 2px 0;
-            font-size: 10pt;
-            color: #555;
-        }}
-
-        .date {{
-            text-align: right;
-            margin-bottom: 20px;
-            font-size: 11pt;
-            color: #333;
-        }}
-
-        .recipient-info {{
-            margin-bottom: 15px;
-        }}
-
-        .recipient-info p {{
-            margin: 2px 0;
-            font-size: 11pt;
-            color: #333;
-        }}
-        .recipient-info .recipient-name {{
-            font-weight: bold;
-        }}
-
-        .salutation {{
-            margin-bottom: 15px;
-            font-size: 11pt;
-            color: #333;
-        }}
-
-        .body-paragraph {{
-            margin-bottom: 12px;
-            text-align: justify;
-            font-size: 11pt;
-            color: #333;
-        }}
-
-        .closing {{
-            margin-top: 20px;
-            margin-bottom: 5px;
-            font-size: 11pt;
-            color: #333;
-        }}
-
-        .signature {{
-            font-size: 11pt;
-            color: #333;
-        }}
-    </style>
-</head>
-<body>
-    <div class="cover-letter">
-        {content}
-    </div>
-</body>
-</html>"""
-
-    return html_template.format(content=content)
+    return content
