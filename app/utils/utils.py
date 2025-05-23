@@ -182,8 +182,14 @@ async def generate_and_upload_pdf(
         pdf_blob = bucket.blob(pdf_cloud_path)
         pdf_blob.upload_from_file(pdf_buffer, content_type="application/pdf")
 
+        # Make the blob publicly accessible
+        pdf_blob.make_public()
+
+        # Get the public URL
+        public_url = pdf_blob.public_url
+
         return {
-            "pdf_url": pdf_blob.public_url,
+            "pdf_url": public_url,
             "pdf_cloud_path": pdf_cloud_path,
             "pdf_filename": pdf_filename,
         }
