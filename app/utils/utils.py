@@ -8,6 +8,9 @@ downloading files, formatting job details, and interacting with the Gemini AI AP
 import re
 import json
 import asyncio
+import io
+import time
+from weasyprint import HTML
 
 from google.genai import types
 
@@ -144,3 +147,48 @@ def format_cover_letter_response(response_text):
     content = content.strip()  # Remove any extra whitespace
 
     return content
+
+
+async def generate_and_upload_pdf(
+    storage_client, html_content, filename_prefix="cover_letter"
+):
+    """
+    Generate PDF from HTML content and upload it to Google Cloud Storage.
+
+    Args:
+        storage_client: Google Cloud Storage client
+        html_content: HTML content to convert to PDF
+        filename_prefix: Prefix for the generated filename
+
+    Returns:
+        dict: Contains PDF URL and filename
+    """
+
+    timestamp = int(time.time())
+    pdf_filename = f"{filename_prefix}_{timestamp}.pdf"
+    pdf_cloud_path = f"generated_cv/{pdf_filename}"
+
+    # Get bucket
+    bucket = storage_client.bucket("main-storage-hireon")
+
+    # Generate PDF and upload
+    def generate_and_upload():
+        # Generate PDF in memory
+        pdf_buffer = io.BytesIO()
+        HTML(string=html_content).write_pdf(pdf_buffer)
+        pdf_buffer.seek(0)
+
+        # Upload PDF
+        pdf_blob = bucket.blob(pdf_cloud_path)
+        pdf_blob.upload_from_file(pdf_buffer, content_type="application/pdf")
+
+        return {
+            "pdf_url": pdf_blob.public_url,
+            "pdf_cloud_path": pdf_cloud_path,
+            "pdf_filename": pdf_filename,
+        }
+
+    # Run PDF generation and upload in a separate thread
+    result = await asyncio.to_thread(generate_and_upload)
+
+    return result

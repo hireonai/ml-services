@@ -25,6 +25,7 @@ from app.utils.utils import (
     process_gemini_response,
     generate_cover_letter,
     format_cover_letter_response,
+    generate_and_upload_pdf,
 )
 
 load_dotenv()
@@ -108,79 +109,40 @@ async def cover_letter_generator(
     """
     start_time = time.time()
 
-    user_cv_content = await download_user_cv(
-        request.app.state.storage_client, data.cv_cloud_path
-    )
-
-    formatted_job_details = format_job_details_for_cover_letter_generation(
-        data.job_details
-    )
-
-    response = await generate_cover_letter(
-        request.app.state.client,
-        user_cv_content,
-        formatted_job_details,
-        "23 Mei 2025",
-    )
-
-    # Format the response into HTML
-    html_content = format_cover_letter_response(response.text)
-
-    # Calculate processing time
-    processing_time = time.time() - start_time
-
-    # Save HTML and PDF content to Google Cloud Storage
     try:
-        import asyncio
-        from weasyprint import HTML
-        import io
-
-        timestamp = int(time.time())
-
-        # Generate file names
-        html_filename = f"debug_cover_letter_{timestamp}.html"
-        pdf_filename = f"debug_cover_letter_{timestamp}.pdf"
-
-        # Define cloud storage paths
-        html_cloud_path = f"generated_cv/{html_filename}"
-        pdf_cloud_path = f"generated_cv/{pdf_filename}"
-
-        # Get bucket
-        bucket = request.app.state.storage_client.bucket("main-storage-hireon")
-
-        # Upload HTML file
-        html_blob = bucket.blob(html_cloud_path)
-        html_blob.upload_from_string(html_content, content_type="text/html")
-
-        # Generate PDF and upload
-        def generate_and_upload_pdf():
-            # Generate PDF in memory
-            pdf_buffer = io.BytesIO()
-            HTML(string=html_content).write_pdf(pdf_buffer)
-            pdf_buffer.seek(0)
-
-            # Upload PDF
-            pdf_blob = bucket.blob(pdf_cloud_path)
-            pdf_blob.upload_from_file(pdf_buffer, content_type="application/pdf")
-
-            return pdf_blob.public_url
-
-        # Run PDF generation and upload in a separate thread
-        pdf_url = await asyncio.to_thread(generate_and_upload_pdf)
-
-        # Get public URLs
-        html_url = html_blob.public_url
-
-        print(f"Files uploaded to Cloud Storage:\nHTML: {html_url}\nPDF: {pdf_url}")
-        logging.info(
-            f"Files uploaded to Cloud Storage:\nHTML: {html_url}\nPDF: {pdf_url}"
+        user_cv_content = await download_user_cv(
+            request.app.state.storage_client, data.cv_cloud_path
         )
-    except Exception as e:
-        print(f"Failed to upload files to Cloud Storage: {str(e)}")
-        logging.error(f"Failed to upload files to Cloud Storage: {str(e)}")
 
-    return {
-        "html_content": html_content,
-        "processing_time_seconds": round(processing_time, 2),
-        "model": "gemini-2.5-pro-preview-05-06",
-    }
+        formatted_job_details = format_job_details_for_cover_letter_generation(
+            data.job_details
+        )
+
+        response = await generate_cover_letter(
+            request.app.state.client,
+            user_cv_content,
+            formatted_job_details,
+            data.current_date if hasattr(data, "current_date") else "23 Mei 2025",
+        )
+
+        # Format the response into HTML
+        html_content = format_cover_letter_response(response)
+
+        # Generate PDF and upload to Cloud Storage
+        pdf_result = await generate_and_upload_pdf(
+            request.app.state.storage_client, html_content
+        )
+
+        # Calculate processing time
+        processing_time = time.time() - start_time
+
+        return {
+            "pdf_url": pdf_result["pdf_url"],
+            "pdf_cloud_path": pdf_result["pdf_cloud_path"],
+            "processing_time_seconds": round(processing_time, 2),
+            "model": "gemini-2.5-pro-preview-05-06",
+        }
+
+    except Exception as e:
+        logging.error(f"Error in cover letter generation: {str(e)}")
+        raise
