@@ -1,0 +1,962 @@
+[
+    {
+        "company_industry": "Technology and Software Solutions",
+        "company_industry_id": 0
+    },
+    {
+        "company_industry": "Fashion & Apparel",
+        "company_industry_id": 1
+    },
+    {
+        "company_industry": "Beauty and Cosmetics",
+        "company_industry_id": 2
+    },
+    {
+        "company_industry": "Human Resources and Consulting",
+        "company_industry_id": 3
+    },
+    {
+        "company_industry": "Information Technology",
+        "company_industry_id": 4
+    },
+    {
+        "company_industry": "technology services",
+        "company_industry_id": 5
+    },
+    {
+        "company_industry": "Tech Company, Fintech",
+        "company_industry_id": 6
+    },
+    {
+        "company_industry": "Advertising Services",
+        "company_industry_id": 7
+    },
+    {
+        "company_industry": "Ritel Makanan Dan Minuman",
+        "company_industry_id": 8
+    },
+    {
+        "company_industry": "IT Services And IT Consulting",
+        "company_industry_id": 9
+    },
+    {
+        "company_industry": "Industrial Machinery Manufacturing",
+        "company_industry_id": 10
+    },
+    {
+        "company_industry": "Financial Services",
+        "company_industry_id": 11
+    },
+    {
+        "company_industry": "Clothing Retail",
+        "company_industry_id": 12
+    },
+    {
+        "company_industry": "Digital, Tech, Content, Media, Creative",
+        "company_industry_id": 13
+    },
+    {
+        "company_industry": "Perguruan Tinggi",
+        "company_industry_id": 14
+    },
+    {
+        "company_industry": "Hospitality",
+        "company_industry_id": 15
+    },
+    {
+        "company_industry": "Digital Services and Technology",
+        "company_industry_id": 16
+    },
+    {
+        "company_industry": "Media Production",
+        "company_industry_id": 17
+    },
+    {
+        "company_industry": "Professional Training And Coaching",
+        "company_industry_id": 18
+    },
+    {
+        "company_industry": "Management Consulting",
+        "company_industry_id": 19
+    },
+    {
+        "company_industry": "Health and Personal Care",
+        "company_industry_id": 20
+    },
+    {
+        "company_industry": "Property & Real Estate",
+        "company_industry_id": 21
+    },
+    {
+        "company_industry": "Information Technology & Services",
+        "company_industry_id": 22
+    },
+    {
+        "company_industry": "Technology",
+        "company_industry_id": 23
+    },
+    {
+        "company_industry": "IT Consulting and Services",
+        "company_industry_id": 24
+    },
+    {
+        "company_industry": "Healthcare Manufacturer",
+        "company_industry_id": 25
+    },
+    {
+        "company_industry": "Insurance",
+        "company_industry_id": 26
+    },
+    {
+        "company_industry": "Information Technology / IT",
+        "company_industry_id": 27
+    },
+    {
+        "company_industry": "Retail and Wholesale",
+        "company_industry_id": 28
+    },
+    {
+        "company_industry": "Retail",
+        "company_industry_id": 29
+    },
+    {
+        "company_industry": "Retail Health And Beauty",
+        "company_industry_id": 30
+    },
+    {
+        "company_industry": "Business Consultant",
+        "company_industry_id": 31
+    },
+    {
+        "company_industry": "Beauty and Personal Care",
+        "company_industry_id": 32
+    },
+    {
+        "company_industry": "Investasi",
+        "company_industry_id": 33
+    },
+    {
+        "company_industry": "Transportation, Logistics, Supply Chain And Storage",
+        "company_industry_id": 34
+    },
+    {
+        "company_industry": "Oil And Gas",
+        "company_industry_id": 35
+    },
+    {
+        "company_industry": "Pharmaceutical Distribution and Logistics",
+        "company_industry_id": 36
+    },
+    {
+        "company_industry": "Cosmetics manufacturing",
+        "company_industry_id": 37
+    },
+    {
+        "company_industry": "Software Development",
+        "company_industry_id": 38
+    },
+    {
+        "company_industry": "Education",
+        "company_industry_id": 39
+    },
+    {
+        "company_industry": "Footwear",
+        "company_industry_id": 40
+    },
+    {
+        "company_industry": "Truck Transportation",
+        "company_industry_id": 41
+    },
+    {
+        "company_industry": "Philantrophy",
+        "company_industry_id": 42
+    },
+    {
+        "company_industry": "Wholesale Import And Export",
+        "company_industry_id": 43
+    },
+    {
+        "company_industry": "Luxury Goods & Jewelry",
+        "company_industry_id": 44
+    },
+    {
+        "company_industry": "Finance",
+        "company_industry_id": 45
+    },
+    {
+        "company_industry": "Construction",
+        "company_industry_id": 46
+    },
+    {
+        "company_industry": "Retail Luxury Goods And Jewelry",
+        "company_industry_id": 47
+    },
+    {
+        "company_industry": "Consumer Goods",
+        "company_industry_id": 48
+    },
+    {
+        "company_industry": "Environmental Services",
+        "company_industry_id": 49
+    },
+    {
+        "company_industry": "Moms & Children Health",
+        "company_industry_id": 50
+    },
+    {
+        "company_industry": "Financial Technology",
+        "company_industry_id": 51
+    },
+    {
+        "company_industry": "Real Estate",
+        "company_industry_id": 52
+    },
+    {
+        "company_industry": "Food And Beverage Services",
+        "company_industry_id": 53
+    },
+    {
+        "company_industry": "Gym",
+        "company_industry_id": 54
+    },
+    {
+        "company_industry": "Food And Beverage Manufacturing",
+        "company_industry_id": 55
+    },
+    {
+        "company_industry": "IT Consulting & Services Company",
+        "company_industry_id": 56
+    },
+    {
+        "company_industry": "Technology, Information & Internet, Management Consulting",
+        "company_industry_id": 57
+    },
+    {
+        "company_industry": "Technology, Information And Internet",
+        "company_industry_id": 58
+    },
+    {
+        "company_industry": "Manufacture",
+        "company_industry_id": 59
+    },
+    {
+        "company_industry": "ICT Services",
+        "company_industry_id": 60
+    },
+    {
+        "company_industry": "Manufacturing (FMCG)",
+        "company_industry_id": 61
+    },
+    {
+        "company_industry": "Hospitality and Tourism",
+        "company_industry_id": 62
+    },
+    {
+        "company_industry": "Taxi Listrik",
+        "company_industry_id": 63
+    },
+    {
+        "company_industry": "Internet Publishing",
+        "company_industry_id": 64
+    },
+    {
+        "company_industry": "Technology (Software Development)",
+        "company_industry_id": 65
+    },
+    {
+        "company_industry": "E-commerce and Online Retail",
+        "company_industry_id": 66
+    },
+    {
+        "company_industry": "Information Tecnology",
+        "company_industry_id": 67
+    },
+    {
+        "company_industry": "Advertising and Media",
+        "company_industry_id": 68
+    },
+    {
+        "company_industry": "Events Services",
+        "company_industry_id": 69
+    },
+    {
+        "company_industry": "Retail and fashion",
+        "company_industry_id": 70
+    },
+    {
+        "company_industry": "Telecomunication",
+        "company_industry_id": 71
+    },
+    {
+        "company_industry": "Technology Education",
+        "company_industry_id": 72
+    },
+    {
+        "company_industry": "IT Services & IT Consulting",
+        "company_industry_id": 73
+    },
+    {
+        "company_industry": "Food Service",
+        "company_industry_id": 74
+    },
+    {
+        "company_industry": "Medicine Healthcare & Wellbeing",
+        "company_industry_id": 75
+    },
+    {
+        "company_industry": "Technology, Information, Internet",
+        "company_industry_id": 76
+    },
+    {
+        "company_industry": "FARMASI",
+        "company_industry_id": 77
+    },
+    {
+        "company_industry": "Logistic Supply Chain",
+        "company_industry_id": 78
+    },
+    {
+        "company_industry": "FMCG",
+        "company_industry_id": 79
+    },
+    {
+        "company_industry": "Headhunter",
+        "company_industry_id": 80
+    },
+    {
+        "company_industry": "Biotechnology",
+        "company_industry_id": 81
+    },
+    {
+        "company_industry": "Artificial Intelligence",
+        "company_industry_id": 82
+    },
+    {
+        "company_industry": "Technology Services",
+        "company_industry_id": 83
+    },
+    {
+        "company_industry": "Fintech",
+        "company_industry_id": 84
+    },
+    {
+        "company_industry": "Health Care",
+        "company_industry_id": 85
+    },
+    {
+        "company_industry": "Healthcare and Medical Services",
+        "company_industry_id": 86
+    },
+    {
+        "company_industry": "Healthcare Technology",
+        "company_industry_id": 87
+    },
+    {
+        "company_industry": "Education Administration Programs",
+        "company_industry_id": 88
+    },
+    {
+        "company_industry": "Freight And Package Transportation",
+        "company_industry_id": 89
+    },
+    {
+        "company_industry": "Pharmaceutical",
+        "company_industry_id": 90
+    },
+    {
+        "company_industry": "Sporting Goods Manufacturing",
+        "company_industry_id": 91
+    },
+    {
+        "company_industry": "Retail & Consumer Goods",
+        "company_industry_id": 92
+    },
+    {
+        "company_industry": "Fisheries",
+        "company_industry_id": 93
+    },
+    {
+        "company_industry": "Produksi Makanan",
+        "company_industry_id": 94
+    },
+    {
+        "company_industry": "Beverage and Food Manufacturing",
+        "company_industry_id": 95
+    },
+    {
+        "company_industry": "Media & Entertainment",
+        "company_industry_id": 96
+    },
+    {
+        "company_industry": "Banking",
+        "company_industry_id": 97
+    },
+    {
+        "company_industry": "ECommerce",
+        "company_industry_id": 98
+    },
+    {
+        "company_industry": "Business Process Outsourcing (BPO)",
+        "company_industry_id": 99
+    },
+    {
+        "company_industry": "Outsourcing Services",
+        "company_industry_id": 100
+    },
+    {
+        "company_industry": "IT Software",
+        "company_industry_id": 101
+    },
+    {
+        "company_industry": "Facilities Services",
+        "company_industry_id": 102
+    },
+    {
+        "company_industry": "Human Resources Services",
+        "company_industry_id": 103
+    },
+    {
+        "company_industry": "Apparel & Fashion",
+        "company_industry_id": 104
+    },
+    {
+        "company_industry": "Marketing and Branding",
+        "company_industry_id": 105
+    },
+    {
+        "company_industry": "Digital marketing services",
+        "company_industry_id": 106
+    },
+    {
+        "company_industry": "Penerbitan Buku Dan Terbitan Berkala",
+        "company_industry_id": 107
+    },
+    {
+        "company_industry": "IT Service",
+        "company_industry_id": 108
+    },
+    {
+        "company_industry": "E-commerce and Retail",
+        "company_industry_id": 109
+    },
+    {
+        "company_industry": "Hospitals And Health Care",
+        "company_industry_id": 110
+    },
+    {
+        "company_industry": "Mining, Oil, And Gas Industry",
+        "company_industry_id": 111
+    },
+    {
+        "company_industry": "Holding Companies",
+        "company_industry_id": 112
+    },
+    {
+        "company_industry": "IT System Custom Software Development",
+        "company_industry_id": 113
+    },
+    {
+        "company_industry": "Teknologi Informasi",
+        "company_industry_id": 114
+    },
+    {
+        "company_industry": "Non-Profit Organizations",
+        "company_industry_id": 115
+    },
+    {
+        "company_industry": "Recruitment Service and Consultant",
+        "company_industry_id": 116
+    },
+    {
+        "company_industry": "Branding, Creative and Digital Agency Indonesia",
+        "company_industry_id": 117
+    },
+    {
+        "company_industry": "Wifi Platform & Integrated Digital Agency",
+        "company_industry_id": 118
+    },
+    {
+        "company_industry": "Advertising",
+        "company_industry_id": 119
+    },
+    {
+        "company_industry": "Kuliner",
+        "company_industry_id": 120
+    },
+    {
+        "company_industry": "Consumer Services",
+        "company_industry_id": 121
+    },
+    {
+        "company_industry": "Telecommunications Service Provider",
+        "company_industry_id": 122
+    },
+    {
+        "company_industry": "Higher Education",
+        "company_industry_id": 123
+    },
+    {
+        "company_industry": "Trading and Retail",
+        "company_industry_id": 124
+    },
+    {
+        "company_industry": "Hospitality Management",
+        "company_industry_id": 125
+    },
+    {
+        "company_industry": "Fintech, SaaS, Accounting",
+        "company_industry_id": 126
+    },
+    {
+        "company_industry": "Manufacturing (Pharmaceutical)",
+        "company_industry_id": 127
+    },
+    {
+        "company_industry": "Pharmaceutical Manufacturing",
+        "company_industry_id": 128
+    },
+    {
+        "company_industry": "Multinational Consulting / FMCG",
+        "company_industry_id": 129
+    },
+    {
+        "company_industry": "Financial Service",
+        "company_industry_id": 130
+    },
+    {
+        "company_industry": "Online Groceries",
+        "company_industry_id": 131
+    },
+    {
+        "company_industry": "Spectator Sports",
+        "company_industry_id": 132
+    },
+    {
+        "company_industry": "Automotive",
+        "company_industry_id": 133
+    },
+    {
+        "company_industry": "Newspaper",
+        "company_industry_id": 134
+    },
+    {
+        "company_industry": "Electronics",
+        "company_industry_id": 135
+    },
+    {
+        "company_industry": "Tech",
+        "company_industry_id": 136
+    },
+    {
+        "company_industry": "Fast Moving Consumer Good",
+        "company_industry_id": 137
+    },
+    {
+        "company_industry": "Otomotive",
+        "company_industry_id": 138
+    },
+    {
+        "company_industry": "Appliances, Electrical, And Electronics Manufacturing",
+        "company_industry_id": 139
+    },
+    {
+        "company_industry": "Automotive and Manufacturing",
+        "company_industry_id": 140
+    },
+    {
+        "company_industry": "Food And Beverages",
+        "company_industry_id": 141
+    },
+    {
+        "company_industry": "Wholesale Building Materials",
+        "company_industry_id": 142
+    },
+    {
+        "company_industry": "Corporate Banking",
+        "company_industry_id": 143
+    },
+    {
+        "company_industry": "Research, Data, Consulting, Finance, FMCG (Fast Moving Consumer Goods)",
+        "company_industry_id": 144
+    },
+    {
+        "company_industry": "Telecommunications",
+        "company_industry_id": 145
+    },
+    {
+        "company_industry": "Retail Apparel And Fashion",
+        "company_industry_id": 146
+    },
+    {
+        "company_industry": "Transportasi",
+        "company_industry_id": 147
+    },
+    {
+        "company_industry": "Fast Food Restaurant",
+        "company_industry_id": 148
+    },
+    {
+        "company_industry": "Children Toys",
+        "company_industry_id": 149
+    },
+    {
+        "company_industry": "Food & Beverage",
+        "company_industry_id": 150
+    },
+    {
+        "company_industry": "Finance Services",
+        "company_industry_id": 151
+    },
+    {
+        "company_industry": "Pharmaceutical, Consumer And Cosmetic",
+        "company_industry_id": 152
+    },
+    {
+        "company_industry": "Agriculture, Forestry, Fishing",
+        "company_industry_id": 153
+    },
+    {
+        "company_industry": "Hospital & Health Care",
+        "company_industry_id": 154
+    },
+    {
+        "company_industry": "Supply Chain Management and Third Party Logistics",
+        "company_industry_id": 155
+    },
+    {
+        "company_industry": "Aviation & Aerospace",
+        "company_industry_id": 156
+    },
+    {
+        "company_industry": "Transport & Logistics",
+        "company_industry_id": 157
+    },
+    {
+        "company_industry": "Auditing",
+        "company_industry_id": 158
+    },
+    {
+        "company_industry": "Technology, Information And Media",
+        "company_industry_id": 159
+    },
+    {
+        "company_industry": "Logistic and Transportation",
+        "company_industry_id": 160
+    },
+    {
+        "company_industry": "Retail and Grocery",
+        "company_industry_id": 161
+    },
+    {
+        "company_industry": "Automobile Manufacture",
+        "company_industry_id": 162
+    },
+    {
+        "company_industry": "Education Consultant",
+        "company_industry_id": 163
+    },
+    {
+        "company_industry": "Business Consulting & Management",
+        "company_industry_id": 164
+    },
+    {
+        "company_industry": "Business Development Services",
+        "company_industry_id": 165
+    },
+    {
+        "company_industry": "Technology and Software Development",
+        "company_industry_id": 166
+    },
+    {
+        "company_industry": "Tobacco Manufacturing",
+        "company_industry_id": 167
+    },
+    {
+        "company_industry": "Jasa Pelayanan Kesehatan Gigi",
+        "company_industry_id": 168
+    },
+    {
+        "company_industry": "Tech Startup, Tech Industry",
+        "company_industry_id": 169
+    },
+    {
+        "company_industry": "Building Materials",
+        "company_industry_id": 170
+    },
+    {
+        "company_industry": "Consulting and Human Resources",
+        "company_industry_id": 171
+    },
+    {
+        "company_industry": "Public Relations and Communications",
+        "company_industry_id": 172
+    },
+    {
+        "company_industry": "Fashion and Retail",
+        "company_industry_id": 173
+    },
+    {
+        "company_industry": "Keuangan",
+        "company_industry_id": 174
+    },
+    {
+        "company_industry": "Fitness",
+        "company_industry_id": 175
+    },
+    {
+        "company_industry": "Industri Manufaktur",
+        "company_industry_id": 176
+    },
+    {
+        "company_industry": "Human Resource Consulting",
+        "company_industry_id": 177
+    },
+    {
+        "company_industry": "Retail and E-commerce",
+        "company_industry_id": 178
+    },
+    {
+        "company_industry": "E-Commerce",
+        "company_industry_id": 179
+    },
+    {
+        "company_industry": "IT & Services",
+        "company_industry_id": 180
+    },
+    {
+        "company_industry": "Fishing",
+        "company_industry_id": 181
+    },
+    {
+        "company_industry": "Logistic",
+        "company_industry_id": 182
+    },
+    {
+        "company_industry": "Perdagangan",
+        "company_industry_id": 183
+    },
+    {
+        "company_industry": "Retail and Hospitality",
+        "company_industry_id": 184
+    },
+    {
+        "company_industry": "Health, Wellness And Fitness",
+        "company_industry_id": 185
+    },
+    {
+        "company_industry": "Freight and Trucking",
+        "company_industry_id": 186
+    },
+    {
+        "company_industry": "Food And Beverage",
+        "company_industry_id": 187
+    },
+    {
+        "company_industry": "Electric Motors And Gears Distributor",
+        "company_industry_id": 188
+    },
+    {
+        "company_industry": "Restaurants",
+        "company_industry_id": 189
+    },
+    {
+        "company_industry": "Digital Business",
+        "company_industry_id": 190
+    },
+    {
+        "company_industry": "Home Appliences",
+        "company_industry_id": 191
+    },
+    {
+        "company_industry": "Investment Management",
+        "company_industry_id": 192
+    },
+    {
+        "company_industry": "B2B Food Ingredients",
+        "company_industry_id": 193
+    },
+    {
+        "company_industry": "Medical Services",
+        "company_industry_id": 194
+    },
+    {
+        "company_industry": "Manufacturing (Machinery)",
+        "company_industry_id": 195
+    },
+    {
+        "company_industry": "Telecommunication",
+        "company_industry_id": 196
+    },
+    {
+        "company_industry": "Book Store",
+        "company_industry_id": 197
+    },
+    {
+        "company_industry": "Childcare",
+        "company_industry_id": 198
+    },
+    {
+        "company_industry": "Hotel/Tourism",
+        "company_industry_id": 199
+    },
+    {
+        "company_industry": "Broadcasting and Media",
+        "company_industry_id": 200
+    },
+    {
+        "company_industry": "Information Security",
+        "company_industry_id": 201
+    },
+    {
+        "company_industry": "Commerce",
+        "company_industry_id": 202
+    },
+    {
+        "company_industry": "Private Equity, Investment Banking, Venture Capital",
+        "company_industry_id": 203
+    },
+    {
+        "company_industry": "Manufacturing and Distribution",
+        "company_industry_id": 204
+    },
+    {
+        "company_industry": "Financial Investment",
+        "company_industry_id": 205
+    },
+    {
+        "company_industry": "Glass, Ceramics And Concrete Manufacturing",
+        "company_industry_id": 206
+    },
+    {
+        "company_industry": "E-Commerce & Logistics",
+        "company_industry_id": 207
+    },
+    {
+        "company_industry": "Manufacturing (Packaging and Container )",
+        "company_industry_id": 208
+    },
+    {
+        "company_industry": "Agribusiness, Financing, Technology, Fintech, Agritech",
+        "company_industry_id": 209
+    },
+    {
+        "company_industry": "Interior Construction Contractor",
+        "company_industry_id": 210
+    },
+    {
+        "company_industry": "Insurance Services",
+        "company_industry_id": 211
+    },
+    {
+        "company_industry": "Logistics and Transportation",
+        "company_industry_id": 212
+    },
+    {
+        "company_industry": "Environment",
+        "company_industry_id": 213
+    },
+    {
+        "company_industry": "Coffee Industry",
+        "company_industry_id": 214
+    },
+    {
+        "company_industry": "Banking & Finance",
+        "company_industry_id": 215
+    },
+    {
+        "company_industry": "B2B Startup",
+        "company_industry_id": 216
+    },
+    {
+        "company_industry": "Energy & Mineral Resources (Oil / Gas)",
+        "company_industry_id": 217
+    },
+    {
+        "company_industry": "Tower and Space Rental",
+        "company_industry_id": 218
+    },
+    {
+        "company_industry": "Accounting and Audit",
+        "company_industry_id": 219
+    },
+    {
+        "company_industry": "Tanker",
+        "company_industry_id": 220
+    },
+    {
+        "company_industry": "Entertainment",
+        "company_industry_id": 221
+    },
+    {
+        "company_industry": "Manufacturing",
+        "company_industry_id": 222
+    },
+    {
+        "company_industry": "Contractor",
+        "company_industry_id": 223
+    },
+    {
+        "company_industry": "Academics",
+        "company_industry_id": 224
+    },
+    {
+        "company_industry": "Digital Media/",
+        "company_industry_id": 225
+    },
+    {
+        "company_industry": "Information Technology Services",
+        "company_industry_id": 226
+    },
+    {
+        "company_industry": "Software Development/Technology",
+        "company_industry_id": 227
+    },
+    {
+        "company_industry": "Media and News Platform",
+        "company_industry_id": 228
+    },
+    {
+        "company_industry": "Construction and Infrastructure",
+        "company_industry_id": 229
+    },
+    {
+        "company_industry": "Technology Company",
+        "company_industry_id": 230
+    },
+    {
+        "company_industry": "Personal Care Product Manufacturing",
+        "company_industry_id": 231
+    },
+    {
+        "company_industry": "Jasa Penyedia Makanan Dan Minuman",
+        "company_industry_id": 232
+    },
+    {
+        "company_industry": "Personal Care Products",
+        "company_industry_id": 233
+    },
+    {
+        "company_industry": "Beauty Industry",
+        "company_industry_id": 234
+    },
+    {
+        "company_industry": "Banking, Google, Palm Oil, Gas, E Commerce",
+        "company_industry_id": 235
+    },
+    {
+        "company_industry": "Banking, Fintech, Insurance",
+        "company_industry_id": 236
+    },
+    {
+        "company_industry": "it sercives and it consulting",
+        "company_industry_id": 237
+    },
+    {
+        "company_industry": "Electrical Equipment Manufacturing",
+        "company_industry_id": 238
+    },
+    {
+        "company_industry": "Group And Investment Holding",
+        "company_industry_id": 239
+    }
+]

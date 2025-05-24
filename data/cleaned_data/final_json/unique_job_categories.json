@@ -1,0 +1,202 @@
+[
+    {
+        "category_name": "Account Management",
+        "job_category_id": 0
+    },
+    {
+        "category_name": "Accounting",
+        "job_category_id": 1
+    },
+    {
+        "category_name": "Administrative & Secretarial",
+        "job_category_id": 2
+    },
+    {
+        "category_name": "Agriculture",
+        "job_category_id": 3
+    },
+    {
+        "category_name": "Audit",
+        "job_category_id": 4
+    },
+    {
+        "category_name": "Business Analysis",
+        "job_category_id": 5
+    },
+    {
+        "category_name": "Business Development",
+        "job_category_id": 6
+    },
+    {
+        "category_name": "Compensation & Benefits",
+        "job_category_id": 7
+    },
+    {
+        "category_name": "Consulting",
+        "job_category_id": 8
+    },
+    {
+        "category_name": "Creative & Design",
+        "job_category_id": 9
+    },
+    {
+        "category_name": "Customer Service & Support",
+        "job_category_id": 10
+    },
+    {
+        "category_name": "Cybersecurity",
+        "job_category_id": 11
+    },
+    {
+        "category_name": "Data Science & Analytics",
+        "job_category_id": 12
+    },
+    {
+        "category_name": "DevOps",
+        "job_category_id": 13
+    },
+    {
+        "category_name": "E-commerce",
+        "job_category_id": 14
+    },
+    {
+        "category_name": "Education & Training",
+        "job_category_id": 15
+    },
+    {
+        "category_name": "Engineering (non-software)",
+        "job_category_id": 16
+    },
+    {
+        "category_name": "Finance",
+        "job_category_id": 17
+    },
+    {
+        "category_name": "HR Operations",
+        "job_category_id": 18
+    },
+    {
+        "category_name": "Health, Safety & Environment (HSE)",
+        "job_category_id": 19
+    },
+    {
+        "category_name": "Healthcare & Medical",
+        "job_category_id": 20
+    },
+    {
+        "category_name": "Hospitality & F&B",
+        "job_category_id": 21
+    },
+    {
+        "category_name": "Human Resources",
+        "job_category_id": 22
+    },
+    {
+        "category_name": "IT Operations & Support",
+        "job_category_id": 23
+    },
+    {
+        "category_name": "Internship & Trainee Programs",
+        "job_category_id": 24
+    },
+    {
+        "category_name": "Learning & Development",
+        "job_category_id": 25
+    },
+    {
+        "category_name": "Legal & Compliance",
+        "job_category_id": 26
+    },
+    {
+        "category_name": "Management & Leadership",
+        "job_category_id": 27
+    },
+    {
+        "category_name": "Marketing",
+        "job_category_id": 28
+    },
+    {
+        "category_name": "Operations Management",
+        "job_category_id": 29
+    },
+    {
+        "category_name": "Other",
+        "job_category_id": 30
+    },
+    {
+        "category_name": "Product Management",
+        "job_category_id": 31
+    },
+    {
+        "category_name": "Production & Manufacturing",
+        "job_category_id": 32
+    },
+    {
+        "category_name": "Project Management",
+        "job_category_id": 33
+    },
+    {
+        "category_name": "Public Relations",
+        "job_category_id": 34
+    },
+    {
+        "category_name": "Quality Assurance (Non-Software)",
+        "job_category_id": 35
+    },
+    {
+        "category_name": "Quality Assurance (Software)",
+        "job_category_id": 36
+    },
+    {
+        "category_name": "Recruitment",
+        "job_category_id": 37
+    },
+    {
+        "category_name": "Research & Development",
+        "job_category_id": 38
+    },
+    {
+        "category_name": "Retail",
+        "job_category_id": 39
+    },
+    {
+        "category_name": "Risk Management",
+        "job_category_id": 40
+    },
+    {
+        "category_name": "Sales",
+        "job_category_id": 41
+    },
+    {
+        "category_name": "Security",
+        "job_category_id": 42
+    },
+    {
+        "category_name": "Skilled Trades & Technician",
+        "job_category_id": 43
+    },
+    {
+        "category_name": "Social Services",
+        "job_category_id": 44
+    },
+    {
+        "category_name": "Software Engineering",
+        "job_category_id": 45
+    },
+    {
+        "category_name": "Supply Chain & Logistics",
+        "job_category_id": 46
+    },
+    {
+        "category_name": "Tax",
+        "job_category_id": 47
+    },
+    {
+        "category_name": "UI/UX Design",
+        "job_category_id": 48
+    },
+    {
+        "category_name": "Warehouse Management",
+        "job_category_id": 49
+    }
+]

@@ -1,0 +1,38 @@
+[
+    {
+        "min_experience": "Min. 1 years of experience",
+        "job_min_experience_id": 0
+    },
+    {
+        "min_experience": "Min. Freshgrad",
+        "job_min_experience_id": 1
+    },
+    {
+        "min_experience": "Min. 4 years of experience",
+        "job_min_experience_id": 2
+    },
+    {
+        "min_experience": "Min. 4th Year College Student",
+        "job_min_experience_id": 3
+    },
+    {
+        "min_experience": "Min. 5+ years of experience",
+        "job_min_experience_id": 4
+    },
+    {
+        "min_experience": "Min. 3rd Year College Student",
+        "job_min_experience_id": 5
+    },
+    {
+        "min_experience": "Min. 2nd Year College Student",
+        "job_min_experience_id": 6
+    },
+    {
+        "min_experience": "Open for all levels",
+        "job_min_experience_id": 7
+    },
+    {
+        "min_experience": "Min. 1st Year College Student",
+        "job_min_experience_id": 8
+    }
+]
