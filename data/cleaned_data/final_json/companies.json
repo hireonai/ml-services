@@ -1206,22 +1206,13 @@
         "company_id": 133
     },
     {
-        "company_name": "SG-EDTS",
-        "company_desc": "In the fast-paced world of technology, disruption is the norm. That's why EDTS was created - to democratize digital technology and make it accessible to everyone. And since 2019, we've been the Digital Center of Excellence for Salim Group.",
-        "company_profile_src": "https://cdn.sejutacita.id/642d049617d0d40013923c88/JobPortalCompanyLogo/a22e0efe-f96f-454a-834e-21b74dd253c2.jpeg",
-        "company_location": "Jakarta",
-        "company_industry": "IT Services And IT Consulting",
-        "company_employess_count": "-",
-        "company_id": 134
-    },
-    {
         "company_name": "IDEKU",
         "company_desc": "Founded in June 2022, IDEKU focus on empowering F&B businesses for success with user-friendly POS, enhanced experiences, and seamless support. By focusing on these aspects, IDEKU can become a valuable partner for F&B businesses, helping them thrive in a competitive industry and provide exceptional experiences to their customers.",
         "company_profile_src": "https://cdn.sejutacita.id/65695364958a1800131ac863/JobPortalCompanyLogo/97c7ed7e-7029-4e1f-bcfd-28ff7f998dbd.jpg",
         "company_location": "Jakarta Barat",
         "company_industry": "IT System Custom Software Development",
         "company_employess_count": "50–100",
-        "company_id": 135
+        "company_id": 134
     },
     {
         "company_name": "Lintas Media Danawa",
@@ -1230,7 +1221,7 @@
         "company_location": "Depok",
         "company_industry": "Teknologi Informasi",
         "company_employess_count": "1–50",
-        "company_id": 136
+        "company_id": 135
     },
     {
         "company_name": "Yayasan Konservasi Alam Nusantara",
@@ -1239,7 +1230,7 @@
         "company_location": "Jakarta Selatan",
         "company_industry": "Non-Profit Organizations",
         "company_employess_count": "-",
-        "company_id": 137
+        "company_id": 136
     },
     {
         "company_name": "VCGamers",
@@ -1248,7 +1239,7 @@
         "company_location": "Bekasi",
         "company_industry": "ECommerce",
         "company_employess_count": "1–50",
-        "company_id": 138
+        "company_id": 137
     },
     {
         "company_name": "Kronikel",
@@ -1257,7 +1248,7 @@
         "company_location": "Jakarta Utara",
         "company_industry": "Apparel & Fashion",
         "company_employess_count": "-",
-        "company_id": 139
+        "company_id": 138
     },
     {
         "company_name": "Reemotely",
@@ -1266,7 +1257,7 @@
         "company_location": "Yogyakarta",
         "company_industry": "Recruitment Service and Consultant",
         "company_employess_count": "1–50",
-        "company_id": 140
+        "company_id": 139
     },
     {
         "company_name": "Rekosistem",
@@ -1275,7 +1266,7 @@
         "company_location": "Jakarta",
         "company_industry": "Environmental Services",
         "company_employess_count": "1–50",
-        "company_id": 141
+        "company_id": 140
     },
     {
         "company_name": "House of Donatello",
@@ -1284,7 +1275,7 @@
         "company_location": "Bandung",
         "company_industry": "Retail",
         "company_employess_count": ">100",
-        "company_id": 142
+        "company_id": 141
     },
     {
         "company_name": "PT Optima Technology Indonesia",
@@ -1293,7 +1284,7 @@
         "company_location": "Jakarta Utara",
         "company_industry": "Branding, Creative and Digital Agency Indonesia",
         "company_employess_count": "1–50",
-        "company_id": 143
+        "company_id": 142
     },
     {
         "company_name": "HIGO",
@@ -1302,7 +1293,7 @@
         "company_location": "Jakarta Barat",
         "company_industry": "Wifi Platform & Integrated Digital Agency",
         "company_employess_count": "50–100",
-        "company_id": 144
+        "company_id": 143
     },
     {
         "company_name": "DGtraffic Indonesia",
@@ -1311,7 +1302,7 @@
         "company_location": "Jakarta",
         "company_industry": "Advertising",
         "company_employess_count": ">100",
-        "company_id": 145
+        "company_id": 144
     },
     {
         "company_name": "Bee Smart Education Center",
@@ -1320,7 +1311,7 @@
         "company_location": "Bogor Regency",
         "company_industry": "Education",
         "company_employess_count": "1–50",
-        "company_id": 146
+        "company_id": 145
     },
     {
         "company_name": "Ginchoux",
@@ -1329,7 +1320,7 @@
         "company_location": "Jakarta Barat",
         "company_industry": "Kuliner",
         "company_employess_count": "1–50",
-        "company_id": 147
+        "company_id": 146
     },
     {
         "company_name": "Imajin",
@@ -1338,7 +1329,7 @@
         "company_location": "Tangerang",
         "company_industry": "Consumer Services",
         "company_employess_count": "1–50",
-        "company_id": 148
+        "company_id": 147
     },
     {
         "company_name": "PT ELUON",
@@ -1347,7 +1338,7 @@
         "company_location": "Jakarta",
         "company_industry": "Telecommunications Service Provider",
         "company_employess_count": "1–50",
-        "company_id": 149
+        "company_id": 148
     },
     {
         "company_name": "IBLAM School of Law",
@@ -1356,7 +1347,7 @@
         "company_location": "Jakarta Selatan",
         "company_industry": "Higher Education",
         "company_employess_count": "1–50",
-        "company_id": 150
+        "company_id": 149
     },
     {
         "company_name": "PMI Hair & Beauty",
@@ -1365,7 +1356,7 @@
         "company_location": "Jakarta Selatan",
         "company_industry": "Trading and Retail",
         "company_employess_count": "1–50",
-        "company_id": 151
+        "company_id": 150
     },
     {
         "company_name": "Gravity Bali",
@@ -1374,7 +1365,7 @@
         "company_location": "Badung Regency",
         "company_industry": "Hospitality Management",
         "company_employess_count": "1–50",
-        "company_id": 152
+        "company_id": 151
     },
     {
         "company_name": "Sinar Pagi Catering",
@@ -1383,7 +1374,7 @@
         "company_location": "Jakarta Utara",
         "company_industry": "Beverage and Food Manufacturing",
         "company_employess_count": "1–50",
-        "company_id": 153
+        "company_id": 152
     },
     {
         "company_name": "PT. iBantu Solusi Syariah",
@@ -1392,7 +1383,7 @@
         "company_location": "Jakarta Selatan",
         "company_industry": "Fintech, SaaS, Accounting",
         "company_employess_count": "1–50",
-        "company_id": 154
+        "company_id": 153
     },
     {
         "company_name": " AEON INDONESIA PT",
@@ -1401,7 +1392,7 @@
         "company_location": "Tangerang",
         "company_industry": "Retail",
         "company_employess_count": "-",
-        "company_id": 155
+        "company_id": 154
     },
     {
         "company_name": "PT Darya-Varia Laboratoria Tbk",
@@ -1410,7 +1401,7 @@
         "company_location": "Jakarta",
         "company_industry": "Manufacturing (Pharmaceutical)",
         "company_employess_count": ">100",
-        "company_id": 156
+        "company_id": 155
     },
     {
         "company_name": "PT.Enseval Putera Megatrading Tbk",
@@ -1419,7 +1410,7 @@
         "company_location": "Jakarta Timur",
         "company_industry": "Pharmaceutical Manufacturing",
         "company_employess_count": "50–100",
-        "company_id": 157
+        "company_id": 156
     },
     {
         "company_name": "PT. Sinar Sosro",
@@ -1428,7 +1419,7 @@
         "company_location": "Bekasi",
         "company_industry": "FMCG",
         "company_employess_count": "-",
-        "company_id": 158
+        "company_id": 157
     },
     {
         "company_name": "PT Multipolar Technology",
@@ -1437,7 +1428,7 @@
         "company_location": "Jakarta Selatan",
         "company_industry": "Information Technology",
         "company_employess_count": "-",
-        "company_id": 159
+        "company_id": 158
     },
     {
         "company_name": "PT. CS2 POLA SEHAT",
@@ -1446,7 +1437,7 @@
         "company_location": "Jakarta Barat",
         "company_industry": "Multinational Consulting / FMCG",
         "company_employess_count": "-",
-        "company_id": 160
+        "company_id": 159
     },
     {
         "company_name": "Wings Group Indonesia (Sayap Mas Utama)",
@@ -1455,7 +1446,7 @@
         "company_location": "Jakarta Timur",
         "company_industry": "Consumer Goods",
         "company_employess_count": "-",
-        "company_id": 161
+        "company_id": 160
     },
     {
         "company_name": "PT Mega Central Finance (MCF)",
@@ -1464,7 +1455,7 @@
         "company_location": "Jakarta Barat",
         "company_industry": "Financial Service",
         "company_employess_count": ">100",
-        "company_id": 162
+        "company_id": 161
     },
     {
         "company_name": "ASTRO",
@@ -1473,7 +1464,7 @@
         "company_location": "Jakarta Barat",
         "company_industry": "Online Groceries",
         "company_employess_count": "-",
-        "company_id": 163
+        "company_id": 162
     },
     {
         "company_name": "Pou Chen Group Indonesia",
@@ -1482,7 +1473,7 @@
         "company_location": "Banten",
         "company_industry": "Spectator Sports",
         "company_employess_count": "50–100",
-        "company_id": 164
+        "company_id": 163
     },
     {
         "company_name": "ADR Group of Companies",
@@ -1491,7 +1482,7 @@
         "company_location": "Tangerang",
         "company_industry": "Automotive",
         "company_employess_count": ">100",
-        "company_id": 165
+        "company_id": 164
     },
     {
         "company_name": "RedDoorz",
@@ -1500,7 +1491,7 @@
         "company_location": "Jakarta",
         "company_industry": "Hospitality",
         "company_employess_count": "-",
-        "company_id": 166
+        "company_id": 165
     },
     {
         "company_name": "Astra Financial",
@@ -1509,7 +1500,7 @@
         "company_location": "Jakarta",
         "company_industry": "Financial Services",
         "company_employess_count": "-",
-        "company_id": 167
+        "company_id": 166
     },
     {
         "company_name": "PT Bank Digital BCA (BCA Digital)",
@@ -1518,7 +1509,7 @@
         "company_location": "Jakarta",
         "company_industry": "Banking",
         "company_employess_count": "-",
-        "company_id": 168
+        "company_id": 167
     },
     {
         "company_name": "Morula IVF Indonesia (PT. Morula Indonesia)",
@@ -1527,7 +1518,7 @@
         "company_location": "Indonesia",
         "company_industry": "Hospitals And Health Care",
         "company_employess_count": ">100",
-        "company_id": 169
+        "company_id": 168
     },
     {
         "company_name": "BINUS Group",
@@ -1536,7 +1527,7 @@
         "company_location": "Jakarta Barat",
         "company_industry": "Education Administration Programs",
         "company_employess_count": "-",
-        "company_id": 170
+        "company_id": 169
     },
     {
         "company_name": "The Jakarta Post",
@@ -1545,7 +1536,7 @@
         "company_location": "Jakarta Pusat",
         "company_industry": "Newspaper",
         "company_employess_count": "-",
-        "company_id": 171
+        "company_id": 170
     },
     {
         "company_name": "PT Gree Electric Appliances Indonesia",
@@ -1554,7 +1545,7 @@
         "company_location": "Jakarta Utara",
         "company_industry": "Electronics",
         "company_employess_count": ">100",
-        "company_id": 172
+        "company_id": 171
     },
     {
         "company_name": "Dealls (YC W22)",
@@ -1563,7 +1554,7 @@
         "company_location": "Jakarta Selatan",
         "company_industry": "Tech",
         "company_employess_count": "1–50",
-        "company_id": 173
+        "company_id": 172
     },
     {
         "company_name": "Sayurbox",
@@ -1572,7 +1563,7 @@
         "company_location": "Jakarta Selatan",
         "company_industry": "Transportation, Logistics, Supply Chain And Storage",
         "company_employess_count": ">100",
-        "company_id": 174
+        "company_id": 173
     },
     {
         "company_name": "PT. Bank KB Bukopin Tbk",
@@ -1581,7 +1572,7 @@
         "company_location": "Jakarta",
         "company_industry": "Banking",
         "company_employess_count": "50–100",
-        "company_id": 175
+        "company_id": 174
     },
     {
         "company_name": "Adira Finance",
@@ -1590,7 +1581,7 @@
         "company_location": "Jakarta",
         "company_industry": "Financial Services",
         "company_employess_count": "-",
-        "company_id": 176
+        "company_id": 175
     },
     {
         "company_name": "Vidio",
@@ -1599,7 +1590,7 @@
         "company_location": "Jakarta Pusat",
         "company_industry": "Media & Entertainment",
         "company_employess_count": ">100",
-        "company_id": 177
+        "company_id": 176
     },
     {
         "company_name": "PT. Bintang Toedjoe",
@@ -1608,7 +1599,7 @@
         "company_location": "Jakarta Timur",
         "company_industry": "Fast Moving Consumer Good",
         "company_employess_count": "-",
-        "company_id": 178
+        "company_id": 177
     },
     {
         "company_name": "PT Astra Otoparts Tbk",
@@ -1617,7 +1608,7 @@
         "company_location": "Jakarta Utara",
         "company_industry": "Otomotive",
         "company_employess_count": ">100",
-        "company_id": 179
+        "company_id": 178
     },
     {
         "company_name": "PT United Family Food",
@@ -1626,7 +1617,7 @@
         "company_location": "Jakarta Barat",
         "company_industry": "Fast Moving Consumer Good",
         "company_employess_count": "-",
-        "company_id": 180
+        "company_id": 179
     },
     {
         "company_name": "MODENA",
@@ -1635,7 +1626,7 @@
         "company_location": "Jakarta",
         "company_industry": "Appliances, Electrical, And Electronics Manufacturing",
         "company_employess_count": "-",
-        "company_id": 181
+        "company_id": 180
     },
     {
         "company_name": "PT Astra International Tbk - TSO Auto2000",
@@ -1644,7 +1635,7 @@
         "company_location": "Jakarta",
         "company_industry": "Automotive and Manufacturing",
         "company_employess_count": "-",
-        "company_id": 182
+        "company_id": 181
     },
     {
         "company_name": "Mondelez International",
@@ -1653,7 +1644,7 @@
         "company_location": "Jakarta",
         "company_industry": "Food And Beverages",
         "company_employess_count": ">100",
-        "company_id": 183
+        "company_id": 182
     },
     {
         "company_name": "PT. Mowilex",
@@ -1662,7 +1653,7 @@
         "company_location": "Jakarta",
         "company_industry": "Wholesale Building Materials",
         "company_employess_count": "-",
-        "company_id": 184
+        "company_id": 183
     },
     {
         "company_name": "Bank Sahabat Sampoerna",
@@ -1671,7 +1662,7 @@
         "company_location": "Jakarta Selatan",
         "company_industry": "Corporate Banking",
         "company_employess_count": ">100",
-        "company_id": 185
+        "company_id": 184
     },
     {
         "company_name": "Arya Noble",
@@ -1680,7 +1671,7 @@
         "company_location": "Jakarta Selatan",
         "company_industry": "Consumer Services",
         "company_employess_count": "-",
-        "company_id": 186
+        "company_id": 185
     },
     {
         "company_name": "Cimory Group",
@@ -1689,7 +1680,7 @@
         "company_location": "Jakarta Barat",
         "company_industry": "Research, Data, Consulting, Finance, FMCG (Fast Moving Consumer Goods)",
         "company_employess_count": ">100",
-        "company_id": 187
+        "company_id": 186
     },
     {
         "company_name": "PT Asuransi BRI Life",
@@ -1698,7 +1689,7 @@
         "company_location": "Jakarta",
         "company_industry": "Insurance",
         "company_employess_count": "-",
-        "company_id": 188
+        "company_id": 187
     },
     {
         "company_name": "Luna Park Media",
@@ -1707,7 +1698,7 @@
         "company_location": "Batam",
         "company_industry": "Technology, Information And Internet",
         "company_employess_count": "50–100",
-        "company_id": 189
+        "company_id": 188
     },
     {
         "company_name": "MSIG Life Insurance Indonesia Tbk",
@@ -1716,7 +1707,7 @@
         "company_location": "Jakarta",
         "company_industry": "Insurance",
         "company_employess_count": ">100",
-        "company_id": 190
+        "company_id": 189
     },
     {
         "company_name": "PT Smartfren Telecom Tbk",
@@ -1725,7 +1716,7 @@
         "company_location": "Jakarta Pusat",
         "company_industry": "Telecommunications",
         "company_employess_count": "-",
-        "company_id": 191
+        "company_id": 190
     },
     {
         "company_name": "PT TOYOTA ASTRA FINANCIAL SERVICES",
@@ -1734,7 +1725,7 @@
         "company_location": "Jakarta",
         "company_industry": "Financial Services",
         "company_employess_count": "-",
-        "company_id": 192
+        "company_id": 191
     },
     {
         "company_name": "CV Cipta Sehat Anugrah Indonesia",
@@ -1743,7 +1734,7 @@
         "company_location": "Tangerang",
         "company_industry": "Retail Health And Beauty",
         "company_employess_count": "1–50",
-        "company_id": 193
+        "company_id": 192
     },
     {
         "company_name": "3MONGKIS",
@@ -1752,7 +1743,7 @@
         "company_location": "Jakarta",
         "company_industry": "Retail Apparel And Fashion",
         "company_employess_count": "-",
-        "company_id": 194
+        "company_id": 193
     },
     {
         "company_name": "AIA Indonesia",
@@ -1761,7 +1752,7 @@
         "company_location": "Jakarta",
         "company_industry": "Insurance",
         "company_employess_count": "-",
-        "company_id": 195
+        "company_id": 194
     },
     {
         "company_name": "PT Kaldu Sari Nabati Indonesia",
@@ -1770,7 +1761,7 @@
         "company_location": "Bandung",
         "company_industry": "Fast Moving Consumer Good",
         "company_employess_count": ">100",
-        "company_id": 196
+        "company_id": 195
     },
     {
         "company_name": "PT RAJAWALI LINTAS SAMUDERA",
@@ -1779,7 +1770,7 @@
         "company_location": "Jakarta Utara",
         "company_industry": "Transportasi",
         "company_employess_count": "50–100",
-        "company_id": 197
+        "company_id": 196
     },
     {
         "company_name": "PT. Richeese Kuliner Indonesia",
@@ -1788,7 +1779,7 @@
         "company_location": "Bandung",
         "company_industry": "Fast Food Restaurant",
         "company_employess_count": ">100",
-        "company_id": 198
+        "company_id": 197
     },
     {
         "company_name": "PT Sanbe Farma",
@@ -1797,7 +1788,7 @@
         "company_location": "Bandung",
         "company_industry": "FARMASI",
         "company_employess_count": "-",
-        "company_id": 199
+        "company_id": 198
     },
     {
         "company_name": "PT. Sarimelati Kencana Tbk.",
@@ -1806,7 +1797,7 @@
         "company_location": "Jakarta Selatan",
         "company_industry": "Food And Beverages",
         "company_employess_count": "-",
-        "company_id": 200
+        "company_id": 199
     },
     {
         "company_name": "PT Mattel Indonesia",
@@ -1815,7 +1806,7 @@
         "company_location": "Bekasi Regency",
         "company_industry": "Children Toys",
         "company_employess_count": "50–100",
-        "company_id": 201
+        "company_id": 200
     },
     {
         "company_name": "SIRKA (YC S21)",
@@ -1824,7 +1815,7 @@
         "company_location": "Jakarta Selatan",
         "company_industry": "Medicine Healthcare & Wellbeing",
         "company_employess_count": "50–100",
-        "company_id": 202
+        "company_id": 201
     },
     {
         "company_name": "Sinar Mas Agribusiness and Food",
@@ -1833,7 +1824,7 @@
         "company_location": "Jakarta Pusat",
         "company_industry": "Food & Beverage",
         "company_employess_count": "-",
-        "company_id": 203
+        "company_id": 202
     },
     {
         "company_name": "Astra Credit Company",
@@ -1842,7 +1833,7 @@
         "company_location": "Jakarta Selatan",
         "company_industry": "Finance Services",
         "company_employess_count": "-",
-        "company_id": 204
+        "company_id": 203
     },
     {
         "company_name": "PT Tempo Scan Pacific Tbk",
@@ -1851,7 +1842,7 @@
         "company_location": "Jakarta Selatan",
         "company_industry": "Pharmaceutical, Consumer And Cosmetic",
         "company_employess_count": ">100",
-        "company_id": 205
+        "company_id": 204
     },
     {
         "company_name": "PT Jasa Teknologi Informasi",
@@ -1860,7 +1851,7 @@
         "company_location": "Jakarta",
         "company_industry": "IT Services And IT Consulting",
         "company_employess_count": "-",
-        "company_id": 206
+        "company_id": 205
     },
     {
         "company_name": "First Resources Ltd.",
@@ -1869,7 +1860,7 @@
         "company_location": "Jakarta Barat",
         "company_industry": "Agriculture, Forestry, Fishing",
         "company_employess_count": ">100",
-        "company_id": 207
+        "company_id": 206
     },
     {
         "company_name": "Surprice Living",
@@ -1878,7 +1869,7 @@
         "company_location": "Kuningan Regency",
         "company_industry": "E-commerce and Online Retail",
         "company_employess_count": "1–50",
-        "company_id": 208
+        "company_id": 207
     },
     {
         "company_name": "GWS Medika",
@@ -1887,7 +1878,7 @@
         "company_location": "Jakarta Pusat",
         "company_industry": "Hospital & Health Care",
         "company_employess_count": "-",
-        "company_id": 209
+        "company_id": 208
     },
     {
         "company_name": "PT Global Jet Cargo",
@@ -1896,7 +1887,7 @@
         "company_location": "Jakarta Utara",
         "company_industry": "Supply Chain Management and Third Party Logistics",
         "company_employess_count": ">100",
-        "company_id": 210
+        "company_id": 209
     },
     {
         "company_name": "PT Surya Citra Media, Tbk",
@@ -1905,7 +1896,7 @@
         "company_location": "Jakarta",
         "company_industry": "Media Production",
         "company_employess_count": ">100",
-        "company_id": 211
+        "company_id": 210
     },
     {
         "company_name": "PT Jasa Angkasa Semesta, Tbk",
@@ -1914,7 +1905,7 @@
         "company_location": "Tangerang",
         "company_industry": "Aviation & Aerospace",
         "company_employess_count": "-",
-        "company_id": 212
+        "company_id": 211
     },
     {
         "company_name": "Kargo Technologies",
@@ -1923,7 +1914,7 @@
         "company_location": "Jakarta",
         "company_industry": "Transport & Logistics",
         "company_employess_count": ">100",
-        "company_id": 213
+        "company_id": 212
     },
     {
         "company_name": "MG Group",
@@ -1932,7 +1923,7 @@
         "company_location": "Jakarta Pusat",
         "company_industry": "Hospitality",
         "company_employess_count": ">100",
-        "company_id": 214
+        "company_id": 213
     },
     {
         "company_name": "Jiera & Una Brands",
@@ -1941,7 +1932,7 @@
         "company_location": "Jakarta",
         "company_industry": "Trading and Retail",
         "company_employess_count": "-",
-        "company_id": 215
+        "company_id": 214
     },
     {
         "company_name": "PT. Trans Retail Indonesia",
@@ -1950,7 +1941,7 @@
         "company_location": "Jakarta",
         "company_industry": "Retail",
         "company_employess_count": "-",
-        "company_id": 216
+        "company_id": 215
     },
     {
         "company_name": "PwC Indonesia",
@@ -1959,7 +1950,7 @@
         "company_location": "Jakarta Selatan",
         "company_industry": "Auditing",
         "company_employess_count": "-",
-        "company_id": 217
+        "company_id": 216
     },
     {
         "company_name": "ATI Business Group",
@@ -1968,7 +1959,7 @@
         "company_location": "Jakarta Pusat",
         "company_industry": "Business Process Outsourcing (BPO)",
         "company_employess_count": "-",
-        "company_id": 218
+        "company_id": 217
     },
     {
         "company_name": "PT Migo Commercial Indonesia",
@@ -1977,7 +1968,7 @@
         "company_location": "Jakarta",
         "company_industry": "Technology, Information And Media",
         "company_employess_count": ">100",
-        "company_id": 219
+        "company_id": 218
     },
     {
         "company_name": "Accenture",
@@ -1986,7 +1977,7 @@
         "company_location": "Jakarta Selatan",
         "company_industry": "Management Consulting",
         "company_employess_count": "-",
-        "company_id": 220
+        "company_id": 219
     },
     {
         "company_name": "PT Serasi Autoraya (Part of Astra) ",
@@ -1995,7 +1986,7 @@
         "company_location": "Jakarta Utara",
         "company_industry": "Logistic and Transportation",
         "company_employess_count": "-",
-        "company_id": 221
+        "company_id": 220
     },
     {
         "company_name": "Ayoconnect",
@@ -2004,7 +1995,7 @@
         "company_location": "Jakarta Selatan",
         "company_industry": "Technology Services",
         "company_employess_count": "-",
-        "company_id": 222
+        "company_id": 221
     },
     {
         "company_name": "PT Mitra Adiperkasa, Tbk (Inditex Group)",
@@ -2013,7 +2004,7 @@
         "company_location": "Jakarta",
         "company_industry": "Retail",
         "company_employess_count": ">100",
-        "company_id": 223
+        "company_id": 222
     },
     {
         "company_name": "Segari",
@@ -2022,7 +2013,7 @@
         "company_location": "Tangerang",
         "company_industry": "Retail and Grocery",
         "company_employess_count": ">100",
-        "company_id": 224
+        "company_id": 223
     },
     {
         "company_name": "PT Bussan Auto Finance",
@@ -2031,7 +2022,7 @@
         "company_location": "Jakarta Selatan",
         "company_industry": "Financial Services",
         "company_employess_count": "-",
-        "company_id": 225
+        "company_id": 224
     },
     {
         "company_name": "Moladin",
@@ -2040,7 +2031,7 @@
         "company_location": "Jakarta Utara",
         "company_industry": "Otomotive",
         "company_employess_count": "50–100",
-        "company_id": 226
+        "company_id": 225
     },
     {
         "company_name": "PT. Hyundai Motor Manufacturing Indonesia",
@@ -2049,7 +2040,7 @@
         "company_location": "Bekasi",
         "company_industry": "Automobile Manufacture",
         "company_employess_count": "-",
-        "company_id": 227
+        "company_id": 226
     },
     {
         "company_name": "PT. FIVE MAPPING INDONESIA",
@@ -2058,7 +2049,7 @@
         "company_location": "Bekasi",
         "company_industry": "Education Consultant",
         "company_employess_count": "1–50",
-        "company_id": 228
+        "company_id": 227
     },
     {
         "company_name": "InCorp Indonesia",
@@ -2067,7 +2058,7 @@
         "company_location": "Jakarta",
         "company_industry": "Business Consulting & Management",
         "company_employess_count": ">100",
-        "company_id": 229
+        "company_id": 228
     },
     {
         "company_name": "Kosong Satu Group",
@@ -2076,7 +2067,7 @@
         "company_location": "Badung Regency",
         "company_industry": "Business Development Services",
         "company_employess_count": ">100",
-        "company_id": 230
+        "company_id": 229
     },
     {
         "company_name": "DFLOW",
@@ -2085,7 +2076,7 @@
         "company_location": "Bali",
         "company_industry": "Technology and Software Development",
         "company_employess_count": "50–100",
-        "company_id": 231
+        "company_id": 230
     },
     {
         "company_name": "PT Rapid Teknologi Indonesia",
@@ -2094,7 +2085,7 @@
         "company_location": "Jakarta",
         "company_industry": "Information Tecnology",
         "company_employess_count": ">100",
-        "company_id": 232
+        "company_id": 231
     },
     {
         "company_name": "EF EFEKTA English for Adults",
@@ -2103,7 +2094,7 @@
         "company_location": "Jakarta Pusat",
         "company_industry": "Education",
         "company_employess_count": ">100",
-        "company_id": 233
+        "company_id": 232
     },
     {
         "company_name": "Doo Group",
@@ -2112,7 +2103,7 @@
         "company_location": "Jakarta",
         "company_industry": "Financial Services",
         "company_employess_count": ">100",
-        "company_id": 234
+        "company_id": 233
     },
     {
         "company_name": "PT Triastha Akademi Global",
@@ -2121,7 +2112,7 @@
         "company_location": "Tangerang Selatan",
         "company_industry": "Education",
         "company_employess_count": "1–50",
-        "company_id": 235
+        "company_id": 234
     },
     {
         "company_name": "Miniso",
@@ -2130,7 +2121,7 @@
         "company_location": "Jakarta",
         "company_industry": "E-commerce and Online Retail",
         "company_employess_count": "-",
-        "company_id": 236
+        "company_id": 235
     },
     {
         "company_name": "PT Nojorono Tobacco International",
@@ -2139,7 +2130,7 @@
         "company_location": "Indonesia",
         "company_industry": "Tobacco Manufacturing",
         "company_employess_count": ">100",
-        "company_id": 237
+        "company_id": 236
     },
     {
         "company_name": "PT Mega Medika Teknologi (SMILE WORKS)",
@@ -2148,7 +2139,7 @@
         "company_location": "Jakarta Utara",
         "company_industry": "Jasa Pelayanan Kesehatan Gigi",
         "company_employess_count": "50–100",
-        "company_id": 238
+        "company_id": 237
     },
     {
         "company_name": "PT Shopee International Indonesia ",
@@ -2157,7 +2148,7 @@
         "company_location": "Yogyakarta",
         "company_industry": "Tech Startup, Tech Industry",
         "company_employess_count": "-",
-        "company_id": 239
+        "company_id": 238
     },
     {
         "company_name": "Mantappu Corp.",
@@ -2166,7 +2157,7 @@
         "company_location": "Jakarta",
         "company_industry": "Advertising Services",
         "company_employess_count": "1–50",
-        "company_id": 240
+        "company_id": 239
     },
     {
         "company_name": "BRIK",
@@ -2175,16 +2166,7 @@
         "company_location": "Jakarta Barat",
         "company_industry": "Building Materials",
         "company_employess_count": "-",
-        "company_id": 241
-    },
-    {
-        "company_name": "SwiftMind Indonesia",
-        "company_desc": "At SwiftMind, we specialize in streamlining HR processes for dynamic and innovative companies, particularly within the IT sector. With a focus on startups and tech firms, our services are designed to not only fill the gap of an in-house HR department but also to enhance efficiency and strategic insight into HR management. Our offerings range from Talent Acquisition and Employee Life Cycle Administration to Legal and Compliance advisory, ensuring a comprehensive suite of services tailored to the unique needs of our clients. We pride ourselves on being not just a service provider, but a partner that understands and anticipates the needs of the fast-paced tech industry.",
-        "company_profile_src": "https://cdn.sejutacita.id/66ea9a3fed90f500136fed38/JobPortalCompanyLogo/74e6f360-d5a9-4063-852c-1969b2cb93ef.jpeg",
-        "company_location": "Tangerang Selatan",
-        "company_industry": "Consulting and Human Resources",
-        "company_employess_count": "1–50",
-        "company_id": 242
+        "company_id": 240
     },
     {
         "company_name": "PT Kurasi Media Nusantara",
@@ -2193,25 +2175,7 @@
         "company_location": "Jakarta Selatan",
         "company_industry": "Public Relations and Communications",
         "company_employess_count": "50–100",
-        "company_id": 243
-    },
-    {
-        "company_name": "PT. Panlandwoo Aksesoris Indonesia",
-        "company_desc": "Panlandwoo adalah merek aksesori fesyen yang menghadirkan desain-desain unik dan segar dengan konsep simple, elegan, dan terjangkau. Sejak berdiri pada tahun 2018, kami berkomitmen untuk memberikan pilihan aksesori yang beragam dan berkualitas bagi para wanita modern.",
-        "company_profile_src": "https://cdn.sejutacita.id/67fcb1209b7590001318239e/JobPortalCompanyLogo/e403aec1-d44b-4f05-9652-6c7ea85df093.png",
-        "company_location": "Bali",
-        "company_industry": "Fashion and Retail",
-        "company_employess_count": "-",
-        "company_id": 244
-    },
-    {
-        "company_name": "PT. SARANAGRIYA LESTARI KERAMIK",
-        "company_desc": "Perusahaan kami adalah PT. Saranagriya Lestari Keramik dan lebih dikenal dengan MILAN KERAMIK, merupakan perusahaan yang bergerak dalam industri keramik lantai dan dinding. Kami berlokasi di Bekasi ( factory) dan Jakarta ( showroom).",
-        "company_profile_src": "https://cdn.sejutacita.id/680059ba9b7590001319338c/JobPortalCompanyLogo/4174ec7b-3657-4a2e-aeae-75cbd11e5c66.png",
-        "company_location": "Bekasi",
-        "company_industry": "Manufacture",
-        "company_employess_count": "-",
-        "company_id": 245
+        "company_id": 241
     },
     {
         "company_name": "PT Asia Pro",
@@ -2220,7 +2184,7 @@
         "company_location": "Jakarta Pusat",
         "company_industry": "Keuangan",
         "company_employess_count": "50–100",
-        "company_id": 246
+        "company_id": 242
     },
     {
         "company_name": "Akademi Prestasi Indonesia",
@@ -2229,7 +2193,7 @@
         "company_location": "Indonesia",
         "company_industry": "Education",
         "company_employess_count": "1–50",
-        "company_id": 247
+        "company_id": 243
     },
     {
         "company_name": "Edu Farmers International Foundation",
@@ -2238,7 +2202,7 @@
         "company_location": "Jakarta",
         "company_industry": "Non-Profit Organizations",
         "company_employess_count": "-",
-        "company_id": 248
+        "company_id": 244
     },
     {
         "company_name": "RS IZZA",
@@ -2247,7 +2211,7 @@
         "company_location": "Karawang Regency",
         "company_industry": "Hospital & Health Care",
         "company_employess_count": ">100",
-        "company_id": 249
+        "company_id": 245
     },
     {
         "company_name": "PT Intinusa Teknik Sejahtera",
@@ -2256,7 +2220,7 @@
         "company_location": "Jakarta Utara",
         "company_industry": "Construction",
         "company_employess_count": ">100",
-        "company_id": 250
+        "company_id": 246
     },
     {
         "company_name": "Evolene Group",
@@ -2265,7 +2229,7 @@
         "company_location": "Tangerang",
         "company_industry": "Fitness",
         "company_employess_count": "50–100",
-        "company_id": 251
+        "company_id": 247
     },
     {
         "company_name": "Integra Land",
@@ -2274,7 +2238,7 @@
         "company_location": "Tangerang",
         "company_industry": "Property & Real Estate",
         "company_employess_count": "50–100",
-        "company_id": 252
+        "company_id": 248
     },
     {
         "company_name": "LingoTalk",
@@ -2283,7 +2247,7 @@
         "company_location": "Jakarta",
         "company_industry": "Technology Education",
         "company_employess_count": "1–50",
-        "company_id": 253
+        "company_id": 249
     },
     {
         "company_name": "PT. Bentonit Alam Indonesia",
@@ -2292,7 +2256,7 @@
         "company_location": "Bogor",
         "company_industry": "Industri Manufaktur",
         "company_employess_count": "-",
-        "company_id": 254
+        "company_id": 250
     },
     {
         "company_name": "PT Avia Avian Tbk. (Avian Brands)",
@@ -2301,7 +2265,7 @@
         "company_location": "Sidoarjo Regency",
         "company_industry": "Building Materials",
         "company_employess_count": "-",
-        "company_id": 255
+        "company_id": 251
     },
     {
         "company_name": "PT. Paramatech Indonesia",
@@ -2310,7 +2274,16 @@
         "company_location": "Jakarta Selatan",
         "company_industry": "Consulting and Human Resources",
         "company_employess_count": "-",
-        "company_id": 256
+        "company_id": 252
+    },
+    {
+        "company_name": "PT. SARANAGRIYA LESTARI KERAMIK",
+        "company_desc": "Perusahaan kami adalah PT. Saranagriya Lestari Keramik dan lebih dikenal dengan MILAN KERAMIK, merupakan perusahaan yang bergerak dalam industri keramik lantai dan dinding. Kami berlokasi di Bekasi ( factory) dan Jakarta ( showroom).",
+        "company_profile_src": "https://cdn.sejutacita.id/680059ba9b7590001319338c/JobPortalCompanyLogo/4174ec7b-3657-4a2e-aeae-75cbd11e5c66.png",
+        "company_location": "Bekasi",
+        "company_industry": "Manufacture",
+        "company_employess_count": "-",
+        "company_id": 253
     },
     {
         "company_name": "Migunani&Co",
@@ -2319,7 +2292,7 @@
         "company_location": "Jakarta Pusat",
         "company_industry": "Human Resource Consulting",
         "company_employess_count": "1–50",
-        "company_id": 257
+        "company_id": 254
     },
     {
         "company_name": "PT Kami Gawi Berjaya (The Watch Co.)",
@@ -2328,7 +2301,7 @@
         "company_location": "Indonesia",
         "company_industry": "Retail and E-commerce",
         "company_employess_count": "50–100",
-        "company_id": 258
+        "company_id": 255
     },
     {
         "company_name": "PT Dinamika Expressindo",
@@ -2337,7 +2310,7 @@
         "company_location": "Surabaya",
         "company_industry": "Freight And Package Transportation",
         "company_employess_count": "50–100",
-        "company_id": 259
+        "company_id": 256
     },
     {
         "company_name": "The Jakarta Consulting Group",
@@ -2346,7 +2319,7 @@
         "company_location": "Jakarta Selatan",
         "company_industry": "Management Consulting",
         "company_employess_count": "1–50",
-        "company_id": 260
+        "company_id": 257
     },
     {
         "company_name": "Aice Indonesia ",
@@ -2355,7 +2328,7 @@
         "company_location": "Jakarta",
         "company_industry": "Food & Beverage",
         "company_employess_count": ">100",
-        "company_id": 261
+        "company_id": 258
     },
     {
         "company_name": "My Hartono",
@@ -2364,7 +2337,7 @@
         "company_location": "Jakarta",
         "company_industry": "E-Commerce",
         "company_employess_count": ">100",
-        "company_id": 262
+        "company_id": 259
     },
     {
         "company_name": "PT. Inovasi Sukses Sentosa",
@@ -2373,7 +2346,7 @@
         "company_location": "Jakarta Barat",
         "company_industry": "IT & Services",
         "company_employess_count": "50–100",
-        "company_id": 263
+        "company_id": 260
     },
     {
         "company_name": "PT K-24 INDONESIA OFFICIAL",
@@ -2382,7 +2355,7 @@
         "company_location": "Yogyakarta",
         "company_industry": "Manufacturing (Pharmaceutical)",
         "company_employess_count": ">100",
-        "company_id": 264
+        "company_id": 261
     },
     {
         "company_name": "PT Efrata Optima Kairosindo",
@@ -2391,7 +2364,7 @@
         "company_location": "Jakarta",
         "company_industry": "Fishing",
         "company_employess_count": ">100",
-        "company_id": 265
+        "company_id": 262
     },
     {
         "company_name": "Baraka Express",
@@ -2400,7 +2373,7 @@
         "company_location": "Jakarta",
         "company_industry": "Logistic",
         "company_employess_count": "-",
-        "company_id": 266
+        "company_id": 263
     },
     {
         "company_name": "PT Noolie Kesehatan Rakyat Indonesia",
@@ -2409,7 +2382,7 @@
         "company_location": "Jakarta Barat",
         "company_industry": "Perdagangan",
         "company_employess_count": "1–50",
-        "company_id": 267
+        "company_id": 264
     },
     {
         "company_name": "PT Bifarma Adiluhung",
@@ -2418,7 +2391,7 @@
         "company_location": "Jakarta",
         "company_industry": "Biotechnology",
         "company_employess_count": ">100",
-        "company_id": 268
+        "company_id": 265
     },
     {
         "company_name": "TEEG Indonesia",
@@ -2427,7 +2400,7 @@
         "company_location": "Jakarta Selatan",
         "company_industry": "Retail and Hospitality",
         "company_employess_count": ">100",
-        "company_id": 269
+        "company_id": 266
     },
     {
         "company_name": "PT. Seven Natural Indonesia",
@@ -2436,7 +2409,7 @@
         "company_location": "Tebing Tinggi",
         "company_industry": "FARMASI",
         "company_employess_count": "1–50",
-        "company_id": 270
+        "company_id": 267
     },
     {
         "company_name": "Beauty Of Angel  ",
@@ -2445,7 +2418,7 @@
         "company_location": "Tangerang",
         "company_industry": "Health, Wellness And Fitness",
         "company_employess_count": "1–50",
-        "company_id": 271
+        "company_id": 268
     },
     {
         "company_name": "Harindra Group",
@@ -2454,7 +2427,7 @@
         "company_location": "Surabaya",
         "company_industry": "Freight and Trucking",
         "company_employess_count": ">100",
-        "company_id": 272
+        "company_id": 269
     },
     {
         "company_name": "CV Unitech Indonesia",
@@ -2463,7 +2436,7 @@
         "company_location": "Malang Regency",
         "company_industry": "Retail and Wholesale",
         "company_employess_count": ">100",
-        "company_id": 273
+        "company_id": 270
     },
     {
         "company_name": "Imperial Group",
@@ -2472,7 +2445,7 @@
         "company_location": "Jakarta",
         "company_industry": "Food And Beverage",
         "company_employess_count": ">100",
-        "company_id": 274
+        "company_id": 271
     },
     {
         "company_name": "ENNOVI",
@@ -2481,7 +2454,7 @@
         "company_location": "Jakarta",
         "company_industry": "Electric Motors And Gears Distributor",
         "company_employess_count": ">100",
-        "company_id": 275
+        "company_id": 272
     },
     {
         "company_name": "GF Culinary",
@@ -2490,7 +2463,7 @@
         "company_location": "Jakarta Utara",
         "company_industry": "Restaurants",
         "company_employess_count": "-",
-        "company_id": 276
+        "company_id": 273
     },
     {
         "company_name": "Indonesia Digital Ecosystem (INDICO)",
@@ -2499,7 +2472,7 @@
         "company_location": "Jakarta",
         "company_industry": "Digital Business",
         "company_employess_count": "-",
-        "company_id": 277
+        "company_id": 274
     },
     {
         "company_name": "PT. Suryaraya Rubberindo Industries",
@@ -2508,7 +2481,7 @@
         "company_location": "Jakarta",
         "company_industry": "Otomotive",
         "company_employess_count": ">100",
-        "company_id": 278
+        "company_id": 275
     },
     {
         "company_name": "PT Jakarana Tama Gaga",
@@ -2517,7 +2490,7 @@
         "company_location": "Jakarta",
         "company_industry": "Beverage and Food Manufacturing",
         "company_employess_count": "-",
-        "company_id": 279
+        "company_id": 276
     },
     {
         "company_name": "PT Daikin Applied Solutions Indonesia",
@@ -2526,7 +2499,7 @@
         "company_location": "Jakarta",
         "company_industry": "Home Appliences",
         "company_employess_count": ">100",
-        "company_id": 280
+        "company_id": 277
     },
     {
         "company_name": "PT Surya Semesta Internusa TBK",
@@ -2535,7 +2508,7 @@
         "company_location": "Jakarta",
         "company_industry": "Investment Management",
         "company_employess_count": ">100",
-        "company_id": 281
+        "company_id": 278
     },
     {
         "company_name": "Flora Food Group",
@@ -2544,7 +2517,7 @@
         "company_location": "Jakarta",
         "company_industry": "B2B Food Ingredients",
         "company_employess_count": ">100",
-        "company_id": 282
+        "company_id": 279
     },
     {
         "company_name": "Duitku",
@@ -2553,7 +2526,7 @@
         "company_location": "Jakarta",
         "company_industry": "Finance",
         "company_employess_count": "-",
-        "company_id": 283
+        "company_id": 280
     },
     {
         "company_name": "PT. Infracom Technology",
@@ -2562,7 +2535,7 @@
         "company_location": "Jakarta",
         "company_industry": "Information Technology",
         "company_employess_count": "-",
-        "company_id": 284
+        "company_id": 281
     },
     {
         "company_name": "Transmedic Group",
@@ -2571,7 +2544,7 @@
         "company_location": "Jakarta",
         "company_industry": "Medical Services",
         "company_employess_count": ">100",
-        "company_id": 285
+        "company_id": 282
     },
     {
         "company_name": "PT Traktor Nusantara (TRAKNUS)",
@@ -2580,7 +2553,7 @@
         "company_location": "Jakarta Timur",
         "company_industry": "Manufacturing (Machinery)",
         "company_employess_count": ">100",
-        "company_id": 286
+        "company_id": 283
     },
     {
         "company_name": "PT Mega Akses Persada (FiberStar)",
@@ -2589,7 +2562,7 @@
         "company_location": "Jakarta Selatan",
         "company_industry": "Telecommunication",
         "company_employess_count": ">100",
-        "company_id": 287
+        "company_id": 284
     },
     {
         "company_name": "Mentari Group (PT Mentari Books Indonesia) ",
@@ -2598,7 +2571,7 @@
         "company_location": "Jakarta",
         "company_industry": "Book Store",
         "company_employess_count": ">100",
-        "company_id": 288
+        "company_id": 285
     },
     {
         "company_name": "PT Generasi Bangsa Indonesia Maju",
@@ -2607,7 +2580,7 @@
         "company_location": "Jakarta",
         "company_industry": "Childcare",
         "company_employess_count": "1–50",
-        "company_id": 289
+        "company_id": 286
     },
     {
         "company_name": "Hilton",
@@ -2616,7 +2589,7 @@
         "company_location": "Jakarta",
         "company_industry": "Hotel/Tourism",
         "company_employess_count": "-",
-        "company_id": 290
+        "company_id": 287
     },
     {
         "company_name": "TransVision",
@@ -2625,7 +2598,7 @@
         "company_location": "Jakarta",
         "company_industry": "Broadcasting and Media",
         "company_employess_count": ">100",
-        "company_id": 291
+        "company_id": 288
     },
     {
         "company_name": "Elitery",
@@ -2634,7 +2607,7 @@
         "company_location": "Jakarta",
         "company_industry": "Information Security",
         "company_employess_count": ">100",
-        "company_id": 292
+        "company_id": 289
     },
     {
         "company_name": "Mandarin Oriental",
@@ -2643,7 +2616,7 @@
         "company_location": "Jakarta",
         "company_industry": "Hotel/Tourism",
         "company_employess_count": ">100",
-        "company_id": 293
+        "company_id": 290
     },
     {
         "company_name": "Treesure Media",
@@ -2652,7 +2625,7 @@
         "company_location": "Jakarta Utara",
         "company_industry": "Commerce",
         "company_employess_count": "50–100",
-        "company_id": 294
+        "company_id": 291
     },
     {
         "company_name": "ROYAL TRUST",
@@ -2661,7 +2634,7 @@
         "company_location": "Jakarta Selatan",
         "company_industry": "Private Equity, Investment Banking, Venture Capital",
         "company_employess_count": "-",
-        "company_id": 295
+        "company_id": 292
     },
     {
         "company_name": "PT Cellindo Putra Jaya",
@@ -2670,7 +2643,7 @@
         "company_location": "Bandung",
         "company_industry": "Manufacturing and Distribution",
         "company_employess_count": "1–50",
-        "company_id": 296
+        "company_id": 293
     },
     {
         "company_name": "PT Indosukses Futures",
@@ -2679,7 +2652,7 @@
         "company_location": "Jakarta Selatan",
         "company_industry": "Financial Investment",
         "company_employess_count": "1–50",
-        "company_id": 297
+        "company_id": 294
     },
     {
         "company_name": "PT Multi Arthamas Glass Industry",
@@ -2688,7 +2661,7 @@
         "company_location": "Surabaya",
         "company_industry": "Glass, Ceramics And Concrete Manufacturing",
         "company_employess_count": ">100",
-        "company_id": 298
+        "company_id": 295
     },
     {
         "company_name": "Dash Electric",
@@ -2697,7 +2670,7 @@
         "company_location": "Jakarta Selatan",
         "company_industry": "E-Commerce & Logistics",
         "company_employess_count": "1–50",
-        "company_id": 299
+        "company_id": 296
     },
     {
         "company_name": "PT Salam Pacific Indonesia Lines",
@@ -2706,7 +2679,7 @@
         "company_location": "Jakarta",
         "company_industry": "Manufacturing (Packaging and Container )",
         "company_employess_count": "-",
-        "company_id": 300
+        "company_id": 297
     },
     {
         "company_name": "PT Buku Usaha Digital",
@@ -2715,7 +2688,7 @@
         "company_location": "Jakarta Selatan",
         "company_industry": "Agribusiness, Financing, Technology, Fintech, Agritech",
         "company_employess_count": ">100",
-        "company_id": 301
+        "company_id": 298
     },
     {
         "company_name": "VIVERE Group",
@@ -2724,7 +2697,7 @@
         "company_location": "Jakarta",
         "company_industry": "Interior Construction Contractor",
         "company_employess_count": "1–50",
-        "company_id": 302
+        "company_id": 299
     },
     {
         "company_name": "PT. Garudafood Putra Putri Jaya, Tbk",
@@ -2733,7 +2706,7 @@
         "company_location": "Jakarta",
         "company_industry": "Beverage and Food Manufacturing",
         "company_employess_count": "-",
-        "company_id": 303
+        "company_id": 300
     },
     {
         "company_name": "Manulife Indonesia (PT Asuransi Jiwa Manulife Indonesia)",
@@ -2742,7 +2715,7 @@
         "company_location": "Jakarta",
         "company_industry": "Insurance Services",
         "company_employess_count": ">100",
-        "company_id": 304
+        "company_id": 301
     },
     {
         "company_name": "Asuransi Astra",
@@ -2751,7 +2724,7 @@
         "company_location": "Jakarta Selatan",
         "company_industry": "Insurance",
         "company_employess_count": "-",
-        "company_id": 305
+        "company_id": 302
     },
     {
         "company_name": "ASSA Rent (PT Adi Sarana Armada Tbk)",
@@ -2760,7 +2733,7 @@
         "company_location": "Jakarta",
         "company_industry": "Logistics and Transportation",
         "company_employess_count": ">100",
-        "company_id": 306
+        "company_id": 303
     },
     {
         "company_name": "PT Permata Karya Jasa",
@@ -2769,7 +2742,7 @@
         "company_location": "Jakarta",
         "company_industry": "Environment",
         "company_employess_count": "-",
-        "company_id": 307
+        "company_id": 304
     },
     {
         "company_name": "Kenangan Brands (Kopi Kenangan)",
@@ -2778,7 +2751,7 @@
         "company_location": "Jakarta",
         "company_industry": "Coffee Industry",
         "company_employess_count": "-",
-        "company_id": 308
+        "company_id": 305
     },
     {
         "company_name": "Mitra Keluarga",
@@ -2787,7 +2760,7 @@
         "company_location": "Indonesia",
         "company_industry": "Hospital & Health Care",
         "company_employess_count": ">100",
-        "company_id": 309
+        "company_id": 306
     },
     {
         "company_name": "PT BCA Finance",
@@ -2796,7 +2769,7 @@
         "company_location": "Jakarta",
         "company_industry": "Banking & Finance",
         "company_employess_count": "-",
-        "company_id": 310
+        "company_id": 307
     },
     {
         "company_name": "BNI Life Insurance ",
@@ -2805,7 +2778,7 @@
         "company_location": "Jakarta",
         "company_industry": "Insurance",
         "company_employess_count": ">100",
-        "company_id": 311
+        "company_id": 308
     },
     {
         "company_name": "Sea",
@@ -2814,7 +2787,7 @@
         "company_location": "Jakarta",
         "company_industry": "B2B Startup",
         "company_employess_count": ">100",
-        "company_id": 312
+        "company_id": 309
     },
     {
         "company_name": "Bayan Resources",
@@ -2823,7 +2796,7 @@
         "company_location": "Jakarta",
         "company_industry": "Energy & Mineral Resources (Oil / Gas)",
         "company_employess_count": "-",
-        "company_id": 313
+        "company_id": 310
     },
     {
         "company_name": "PT Tower Bersama Infrastructure, Tbk",
@@ -2832,7 +2805,7 @@
         "company_location": "Jakarta",
         "company_industry": "Tower and Space Rental",
         "company_employess_count": ">100",
-        "company_id": 314
+        "company_id": 311
     },
     {
         "company_name": "KPMG Indonesia",
@@ -2841,7 +2814,7 @@
         "company_location": "Jakarta",
         "company_industry": "Accounting and Audit",
         "company_employess_count": "-",
-        "company_id": 315
+        "company_id": 312
     },
     {
         "company_name": "Lazada",
@@ -2850,7 +2823,7 @@
         "company_location": "Jakarta",
         "company_industry": "E-Commerce",
         "company_employess_count": "-",
-        "company_id": 316
+        "company_id": 313
     },
     {
         "company_name": "PT. Soechi Lines Tbk",
@@ -2859,7 +2832,7 @@
         "company_location": "Jakarta",
         "company_industry": "Tanker",
         "company_employess_count": "-",
-        "company_id": 317
+        "company_id": 314
     },
     {
         "company_name": "TikTok",
@@ -2868,7 +2841,7 @@
         "company_location": "Jakarta",
         "company_industry": "Entertainment",
         "company_employess_count": ">100",
-        "company_id": 318
+        "company_id": 315
     },
     {
         "company_name": "Boston Consulting Group (BCG)",
@@ -2877,7 +2850,7 @@
         "company_location": "Jakarta",
         "company_industry": "Recruitment Service and Consultant",
         "company_employess_count": ">100",
-        "company_id": 319
+        "company_id": 316
     },
     {
         "company_name": "Wuling Motors Indonesia",
@@ -2886,7 +2859,7 @@
         "company_location": "Cikarang",
         "company_industry": "Manufacturing",
         "company_employess_count": "-",
-        "company_id": 320
+        "company_id": 317
     },
     {
         "company_name": "Permata Bank",
@@ -2895,7 +2868,7 @@
         "company_location": "Indonesia",
         "company_industry": "Banking",
         "company_employess_count": "-",
-        "company_id": 321
+        "company_id": 318
     },
     {
         "company_name": "PT. Erajaya Swasembada, Tbk",
@@ -2904,7 +2877,7 @@
         "company_location": "Jakarta",
         "company_industry": "Retail",
         "company_employess_count": ">100",
-        "company_id": 322
+        "company_id": 319
     },
     {
         "company_name": "PT Bank Central Asia Tbk (BCA)",
@@ -2913,7 +2886,7 @@
         "company_location": "Jakarta Pusat",
         "company_industry": "Banking",
         "company_employess_count": ">100",
-        "company_id": 323
+        "company_id": 320
     },
     {
         "company_name": "BNI Finance",
@@ -2922,7 +2895,7 @@
         "company_location": "Jakarta",
         "company_industry": "Banking & Finance",
         "company_employess_count": "-",
-        "company_id": 324
+        "company_id": 321
     },
     {
         "company_name": "PT Total Bangun Persada, Tbk",
@@ -2931,7 +2904,7 @@
         "company_location": "Jakarta",
         "company_industry": "Contractor",
         "company_employess_count": "-",
-        "company_id": 325
+        "company_id": 322
     },
     {
         "company_name": "Sinarmas World Academy",
@@ -2940,7 +2913,7 @@
         "company_location": "Jakarta",
         "company_industry": "Academics",
         "company_employess_count": ">100",
-        "company_id": 326
+        "company_id": 323
     },
     {
         "company_name": "PT Waskita Karya",
@@ -2949,7 +2922,7 @@
         "company_location": "Jakarta",
         "company_industry": "Contractor",
         "company_employess_count": "-",
-        "company_id": 327
+        "company_id": 324
     },
     {
         "company_name": "SeaMoney",
@@ -2958,7 +2931,7 @@
         "company_location": "Jakarta",
         "company_industry": "Banking",
         "company_employess_count": "-",
-        "company_id": 328
+        "company_id": 325
     },
     {
         "company_name": "Netflix",
@@ -2967,7 +2940,7 @@
         "company_location": "Jakarta",
         "company_industry": "Digital Media/",
         "company_employess_count": ">100",
-        "company_id": 329
+        "company_id": 326
     },
     {
         "company_name": "PT Yakult Indonesia Persada",
@@ -2976,7 +2949,7 @@
         "company_location": "Jakarta",
         "company_industry": "B2B Food Ingredients",
         "company_employess_count": ">100",
-        "company_id": 330
+        "company_id": 327
     },
     {
         "company_name": "Google Indonesia",
@@ -2985,7 +2958,7 @@
         "company_location": "Jakarta",
         "company_industry": "Information Technology Services",
         "company_employess_count": "-",
-        "company_id": 331
+        "company_id": 328
     },
     {
         "company_name": "PT Indofood Sukses Makmur Tbk",
@@ -2994,7 +2967,7 @@
         "company_location": "Jakarta",
         "company_industry": "Manufacturing",
         "company_employess_count": ">100",
-        "company_id": 332
+        "company_id": 329
     },
     {
         "company_name": "Zalora Group",
@@ -3003,7 +2976,7 @@
         "company_location": "Jakarta Selatan",
         "company_industry": "Software Development/Technology",
         "company_employess_count": ">100",
-        "company_id": 333
+        "company_id": 330
     },
     {
         "company_name": "detikcom",
@@ -3012,7 +2985,7 @@
         "company_location": "Jakarta Selatan",
         "company_industry": "Media and News Platform",
         "company_employess_count": "-",
-        "company_id": 334
+        "company_id": 331
     },
     {
         "company_name": "PT. Sumber Alfaria Trijaya, Tbk (Alfamart)",
@@ -3021,7 +2994,7 @@
         "company_location": "Tangerang",
         "company_industry": "Retail",
         "company_employess_count": ">100",
-        "company_id": 335
+        "company_id": 332
     },
     {
         "company_name": "PT Pakuwon Jati Tbk",
@@ -3030,7 +3003,7 @@
         "company_location": "Jakarta",
         "company_industry": "Construction and Infrastructure",
         "company_employess_count": "-",
-        "company_id": 336
+        "company_id": 333
     },
     {
         "company_name": "Microsoft",
@@ -3039,7 +3012,7 @@
         "company_location": "Jakarta",
         "company_industry": "Technology Company",
         "company_employess_count": "-",
-        "company_id": 337
+        "company_id": 334
     },
     {
         "company_name": "PT Eka Jaya Internasional",
@@ -3048,7 +3021,7 @@
         "company_location": "Tangerang",
         "company_industry": "Personal Care Product Manufacturing",
         "company_employess_count": "-",
-        "company_id": 338
+        "company_id": 335
     },
     {
         "company_name": "Jaddi+",
@@ -3057,7 +3030,7 @@
         "company_location": "Jakarta Utara",
         "company_industry": "Jasa Penyedia Makanan Dan Minuman",
         "company_employess_count": ">100",
-        "company_id": 339
+        "company_id": 336
     },
     {
         "company_name": "PT. Buana Fortuna Sejahtera",
@@ -3066,7 +3039,7 @@
         "company_location": "Tangerang",
         "company_industry": "Personal Care Products",
         "company_employess_count": ">100",
-        "company_id": 340
+        "company_id": 337
     },
     {
         "company_name": "Bank Mandiri Taspen",
@@ -3075,7 +3048,7 @@
         "company_location": "Jakarta",
         "company_industry": "Banking",
         "company_employess_count": ">100",
-        "company_id": 341
+        "company_id": 338
     },
     {
         "company_name": "PT RANS KOSMETIKA INDONESIA",
@@ -3084,7 +3057,7 @@
         "company_location": "Jakarta",
         "company_industry": "Beauty Industry",
         "company_employess_count": ">100",
-        "company_id": 342
+        "company_id": 339
     },
     {
         "company_name": "Medco Power Indonesia",
@@ -3093,7 +3066,7 @@
         "company_location": "Jakarta",
         "company_industry": "Banking, Google, Palm Oil, Gas, E Commerce",
         "company_employess_count": ">100",
-        "company_id": 343
+        "company_id": 340
     },
     {
         "company_name": "PT Flin Consultancy Indonesia",
@@ -3102,7 +3075,7 @@
         "company_location": "Jakarta Selatan",
         "company_industry": "Banking, Fintech, Insurance",
         "company_employess_count": "1–50",
-        "company_id": 344
+        "company_id": 341
     },
     {
         "company_name": "PT. Karya Swasti Mandiri (Nipplets)",
@@ -3111,7 +3084,7 @@
         "company_location": "Jakarta",
         "company_industry": "Apparel & Fashion",
         "company_employess_count": "1–50",
-        "company_id": 345
+        "company_id": 342
     },
     {
         "company_name": "PT. Cakra Radha Mustika (Kalbe Group)",
@@ -3120,7 +3093,16 @@
         "company_location": "Jakarta Timur",
         "company_industry": "Consumer Services",
         "company_employess_count": ">100",
-        "company_id": 346
+        "company_id": 343
+    },
+    {
+        "company_name": "SwiftMind Indonesia",
+        "company_desc": "At SwiftMind, we specialize in streamlining HR processes for dynamic and innovative companies, particularly within the IT sector. With a focus on startups and tech firms, our services are designed to not only fill the gap of an in-house HR department but also to enhance efficiency and strategic insight into HR management. Our offerings range from Talent Acquisition and Employee Life Cycle Administration to Legal and Compliance advisory, ensuring a comprehensive suite of services tailored to the unique needs of our clients. We pride ourselves on being not just a service provider, but a partner that understands and anticipates the needs of the fast-paced tech industry.",
+        "company_profile_src": "https://cdn.sejutacita.id/66ea9a3fed90f500136fed38/JobPortalCompanyLogo/74e6f360-d5a9-4063-852c-1969b2cb93ef.jpeg",
+        "company_location": "Tangerang Selatan",
+        "company_industry": "Consulting and Human Resources",
+        "company_employess_count": "1–50",
+        "company_id": 344
     },
     {
         "company_name": "Arkademi",
@@ -3129,7 +3111,7 @@
         "company_location": "Jakarta Selatan",
         "company_industry": "Technology Education",
         "company_employess_count": "1–50",
-        "company_id": 347
+        "company_id": 345
     },
     {
         "company_name": "Arupa Cloud Nusantara",
@@ -3138,7 +3120,7 @@
         "company_location": "Jakarta",
         "company_industry": "it sercives and it consulting",
         "company_employess_count": "1–50",
-        "company_id": 348
+        "company_id": 346
     },
     {
         "company_name": "Trafoindo Group",
@@ -3147,7 +3129,7 @@
         "company_location": "Jakarta Pusat",
         "company_industry": "Electrical Equipment Manufacturing",
         "company_employess_count": ">100",
-        "company_id": 349
+        "company_id": 347
     },
     {
         "company_name": "PT Mekar Armada Investama",
@@ -3156,6 +3138,6 @@
         "company_location": "Jakarta Pusat",
         "company_industry": "Group And Investment Holding",
         "company_employess_count": ">100",
-        "company_id": 350
+        "company_id": 348
     }
 ]
