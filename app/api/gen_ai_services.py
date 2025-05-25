@@ -8,7 +8,6 @@ using the Gemini AI model.
 import os
 from contextlib import asynccontextmanager
 import time
-import logging
 
 from fastapi import APIRouter, Request, Body
 from fastapi.responses import JSONResponse
@@ -16,7 +15,6 @@ from dotenv import load_dotenv
 from google import genai
 from google.cloud import storage
 from starlette import status
-from typing import Dict, Any, List
 
 from app.api.models import (
     CVJobAnalysisRequest,
@@ -166,9 +164,7 @@ async def get_cv_job_analysis_flash(
 
     try:
         # Get file directly from Google Cloud Storage asynchronously
-        user_cv_content = await download_user_cv(
-            request.app.state.storage_client, data.cv_cloud_path
-        )
+        user_cv_content = await download_user_cv(data.cv_url)
 
         # Format job details as formatted text for the model
         formatted_job_details = format_job_details_for_ai_jobs_analysis(
@@ -186,7 +182,7 @@ async def get_cv_job_analysis_flash(
         return result
 
     except Exception as e:
-        logging.error(f"Error in CV analysis: {str(e)}")
+        print(f"Error in CV analysis: {str(e)}")
         return JSONResponse(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, content={"error": str(e)}
         )
@@ -228,9 +224,7 @@ async def cover_letter_generator(
     start_time = time.time()
 
     try:
-        user_cv_content = await download_user_cv(
-            request.app.state.storage_client, data.cv_cloud_path
-        )
+        user_cv_content = await download_user_cv(data.cv_url)
 
         formatted_job_details = format_job_details_for_cover_letter_generation(
             data.job_details
@@ -241,6 +235,7 @@ async def cover_letter_generator(
             user_cv_content,
             formatted_job_details,
             data.current_date if hasattr(data, "current_date") else "23 Mei 2025",
+            data.spesific_request if hasattr(data, "spesific_request") else None,
         )
 
         # Format the response into HTML
@@ -262,7 +257,7 @@ async def cover_letter_generator(
         }
 
     except Exception as e:
-        logging.error(f"Error in cover letter generation: {str(e)}")
+        print(f"Error in cover letter generation: {str(e)}")
         return JSONResponse(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, content={"error": str(e)}
         )

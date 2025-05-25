@@ -10,6 +10,7 @@ import json
 import asyncio
 import io
 import time
+import aiohttp
 from weasyprint import HTML
 
 from google.genai import types
@@ -20,26 +21,24 @@ from app.utils.system_prompt import (
 )
 
 
-async def download_user_cv(storage_client, cv_cloud_path: str) -> bytes:
+async def download_user_cv(cv_url: str) -> bytes:
     """
-    Download a CV file from Google Cloud Storage.
+    Download a CV file from a public URL.
 
     Args:
-        storage_client: Google Cloud Storage client
-        cv_cloud_path: Path to the CV file in Cloud Storage
+        cv_url: Public URL to the CV file
 
     Returns:
         bytes: The CV file content as bytes
     """
+    print("Fetching file from URL: %s", cv_url)
 
-    print("Fetching file from GCS path: %s", cv_cloud_path)
-    bucket = storage_client.bucket("main-storage-hireon")
-    blob = bucket.blob(cv_cloud_path)
+    async with aiohttp.ClientSession() as session:
+        async with session.get(cv_url) as response:
+            response.raise_for_status()
+            user_cv_content = await response.read()
 
-    # Download file content as bytes asynchronously
-    user_cv_content = await asyncio.to_thread(blob.download_as_bytes)
-    print("Downloaded %d bytes from Cloud Storage", len(user_cv_content))
-
+    print("Downloaded %d bytes from URL", len(user_cv_content))
     return user_cv_content
 
 
@@ -61,17 +60,22 @@ def format_job_details_for_cover_letter_generation(job_details):
     """
 
 
-async def generate_cover_letter(client, cv_content, job_details_text, current_date):
+async def generate_cover_letter(
+    client, cv_content, job_details_text, current_date, spesific_request
+):
     """Generate a cover letter using Gemini."""
     return await client.aio.models.generate_content(
         model="gemini-2.5-pro-preview-05-06",
         contents=[
+            "CV Content:",
             types.Part.from_bytes(data=cv_content, mime_type="application/pdf"),
+            "Job Details json:",
             job_details_text,
             f"Current Date: {current_date}",
+            f"Spesific Request: {spesific_request}",
         ],
         config=types.GenerateContentConfig(
-            temperature=0.0,
+            temperature=0.1,
             system_instruction=COVER_LETTER_GENERATION_SYSTEM_PROMPT,
         ),
     )

@@ -4,17 +4,24 @@ API data models.
 This module defines Pydantic models for request/response data validation and serialization.
 """
 
-from typing import List, Dict, Optional, Any, Union
+from typing import List, Dict
 from pydantic import BaseModel, HttpUrl, Field
 
 
-# Response model untuk CV Job Analysis
 class SkillSuggestion(BaseModel):
+    """
+    Model representing a skill suggestion with a key point and explanation.
+    """
+
     keypoint: str
     penjelasan: str
 
 
 class CVJobAnalysisResponse(BaseModel):
+    """
+    Response model for CV job analysis containing relevance scores and improvement suggestions.
+    """
+
     cv_relevance_score: int = Field(
         ..., description="Score indicating relevance of CV to job (0-100)"
     )
@@ -34,6 +41,10 @@ class CVJobAnalysisResponse(BaseModel):
 
 
 class CoverLetterResponse(BaseModel):
+    """
+    Response model for cover letter generation containing access URLs and processing metadata.
+    """
+
     pdf_url: HttpUrl = Field(..., description="Public URL to access the generated PDF")
     pdf_cloud_path: str = Field(..., description="Cloud storage path to the PDF file")
     processing_time_seconds: float = Field(
@@ -62,8 +73,10 @@ class CoverLetterGeneratorRequest(BaseModel):
     Request model for cover letter generation.
     """
 
-    cv_cloud_path: str
+    cv_url: str
     job_details: CoverLetterJobDetails
+    current_date: str
+    spesific_request: str
 
     class Config:
         """
@@ -73,7 +86,9 @@ class CoverLetterGeneratorRequest(BaseModel):
         arbitrary_types_allowed = True
         json_schema_extra = {
             "example": {
-                "cv_cloud_path": "user_cv/CV EVAN - CAPSTONE.pdf",
+                "cv_url": "https://storage.googleapis.com/main-storage-hireon/user_cv/6831c533f4a50c7c69a2bde9-1748153594549.pdf",
+                "current_date": "2025-05-25",
+                "spesific_request": "Use English language in the cover letter.",
                 "job_details": {
                     "url": "https://dealls.com/loker/data-scientist-33~dexagroup",
                     "company_name": "Dexa Group",
@@ -121,7 +136,7 @@ class CVJobAnalysisRequest(BaseModel):
     """
 
     job_details: CVJobDetails
-    cv_cloud_path: str  # Path to the file in GCS bucket (e.g., "user_cv/filename.pdf")
+    cv_url: str  # Path to the file in GCS bucket (e.g., "user_cv/filename.pdf")
 
     class Config:
         """
@@ -131,7 +146,7 @@ class CVJobAnalysisRequest(BaseModel):
         arbitrary_types_allowed = True
         json_schema_extra = {
             "example": {
-                "cv_cloud_path": "user_cv/CV EVAN - CAPSTONE.pdf",
+                "cv_url": "https://storage.googleapis.com/main-storage-hireon/user_cv/6831c533f4a50c7c69a2bde9-1748153594549.pdf",
                 "job_details": {
                     "job_position": "Data Scientist",
                     "min_experience": "Min. 1 years of experience",
