@@ -9,8 +9,9 @@ import re
 import json
 import asyncio
 import io
-import time
 import aiohttp
+import uuid
+
 from weasyprint import HTML
 
 from google.genai import types
@@ -153,9 +154,7 @@ def format_cover_letter_response(response_text):
     return content
 
 
-async def generate_and_upload_pdf(
-    storage_client, html_content, filename_prefix="cover_letter"
-):
+async def generate_and_upload_pdf(storage_client, html_content):
     """
     Generate PDF from HTML content and upload it to Google Cloud Storage.
 
@@ -167,9 +166,9 @@ async def generate_and_upload_pdf(
     Returns:
         dict: Contains PDF URL and filename
     """
-
-    timestamp = int(time.time())
-    pdf_filename = f"{filename_prefix}_{timestamp}.pdf"
+    # Generate random ID and timestamp
+    random_id_1 = uuid.uuid4().hex[:32]  # First part of the filename
+    pdf_filename = f"{random_id_1}.pdf"
     pdf_cloud_path = f"generated_cv/{pdf_filename}"
 
     # Get bucket
