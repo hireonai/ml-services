@@ -9,8 +9,9 @@ import re
 import json
 import asyncio
 import io
-import aiohttp
 import uuid
+
+import aiohttp
 
 from weasyprint import HTML
 

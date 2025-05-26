@@ -25,14 +25,13 @@ RUN apt-get update && apt-get install -y \
     fonts-liberation \
     && rm -rf /var/lib/apt/lists/*
 
+# Install dependencies first (for better caching)
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Create credentials directory
 RUN mkdir -p credentials
 COPY credentials/ ./credentials
-
-# Install dependencies first (for better caching)
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy .env file
 COPY .env .
