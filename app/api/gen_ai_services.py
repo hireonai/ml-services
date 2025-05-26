@@ -5,7 +5,6 @@ This module provides an API endpoint to analyze CVs against job details
 using the Gemini AI model.
 """
 
-import os
 from contextlib import asynccontextmanager
 import time
 
@@ -35,17 +34,6 @@ from app.utils.utils import (
 
 load_dotenv()
 
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-if os.getenv("GOOGLE_CLOUD_STORAGE_SERVICE_ACCOUNT_PATH"):
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.getenv(
-        "GOOGLE_CLOUD_STORAGE_SERVICE_ACCOUNT_PATH"
-    )
-else:
-    # Default path inside container
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = (
-        "credentials/google_cloud_storage_service_account.json"
-    )
-
 
 @asynccontextmanager
 async def lifespan(application: APIRouter):
@@ -56,7 +44,7 @@ async def lifespan(application: APIRouter):
     cleans up resources during the shutdown phase.
     """
     # Startup logic
-    application.state.client = genai.Client(api_key=GEMINI_API_KEY)
+    application.state.client = genai.Client()
     application.state.storage_client = storage.Client()
     print("Gemini client and storage client initialized")
     yield
