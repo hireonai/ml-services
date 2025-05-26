@@ -7,10 +7,6 @@ WORKDIR /app
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
 
-# Create credentials directory
-RUN mkdir -p credentials
-COPY credentials/ ./credentials
-
 # Install system dependencies and WeasyPrint dependencies
 RUN apt-get update && apt-get install -y \
     curl \
@@ -28,6 +24,11 @@ RUN apt-get update && apt-get install -y \
     fonts-dejavu \
     fonts-liberation \
     && rm -rf /var/lib/apt/lists/*
+
+
+# Create credentials directory
+RUN mkdir -p credentials
+COPY credentials/ ./credentials
 
 # Install dependencies first (for better caching)
 COPY requirements.txt .
