@@ -33,15 +33,15 @@ RUN apt-get update && apt-get install -y \
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Copy .env file
+COPY .env .
+
 # Create non-root user for security
 RUN adduser --disabled-password --gecos "" appuser
 
 # Copy application code
 COPY ./app ./app
 COPY main.py .
-
-# Copy only necessary files (avoid .env)
-COPY .env.example ./.env.example
 
 # Set permissions
 RUN chown -R appuser:appuser /app

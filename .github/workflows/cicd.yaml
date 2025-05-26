@@ -62,5 +62,4 @@ jobs:
           --image ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/ml-services/api:${{ github.sha }} \
           --platform managed \
           --region ${{ secrets.GCP_REGION }} \
-          --set-env-vars="GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}" \
           --allow-unauthenticated
