@@ -1,4 +1,4 @@
-FROM python:3.9-slim
+FROM python:3.12.3-slim
 
 # Set working directory
 WORKDIR /app
@@ -27,7 +27,7 @@ RUN apt-get update && apt-get install -y \
 
 # Install dependencies first (for better caching)
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt --timeout 300 --retries 10
 
 # Create credentials directory
 RUN mkdir -p credentials
@@ -48,4 +48,4 @@ RUN chown -R appuser:appuser /app
 USER appuser
 
 # Run the application with PORT environment variable
-CMD ["sh", "-c", "uvicorn main:app --host 0.0.0.0 --port ${PORT:-8080}"]
+CMD ["sh", "-c", "uvicorn main:app --host 0.0.0.0 --port ${PORT:-8080} --reload"]
