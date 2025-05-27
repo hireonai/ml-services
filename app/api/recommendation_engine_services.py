@@ -1,9 +1,16 @@
-from contextlib import asynccontextmanager
+"""
+Recommendation Engine Services module.
 
-from typing import List
+This module provides API endpoints for generating job recommendations
+based on user CV and search criteria using semantic search and embeddings.
+"""
+
+from contextlib import asynccontextmanager
+import logging
 
 from fastapi import APIRouter, Request
-from pydantic import BaseModel, Field
+
+from app.api.models import RecommendationsRequest
 
 from app.api.core import (
     create_chroma_client,
@@ -11,13 +18,17 @@ from app.api.core import (
     google_storage_client,
     gemini_client_vertex_ai,
 )
-from app.utils.utils import download_user_cv, generate_text_representation_from_cv
+from app.utils.utils import download_user_cv
+from app.utils.gen_ai_utils import generate_text_representation_from_cv
 from app.utils.recommendation_utils import (
     create_embedding,
     query_collection,
     create_dataframe_from_results,
     merge_dataframes,
 )
+
+# Configure logger
+logger = logging.getLogger(__name__)
 
 
 @asynccontextmanager
@@ -48,26 +59,16 @@ async def lifespan(application: APIRouter):
                 name="job_desc_req_documents"
             )
         )
-        print("Successfully loaded existing ChromaDB collections")
+        logger.info("Successfully loaded existing ChromaDB collections")
     except Exception as e:
-        print(f"Error loading collections: {e}")
-        print("Collections will be initialized on first use")
+        logger.error(f"Error loading collections: {e}")
+        logger.info("Collections will be initialized on first use")
 
-    print(
+    logger.info(
         "Gemini client, google storage client and chroma client initialized on recommendation engine services"
     )
     yield
     # Shutdown logic
-
-
-class RecommendationsRequest(BaseModel):
-    cv_storage_url: str = Field(..., description="URL to the CV document in storage")
-    search_query: str = Field(
-        None, description="Optional search query to filter recommendations"
-    )
-    filtered_id: List[str] = Field(
-        None, description="Optional list of job IDs to filter out"
-    )
 
 
 router = APIRouter(
