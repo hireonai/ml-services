@@ -5,15 +5,12 @@ This module provides an API endpoint to analyze CVs against job details
 using the Gemini AI model.
 """
 
-import os
 from contextlib import asynccontextmanager
 import time
 
 from fastapi import APIRouter, Request, Body
 from fastapi.responses import JSONResponse
 from dotenv import load_dotenv
-from google import genai
-from google.cloud import storage
 from starlette import status
 
 from app.api.models import (
@@ -32,19 +29,9 @@ from app.utils.utils import (
     format_cover_letter_response,
     generate_and_upload_pdf,
 )
+from app.api.core import gemini_client, google_storage_client
 
 load_dotenv()
-
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-if os.getenv("GOOGLE_CLOUD_STORAGE_SERVICE_ACCOUNT_PATH"):
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.getenv(
-        "GOOGLE_CLOUD_STORAGE_SERVICE_ACCOUNT_PATH"
-    )
-else:
-    # Default path inside container
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = (
-        "credentials/google_cloud_storage_service_account.json"
-    )
 
 
 @asynccontextmanager
@@ -56,9 +43,9 @@ async def lifespan(application: APIRouter):
     cleans up resources during the shutdown phase.
     """
     # Startup logic
-    application.state.client = genai.Client(api_key=GEMINI_API_KEY)
-    application.state.storage_client = storage.Client()
-    print("Gemini client and storage client initialized")
+    application.state.gemini_client = gemini_client
+    application.state.google_storage_client = google_storage_client
+    print("Gemini client and storage client initialized on gen ai services.")
     yield
     # Shutdown logic
 
@@ -173,7 +160,7 @@ async def get_cv_job_analysis_flash(
 
         # Use the async client for non-blocking requests
         response = await analyze_cv_with_gemini(
-            request.app.state.client, user_cv_content, formatted_job_details
+            request.app.state.gemini_client, user_cv_content, formatted_job_details
         )
 
         # Process response
@@ -231,7 +218,7 @@ async def cover_letter_generator(
         )
 
         response = await generate_cover_letter(
-            request.app.state.client,
+            request.app.state.gemini_client,
             user_cv_content,
             formatted_job_details,
             data.current_date if hasattr(data, "current_date") else "23 Mei 2025",
@@ -243,7 +230,7 @@ async def cover_letter_generator(
 
         # Generate PDF and upload to Cloud Storage
         pdf_result = await generate_and_upload_pdf(
-            request.app.state.storage_client, html_content
+            request.app.state.google_storage_client, html_content
         )
 
         # Calculate processing time
