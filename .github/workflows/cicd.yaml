@@ -42,12 +42,19 @@ jobs:
       run: |
         mkdir -p credentials
         echo '${{ secrets.GOOGLE_CLOUD_STORAGE_SERVICE_ACCOUNT }}' > credentials/google_cloud_storage_service_account.json
+        echo '${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}' > credentials/ai_platform.json
 
     # Create .env file
     - name: 'Setup .env file'
       run: |
         echo "GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}" >> .env
         echo "GOOGLE_CLOUD_STORAGE_SERVICE_ACCOUNT_PATH=credentials/google_cloud_storage_service_account.json" >> .env
+        echo "GOOGLE_APPLICATION_CREDENTIALS=credentials/ai_platform.json" >> .env
+        echo "GOOGLE_CLOUD_PROJECT=${{ secrets.GOOGLE_CLOUD_PROJECT }}" >> .env
+        echo "GOOGLE_CLOUD_LOCATION=${{ secrets.GCP_REGION }}" >> .env
+        echo "GOOGLE_GENAI_USE_VERTEXAI=True" >> .env
+        echo "CHROMA_SERVER_PORT=${{ secrets.CHROMA_SERVER_PORT }}" >> .env
+        echo "CHROMA_SERVER_HOST=${{ secrets.CHROMA_SERVER_HOST }}" >> .env
 
     # Build and push Docker image
     - name: 'Build and push'
