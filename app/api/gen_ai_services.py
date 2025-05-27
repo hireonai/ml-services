@@ -5,16 +5,13 @@ This module provides an API endpoint to analyze CVs against job details
 using the Gemini AI model.
 """
 
-import os
-
 from contextlib import asynccontextmanager
 import time
+import logging
 
 from fastapi import APIRouter, Request, Body
 from fastapi.responses import JSONResponse
 from dotenv import load_dotenv
-from google import genai
-from google.cloud import storage
 from starlette import status
 
 from app.api.models import (
@@ -23,16 +20,19 @@ from app.api.models import (
     CoverLetterResponse,
     CVJobAnalysisResponse,
 )
-from app.utils.utils import (
-    download_user_cv,
+from app.utils.utils import download_user_cv, generate_and_upload_pdf
+from app.utils.gen_ai_utils import (
     format_job_details_for_ai_jobs_analysis,
     format_job_details_for_cover_letter_generation,
     analyze_cv_with_gemini,
     process_gemini_response,
     generate_cover_letter,
     format_cover_letter_response,
-    generate_and_upload_pdf,
 )
+from app.api.core import gemini_client, google_storage_client
+
+# Configure logger
+logger = logging.getLogger(__name__)
 
 load_dotenv()
 
@@ -46,13 +46,12 @@ async def lifespan(application: APIRouter):
     cleans up resources during the shutdown phase.
     """
     # Startup logic
-    application.state.client = genai.Client(
-        api_key=os.getenv("GEMINI_API_KEY"), vertexai=False
-    )
-    application.state.storage_client = storage.Client()
-    print("Gemini client and storage client initialized")
+    application.state.gemini_client = gemini_client
+    application.state.google_storage_client = google_storage_client
+    logger.info("Gemini client and storage client initialized on gen ai services.")
     yield
     # Shutdown logic
+    logger.info("Shutting down gen-ai services resources")
 
 
 router = APIRouter(
@@ -67,74 +66,7 @@ router = APIRouter(
     status_code=status.HTTP_200_OK,
     response_model=CVJobAnalysisResponse,
     responses={
-        200: {
-            "description": "CV analysis completed successfully",
-            "content": {
-                "application/json": {
-                    "example": {
-                        "cv_relevance_score": 78,
-                        "explaination": [
-                            "CV kamu cukup relevan dengan Job Desc, terutama di bagian technical skills dan pengalaman membangun model ML.",
-                            "Pengalaman kamu sebagai Founder & Head of AI/ML di startup sangat menarik dan menunjukkan kemampuan end-to-end.",
-                            "Ada beberapa area di mana pengalaman kamu bisa diperkuat untuk lebih sesuai dengan kebutuhan spesifik di Job Desc, terutama terkait big data dan beberapa teknologi spesifik.",
-                        ],
-                        "skill_identification_dict": {
-                            "Data Processing and Analysis": 85,
-                            "Pattern Discovery": 80,
-                            "Insight Gathering": 80,
-                            "Predictive Analytics": 90,
-                            "Optimization Models": 75,
-                            "AI Use Cases Development": 85,
-                            "Productivity Enhancement (AI)": 70,
-                            "Process Automation (AI)": 70,
-                            "New Technology Adoption (AI)": 70,
-                            "Cross-functional Collaboration": 80,
-                            "Communication of Findings": 75,
-                            "Data-driven Solution Implementation": 80,
-                            "Continuous Learning (Data Science)": 90,
-                            "Stay Updated (Data Science Methods)": 90,
-                            "Stay Updated (Data Science Use Cases)": 90,
-                            "Stay Updated (Technology Advancements)": 90,
-                            "Analytical Skills": 95,
-                            "Statistical Skills": 95,
-                            "Logical Thinking": 95,
-                            "Big Data Analysis": 40,
-                            "Data Warehousing": 30,
-                            "Business Intelligence": 30,
-                            "R": 70,
-                            "Python": 90,
-                            "Machine Learning Models": 95,
-                            "Hadoop": 10,
-                            "Spark": 10,
-                            "Graph DB": 5,
-                            "Gen-AI Use Cases": 70,
-                            "Teamwork": 85,
-                            "Individual Work": 85,
-                        },
-                        "suggestions": [
-                            {
-                                "keypoint": "Perkuat pengalaman dengan teknologi Big Data",
-                                "penjelasan": "Job requirements menyebutkan pengalaman dengan big data analysis, data warehousing, dan business intelligence. Di CV kamu belum banyak menyoroti pengalaman di area ini. Coba tambahkan detail proyek atau pengalaman yang relevan, atau pertimbangkan untuk mengambil kursus/sertifikasi terkait dalam 1-3 bulan ke depan.",
-                            },
-                            {
-                                "keypoint": "Highlight pengalaman dengan Hadoop, Spark, dan Graph DB",
-                                "penjelasan": "Job requirements menyebutkan pengalaman dengan Hadoop, Spark, dan Graph DB sebagai nilai tambah. Meskipun tidak wajib, memiliki pengalaman ini akan sangat meningkatkan relevansi CV kamu. Jika kamu pernah menggunakan teknologi ini dalam proyek (meskipun kecil), pastikan untuk menyorotnya. Jika belum, pertimbangkan untuk mempelajari dasar-dasarnya dalam 1-2 bulan.",
-                            },
-                            {
-                                "keypoint": "Detailkan kontribusi spesifik dalam proyek AI Use Cases",
-                                "penjelasan": "Kamu sudah punya pengalaman bagus dengan AI use cases. Untuk lebih meyakinkan, coba detailkan kontribusi spesifik kamu dalam mengembangkan AI use cases yang bertujuan meningkatkan produktivitas atau mengotomatisasi proses, seperti yang disebutkan di Job Desc. Berikan angka atau metrik jika memungkinkan.",
-                            },
-                            {
-                                "keypoint": "Cantumkan sertifikasi yang paling relevan di bagian awal CV",
-                                "penjelasan": "Kamu punya banyak sertifikasi, itu bagus! Untuk Job Desc ini, sertifikasi di bidang Data Analytics, Machine Learning, dan Deep Learning sangat relevan. Coba pindahkan sertifikasi yang paling relevan ke bagian awal CV atau buat bagian 'Relevant Certifications' untuk menyorotnya.",
-                            },
-                        ],
-                        "processing_time_seconds": 5.78,
-                        "model": "gemini-2.5-flash-preview-04-17",
-                    }
-                }
-            },
-        },
+        200: {"description": "CV analysis completed successfully"},
         500: {"description": "Error analyzing CV"},
     },
 )
@@ -153,10 +85,15 @@ async def get_cv_job_analysis_flash(
     Uses Gemini's flash model for fast, efficient processing.
     """
     start_time = time.time()
+    logger.info(
+        f"Starting CV analysis for job position: {data.job_details.job_position}"
+    )
 
     try:
         # Get file directly from Google Cloud Storage asynchronously
+        logger.info(f"Downloading CV from: {data.cv_url}")
         user_cv_content = await download_user_cv(data.cv_url)
+        logger.info(f"Successfully downloaded CV, size: {len(user_cv_content)} bytes")
 
         # Format job details as formatted text for the model
         formatted_job_details = format_job_details_for_ai_jobs_analysis(
@@ -164,17 +101,22 @@ async def get_cv_job_analysis_flash(
         )
 
         # Use the async client for non-blocking requests
+        logger.info("Sending CV for analysis with Gemini")
         response = await analyze_cv_with_gemini(
-            request.app.state.client, user_cv_content, formatted_job_details
+            request.app.state.gemini_client, user_cv_content, formatted_job_details
         )
+        logger.info("Received response from Gemini")
 
         # Process response
         result = process_gemini_response(response.text, time.time() - start_time)
+        logger.info(
+            f"Analysis complete. CV relevance score: {result.get('cv_relevance_score')}%, time: {result.get('processing_time_seconds')}s"
+        )
 
         return result
 
     except Exception as e:
-        print(f"Error in CV analysis: {str(e)}")
+        logger.error(f"Error in CV analysis: {str(e)}", exc_info=True)
         return JSONResponse(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, content={"error": str(e)}
         )
@@ -185,19 +127,7 @@ async def get_cv_job_analysis_flash(
     status_code=status.HTTP_200_OK,
     response_model=CoverLetterResponse,
     responses={
-        200: {
-            "description": "Cover letter generated successfully",
-            "content": {
-                "application/json": {
-                    "example": {
-                        "pdf_url": "https://storage.googleapis.com/main-storage-hireon/generated_cv/cover_letter_1748024958.pdf",
-                        "pdf_cloud_path": "generated_cv/cover_letter_1748024958.pdf",
-                        "processing_time_seconds": 54.67,
-                        "model": "gemini-2.5-pro-preview-05-06",
-                    }
-                }
-            },
-        },
+        200: {"description": "Cover letter generated successfully"},
         500: {"description": "Error generating cover letter"},
     },
 )
@@ -214,32 +144,44 @@ async def cover_letter_generator(
     Returns a JSON object containing the URL to the generated PDF file and processing metadata.
     """
     start_time = time.time()
+    logger.info(
+        f"Starting cover letter generation for job: {data.job_details.job_position} at {data.job_details.company_name}"
+    )
 
     try:
+        logger.info(f"Downloading CV from: {data.cv_url}")
         user_cv_content = await download_user_cv(data.cv_url)
+        logger.info(f"Successfully downloaded CV, size: {len(user_cv_content)} bytes")
 
         formatted_job_details = format_job_details_for_cover_letter_generation(
             data.job_details
         )
 
+        logger.info("Generating cover letter with Gemini")
         response = await generate_cover_letter(
-            request.app.state.client,
+            request.app.state.gemini_client,
             user_cv_content,
             formatted_job_details,
             data.current_date if hasattr(data, "current_date") else "23 Mei 2025",
             data.spesific_request if hasattr(data, "spesific_request") else None,
         )
+        logger.info("Received cover letter from Gemini")
 
         # Format the response into HTML
         html_content = format_cover_letter_response(response.text)
 
         # Generate PDF and upload to Cloud Storage
+        logger.info("Generating PDF and uploading to Cloud Storage")
         pdf_result = await generate_and_upload_pdf(
-            request.app.state.storage_client, html_content
+            request.app.state.google_storage_client, html_content
         )
+        logger.info(f"PDF generated and uploaded: {pdf_result['pdf_url']}")
 
         # Calculate processing time
         processing_time = time.time() - start_time
+        logger.info(
+            f"Cover letter generation complete, took {processing_time:.2f} seconds"
+        )
 
         return {
             "pdf_url": pdf_result["pdf_url"],
@@ -249,7 +191,7 @@ async def cover_letter_generator(
         }
 
     except Exception as e:
-        print(f"Error in cover letter generation: {str(e)}")
+        logger.error(f"Error in cover letter generation: {str(e)}", exc_info=True)
         return JSONResponse(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, content={"error": str(e)}
         )

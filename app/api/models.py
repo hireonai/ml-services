@@ -86,7 +86,7 @@ class CoverLetterGeneratorRequest(BaseModel):
         arbitrary_types_allowed = True
         json_schema_extra = {
             "example": {
-                "cv_url": "https://storage.googleapis.com/main-storage-hireon/user_cv/6831c533f4a50c7c69a2bde9-1748153594549.pdf",
+                "cv_url": "https://storage.googleapis.com/main-storage-hireon/user_cv/6831c533f4a50c7c69a2bde9-1748309206886.pdf",
                 "current_date": "2025-05-25",
                 "spesific_request": "Use English language in the cover letter.",
                 "job_details": {
@@ -146,7 +146,7 @@ class CVJobAnalysisRequest(BaseModel):
         arbitrary_types_allowed = True
         json_schema_extra = {
             "example": {
-                "cv_url": "https://storage.googleapis.com/main-storage-hireon/user_cv/6831c533f4a50c7c69a2bde9-1748153594549.pdf",
+                "cv_url": "https://storage.googleapis.com/main-storage-hireon/user_cv/6831c533f4a50c7c69a2bde9-1748309206886.pdf",
                 "job_details": {
                     "job_position": "Data Scientist",
                     "min_experience": "Min. 1 years of experience",
@@ -171,3 +171,53 @@ class CVJobAnalysisRequest(BaseModel):
                 },
             }
         }
+
+
+class RecommendationsRequest(BaseModel):
+    """
+    Request model for job recommendations.
+    """
+
+    cv_storage_url: str = Field(..., description="URL to the CV document in storage")
+    search_query: str = Field(
+        None, description="Optional search query to filter recommendations"
+    )
+    filtered_id: List[str] = Field(
+        None, description="Optional list of job IDs to filter out"
+    )
+
+    class Config:
+        """
+        Configuration for the RecommendationsRequest model with example data.
+        """
+
+        json_schema_extra = {
+            "example": {
+                "cv_storage_url": "https://storage.googleapis.com/main-storage-hireon/user_cv/6831c533f4a50c7c69a2bde9-1748309206886.pdf",
+                "search_query": "Data Scientist",
+                "filtered_id": [
+                    "68341f06d64eecb3953d5c3b",
+                    "68341f06d64eecb3953d5adc",
+                    "68341f06d64eecb3953d5e4f",
+                    "68341f06d64eecb3953d5f62",
+                    # more IDs omitted for brevity
+                ],
+            }
+        }
+
+
+class JobRecommendation(BaseModel):
+    """
+    Model representing a job recommendation with job details and match score.
+    """
+
+    job_id: str
+    similarity_score: float
+
+
+class RecommendationsResponse(BaseModel):
+    """
+    Response model for job recommendations containing a list of job details.
+    """
+
+    recommendations: List[JobRecommendation]
