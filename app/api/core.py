@@ -8,8 +8,9 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-gemini_client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+gemini_client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"), vertexai=False)
 google_storage_client = storage.Client()
+gemini_client_vertex_ai = genai.Client()
 
 
 # Async factory function for ChromaDB client

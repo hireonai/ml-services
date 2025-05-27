@@ -9,8 +9,8 @@ import re
 import json
 import asyncio
 import io
-import aiohttp
 import uuid
+import aiohttp
 
 from weasyprint import HTML
 
@@ -19,6 +19,7 @@ from google.genai import types
 from app.utils.system_prompt import (
     CV_JOB_ANALYSIS_SYSTEM_PROMPT,
     COVER_LETTER_GENERATION_SYSTEM_PROMPT,
+    CV_TO_TEXT_SYSTEM_PROMPT,
 )
 
 
@@ -201,3 +202,15 @@ async def generate_and_upload_pdf(storage_client, html_content):
     result = await asyncio.to_thread(generate_and_upload)
 
     return result
+
+
+async def generate_text_representation_from_cv(client, cv_content: bytes) -> str:
+    return await client.aio.models.generate_content(
+        model="gemini-2.5-flash-preview-05-20",
+        contents=[types.Part.from_bytes(data=cv_content, mime_type="application/pdf")],
+        config=types.GenerateContentConfig(
+            temperature=0.0,
+            thinking_config=types.ThinkingConfig(thinking_budget=0),
+            system_instruction=CV_TO_TEXT_SYSTEM_PROMPT,
+        ),
+    )
