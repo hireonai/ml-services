@@ -186,6 +186,25 @@ class RecommendationsRequest(BaseModel):
         None, description="Optional list of job IDs to filter out"
     )
 
+    class Config:
+        """
+        Configuration for the RecommendationsRequest model with example data.
+        """
+
+        json_schema_extra = {
+            "example": {
+                "cv_storage_url": "https://storage.googleapis.com/main-storage-hireon/user_cv/6831c533f4a50c7c69a2bde9-1748309206886.pdf",
+                "search_query": "Data Scientist",
+                "filtered_id": [
+                    "68341f06d64eecb3953d5c3b",
+                    "68341f06d64eecb3953d5adc",
+                    "68341f06d64eecb3953d5e4f",
+                    "68341f06d64eecb3953d5f62",
+                    # more IDs omitted for brevity
+                ],
+            }
+        }
+
 
 class JobRecommendation(BaseModel):
     """
