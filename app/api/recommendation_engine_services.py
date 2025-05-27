@@ -30,7 +30,6 @@ from app.utils.recommendation_utils import (
     create_embedding,
     query_collection,
     create_dataframe_from_results,
-    merge_dataframes,
 )
 
 # Configure logger
@@ -118,49 +117,43 @@ async def status(request: Request):
     },
 )
 async def recommendations(request: Request, req_data: RecommendationsRequest):
-    """Get recommendations for a given user."""
+    """Get recommendations for a given user based on their CV."""
     try:
         # Get user CV and generate representation
+        logger.info(f"Downloading CV from: {req_data.cv_storage_url}")
         user_cv = await download_user_cv(req_data.cv_storage_url)
+        logger.info("Generating text representation of CV")
         user_cv_representation = await generate_text_representation_from_cv(
             request.app.state.gemini_client, user_cv
         )
 
-        # Process search query if provided
-        job_title_results = None
-        if req_data.search_query:
-            # Generate embedding for job title search
-            job_title_embedding = await create_embedding(
-                request.app.state.gemini_client_vertex_ai, req_data.search_query
-            )
-
-            # Query job titles collection
-            job_title_results = await query_collection(
-                request.app.state.job_titles_collection, job_title_embedding
-            )
-
         # Generate embedding for CV
+        logger.info("Creating embedding from CV content")
         cv_embedding = await create_embedding(
             request.app.state.gemini_client_vertex_ai, user_cv_representation.text
         )
 
         # Query job descriptions with CV embedding
+        logger.info("Querying job descriptions based on CV")
         job_desc_results = await query_collection(
             request.app.state.job_desc_collection, cv_embedding
         )
 
-        # Create dataframes from results
+        # Create dataframe from results
         job_desc_df = create_dataframe_from_results(job_desc_results, "job_description")
 
-        # Process job title results if they exist
-        job_title_df = None
-        if job_title_results:
-            job_title_df = create_dataframe_from_results(job_title_results, "job_title")
+        job_desc_df["match_score"] = (
+            1
+            - job_desc_df["job_description_distance"]
+            / job_desc_df["job_description_distance"].max()
+        ) * 100
 
-        # Merge results and calculate scores
-        combined_df = merge_dataframes(job_desc_df, job_title_df)
+        combined_df = job_desc_df[["id", "match_score"]].sort_values(
+            "match_score", ascending=False
+        )
 
         # Format the response to match the RecommendationsResponse model
+        logger.info(f"Preparing response with {len(combined_df)} recommendations")
         recommendations_list = []
         for item in combined_df.to_dict(orient="records"):
             recommendations_list.append(
