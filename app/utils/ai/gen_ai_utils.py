@@ -22,7 +22,7 @@ logger = logging.getLogger(__name__)
 
 def format_job_details_for_cover_letter_generation(job_details):
     """Format job details into text format for the model."""
-    logger.info(f"Formatting job details for cover letter: {job_details.job_position}")
+    logger.info("Formatting job details for cover letter: %s", job_details.job_position)
     return f"""
     Jobs URL: {job_details.url}
     Company Name: {job_details.company_name}
@@ -43,7 +43,7 @@ async def generate_cover_letter(
     client, cv_content, job_details_text, current_date, spesific_request
 ):
     """Generate a cover letter using Gemini."""
-    logger.info(f"Generating cover letter with Gemini for date: {current_date}")
+    logger.info("Generating cover letter with Gemini for date: %s", current_date)
 
     return await client.aio.models.generate_content(
         model="gemini-2.5-pro-preview-05-06",
@@ -64,7 +64,7 @@ async def generate_cover_letter(
 
 def format_job_details_for_ai_jobs_analysis(job_details):
     """Format job details into text format for the model."""
-    logger.info(f"Formatting job details for analysis: {job_details.job_position}")
+    logger.info("Formatting job details for analysis: %s", job_details.job_position)
 
     return f"""
     Job Position: {job_details.job_position}
@@ -98,7 +98,7 @@ async def analyze_cv_with_gemini(client, cv_content, job_details_text):
 
 def process_gemini_response(response_text, processing_time):
     """Process Gemini response and extract JSON result."""
-    logger.info(f"Processing Gemini response, took {processing_time:.2f} seconds")
+    logger.info("Processing Gemini response, took %.2f seconds", processing_time)
 
     # Remove markdown code block formatting if present
     json_text = re.sub(r"^```json\s*|\s*```$", "", response_text, flags=re.MULTILINE)
@@ -111,7 +111,7 @@ def process_gemini_response(response_text, processing_time):
     result["model"] = "gemini-2.5-flash-preview-04-17"
 
     logger.info(
-        f"Processed response with score: {result.get('cv_relevance_score', 'N/A')}"
+        "Processed response with score: %s", result.get("cv_relevance_score", "N/A")
     )
     return result
 
@@ -143,7 +143,7 @@ def format_cover_letter_response(response_text):
         logger.info("Removed trailing ``` from response")
 
     content = content.strip()  # Remove any extra whitespace
-    logger.info(f"Formatted HTML content (length: {len(content)} characters)")
+    logger.info("Formatted HTML content (length: %d characters)", len(content))
 
     return content
 
@@ -151,7 +151,7 @@ def format_cover_letter_response(response_text):
 async def generate_text_representation_from_cv(client, cv_content: bytes) -> str:
     """Generate text representation from CV content using Gemini."""
     logger.info(
-        f"Generating text representation from CV, size: {len(cv_content)} bytes"
+        "Generating text representation from CV, size: %d bytes", len(cv_content)
     )
 
     response = await client.aio.models.generate_content(

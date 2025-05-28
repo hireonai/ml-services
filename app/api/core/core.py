@@ -1,3 +1,5 @@
+"""Core module for managing external service clients and connections."""
+
 import os
 
 import chromadb

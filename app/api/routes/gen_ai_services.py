@@ -114,14 +114,14 @@ async def get_cv_job_analysis_flash(
     """
     start_time = time.time()
     logger.info(
-        f"Starting CV analysis for job position: {data.job_details.job_position}"
+        "Starting CV analysis for job position: %s", data.job_details.job_position
     )
 
     try:
         # Get file directly from Google Cloud Storage asynchronously
-        logger.info(f"Downloading CV from: {data.cv_url}")
+        logger.info("Downloading CV from: %s", data.cv_url)
         user_cv_content = await download_user_cv(data.cv_url)
-        logger.info(f"Successfully downloaded CV, size: {len(user_cv_content)} bytes")
+        logger.info("Successfully downloaded CV, size: %d bytes", len(user_cv_content))
 
         # Format job details as formatted text for the model
         formatted_job_details = format_job_details_for_ai_jobs_analysis(
@@ -138,13 +138,15 @@ async def get_cv_job_analysis_flash(
         # Process response
         result = process_gemini_response(response.text, time.time() - start_time)
         logger.info(
-            f"Analysis complete. CV relevance score: {result.get('cv_relevance_score')}%, time: {result.get('processing_time_seconds')}s"
+            "Analysis complete. CV relevance score: %d%%, time: %ss",
+            result.get("cv_relevance_score"),
+            result.get("processing_time_seconds"),
         )
 
         return result
 
     except Exception as e:
-        logger.error(f"Error in CV analysis: {str(e)}", exc_info=True)
+        logger.error("Error in CV analysis: %s", str(e), exc_info=True)
         return JSONResponse(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, content={"error": str(e)}
         )
@@ -185,13 +187,15 @@ async def cover_letter_generator(
     """
     start_time = time.time()
     logger.info(
-        f"Starting cover letter generation for job: {data.job_details.job_position} at {data.job_details.company_name}"
+        "Starting cover letter generation for job: %s at %s",
+        data.job_details.job_position,
+        data.job_details.company_name,
     )
 
     try:
-        logger.info(f"Downloading CV from: {data.cv_url}")
+        logger.info("Downloading CV from: %s", data.cv_url)
         user_cv_content = await download_user_cv(data.cv_url)
-        logger.info(f"Successfully downloaded CV, size: {len(user_cv_content)} bytes")
+        logger.info("Successfully downloaded CV, size: %d bytes", len(user_cv_content))
 
         formatted_job_details = format_job_details_for_cover_letter_generation(
             data.job_details
@@ -215,12 +219,12 @@ async def cover_letter_generator(
         pdf_result = await generate_and_upload_pdf(
             request.app.state.google_storage_client, html_content
         )
-        logger.info(f"PDF generated and uploaded: {pdf_result['pdf_url']}")
+        logger.info("PDF generated and uploaded: %s", pdf_result["pdf_url"])
 
         # Calculate processing time
         processing_time = time.time() - start_time
         logger.info(
-            f"Cover letter generation complete, took {processing_time:.2f} seconds"
+            "Cover letter generation complete, took %.2f seconds", processing_time
         )
 
         return {
@@ -231,7 +235,7 @@ async def cover_letter_generator(
         }
 
     except Exception as e:
-        logger.error(f"Error in cover letter generation: {str(e)}", exc_info=True)
+        logger.error("Error in cover letter generation: %s", str(e), exc_info=True)
         return JSONResponse(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, content={"error": str(e)}
         )

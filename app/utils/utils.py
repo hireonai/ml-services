@@ -7,7 +7,6 @@ This module provides helper functions shared across different services.
 import asyncio
 import io
 import uuid
-import aiohttp
 import logging
 
 import aiohttp
@@ -28,14 +27,14 @@ async def download_user_cv(cv_url: str) -> bytes:
     Returns:
         bytes: The CV file content as bytes
     """
-    logger.info(f"Fetching file from URL: {cv_url}")
+    logger.info("Fetching file from URL: %s", cv_url)
 
     async with aiohttp.ClientSession() as session:
         async with session.get(cv_url) as response:
             response.raise_for_status()
             user_cv_content = await response.read()
 
-    logger.info(f"Downloaded {len(user_cv_content)} bytes from URL")
+    logger.info("Downloaded %d bytes from URL", len(user_cv_content))
     return user_cv_content
 
 
@@ -55,7 +54,7 @@ async def generate_and_upload_pdf(storage_client, html_content):
     pdf_filename = f"{random_id_1}.pdf"
     pdf_cloud_path = f"generated_cv/{pdf_filename}"
 
-    logger.info(f"Starting PDF generation for {pdf_filename}")
+    logger.info("Starting PDF generation for %s", pdf_filename)
 
     # Get bucket
     bucket = storage_client.bucket("main-storage-hireon")
@@ -69,7 +68,7 @@ async def generate_and_upload_pdf(storage_client, html_content):
         pdf_buffer.seek(0)
 
         # Upload PDF
-        logger.info(f"Uploading PDF to {pdf_cloud_path}")
+        logger.info("Uploading PDF to %s", pdf_cloud_path)
         pdf_blob = bucket.blob(pdf_cloud_path)
         pdf_blob.upload_from_file(pdf_buffer, content_type="application/pdf")
 
@@ -79,7 +78,7 @@ async def generate_and_upload_pdf(storage_client, html_content):
 
         # Get the public URL
         public_url = pdf_blob.public_url
-        logger.info(f"PDF available at: {public_url}")
+        logger.info("PDF available at: %s", public_url)
 
         return {
             "pdf_url": public_url,

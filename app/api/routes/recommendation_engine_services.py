@@ -66,7 +66,7 @@ async def lifespan(application: APIRouter):
         )
         logger.info("Successfully loaded existing ChromaDB collections")
     except Exception as e:
-        logger.error(f"Error loading collections: {e}")
+        logger.error("Error loading collections: %s", e)
         logger.info("Collections will be initialized on first use")
 
     logger.info(
@@ -120,7 +120,7 @@ async def recommendations(request: Request, req_data: RecommendationsRequest):
     """Get recommendations for a given user based on their CV."""
     try:
         # Get user CV and generate representation
-        logger.info(f"Downloading CV from: {req_data.cv_storage_url}")
+        logger.info("Downloading CV from: %s", req_data.cv_storage_url)
         user_cv = await download_user_cv(req_data.cv_storage_url)
         logger.info("Generating text representation of CV")
         user_cv_representation = await generate_text_representation_from_cv(
@@ -153,7 +153,7 @@ async def recommendations(request: Request, req_data: RecommendationsRequest):
         )
 
         # Format the response to match the RecommendationsResponse model
-        logger.info(f"Preparing response with {len(combined_df)} recommendations")
+        logger.info("Preparing response with %d recommendations", len(combined_df))
         recommendations_list = []
         for item in combined_df.to_dict(orient="records"):
             recommendations_list.append(
@@ -165,7 +165,7 @@ async def recommendations(request: Request, req_data: RecommendationsRequest):
         return {"recommendations": recommendations_list}
 
     except Exception as e:
-        logger.error(f"Error generating recommendations: {str(e)}", exc_info=True)
+        logger.error("Error generating recommendations: %s", str(e), exc_info=True)
         return JSONResponse(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, content={"error": str(e)}
         )

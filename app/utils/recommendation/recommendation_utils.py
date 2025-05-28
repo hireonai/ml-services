@@ -1,3 +1,10 @@
+"""
+Utility functions for generating and processing recommendations.
+
+This module provides functions for creating embeddings, querying vector collections,
+and processing recommendation results through dataframe operations.
+"""
+
 from typing import List, Dict, Any, Optional
 import logging
 
@@ -10,7 +17,7 @@ logger = logging.getLogger(__name__)
 
 async def create_embedding(client, content: str, task_type: str = "RETRIEVAL_QUERY"):
     """Generate embedding for the given content."""
-    logger.info(f"Creating embedding with task type: {task_type}")
+    logger.info("Creating embedding with task type: %s", task_type)
 
     embedding = (
         client.models.embed_content(
@@ -22,23 +29,23 @@ async def create_embedding(client, content: str, task_type: str = "RETRIEVAL_QUE
         .values
     )
 
-    logger.info(f"Embedding created successfully, dimension: {len(embedding)}")
+    logger.info("Embedding created successfully, dimension: %d", len(embedding))
     return embedding
 
 
 async def query_collection(collection, embedding: List[float], n_results: int = 10000):
     """Query a collection with the given embedding."""
-    logger.info(f"Querying collection '{collection.name}' for {n_results} results")
+    logger.info("Querying collection '%s' for %d results", collection.name, n_results)
 
     results = await collection.query(query_embeddings=[embedding], n_results=n_results)
 
-    logger.info(f"Query completed, found {len(results['ids'][0])} matches")
+    logger.info("Query completed, found %d matches", len(results["ids"][0]))
     return results
 
 
 def create_dataframe_from_results(results: Dict[str, Any], source_type: str):
     """Create a dataframe from query results."""
-    logger.info(f"Creating dataframe from {source_type} results")
+    logger.info("Creating dataframe from %s results", source_type)
 
     df = pd.DataFrame(
         {
@@ -48,7 +55,7 @@ def create_dataframe_from_results(results: Dict[str, Any], source_type: str):
         }
     )
 
-    logger.info(f"Dataframe created with {len(df)} rows")
+    logger.info("Dataframe created with %d rows", len(df))
     return df
 
 
@@ -64,7 +71,7 @@ def merge_dataframes(
         )
         combined_df = job_desc_df[["id", "match_score"]]
 
-        logger.info(f"Created result dataframe with {len(combined_df)} rows")
+        logger.info("Created result dataframe with %d rows", len(combined_df))
         return combined_df.sort_values("match_score", ascending=False)
 
     # Merge the dataframes on 'id' column
@@ -74,7 +81,7 @@ def merge_dataframes(
         job_desc_df, job_title_df, on="id", how="outer", suffixes=("_desc", "_title")
     )
 
-    logger.info(f"Merged dataframe created with {len(combined_df)} rows")
+    logger.info("Merged dataframe created with %d rows", len(combined_df))
 
     # Calculate hybrid score (60% title, 40% description)
     logger.info("Calculating hybrid scores (60% title, 40% description)")
@@ -90,6 +97,6 @@ def merge_dataframes(
 
     # Select and sort results
     combined_df = combined_df[["id", "match_score"]]
-    logger.info(f"Final result dataframe created with {len(combined_df)} rows")
+    logger.info("Final result dataframe created with %d rows", len(combined_df))
 
     return combined_df.sort_values("match_score", ascending=False)
