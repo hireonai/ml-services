@@ -25,8 +25,8 @@ from app.api.core.core import (
     gemini_client_vertex_ai,
 )
 from app.utils.utils import download_user_cv
-from app.utils.gen_ai_utils import generate_text_representation_from_cv
-from app.utils.recommendation_utils import (
+from app.utils.ai.gen_ai_utils import generate_text_representation_from_cv
+from app.utils.recommendation.recommendation_utils import (
     create_embedding,
     query_collection,
     create_dataframe_from_results,

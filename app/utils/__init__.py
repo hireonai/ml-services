@@ -1,5 +1,5 @@
 """
-Utilities package containing helper functions and tools.
+Utilities package for ML Services.
 """
 
-from app.utils.utils import *  # Import general utility functions
+from app.utils.utils import *  # Import general utilities

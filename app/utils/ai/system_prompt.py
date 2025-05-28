@@ -4,7 +4,7 @@ System prompts for AI models.
 This module contains system prompts used to guide AI models in generating specific responses.
 """
 
-from app.utils.cv_template import CV_TEMPLATE_HTML
+from app.utils.templates.cv_template import CV_TEMPLATE_HTML
 
 CV_JOB_ANALYSIS_SYSTEM_PROMPT = """
 **Tugas CV Matching Analyst**

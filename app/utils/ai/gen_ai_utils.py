@@ -10,7 +10,7 @@ import json
 import logging
 from google.genai import types
 
-from app.utils.system_prompt import (
+from app.utils.ai.system_prompt import (
     CV_JOB_ANALYSIS_SYSTEM_PROMPT,
     COVER_LETTER_GENERATION_SYSTEM_PROMPT,
     CV_TO_TEXT_SYSTEM_PROMPT,

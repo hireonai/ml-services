@@ -21,7 +21,7 @@ from app.api.models.models import (
     CVJobAnalysisResponse,
 )
 from app.utils.utils import download_user_cv, generate_and_upload_pdf
-from app.utils.gen_ai_utils import (
+from app.utils.ai.gen_ai_utils import (
     format_job_details_for_ai_jobs_analysis,
     format_job_details_for_cover_letter_generation,
     analyze_cv_with_gemini,
