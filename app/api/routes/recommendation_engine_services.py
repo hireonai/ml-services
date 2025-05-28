@@ -12,13 +12,13 @@ from fastapi import APIRouter, Request
 from fastapi.responses import JSONResponse
 from fastapi import status
 
-from app.api.models import (
+from app.api.models.models import (
     RecommendationsRequest,
     RecommendationsResponse,
     JobRecommendation,
 )
 
-from app.api.core import (
+from app.api.core.core import (
     create_chroma_client,
     gemini_client,
     google_storage_client,

@@ -1,18 +1,5 @@
 """
-API router initialization module.
-
-This module configures and exports the main API router with all route handlers.
+API package initialization.
 """
 
-from fastapi import APIRouter
-from app.api.gen_ai_services import router as gen_ai_services_router
-from app.api.recommendation_engine_services import (
-    router as recommendation_engine_services_router,
-)
-
-# Create main API router
-router = APIRouter()
-
-# Include all routers
-router.include_router(gen_ai_services_router)
-router.include_router(recommendation_engine_services_router)
+from app.api.routes import router  # Import main router from routes

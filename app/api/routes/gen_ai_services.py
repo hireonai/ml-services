@@ -14,7 +14,7 @@ from fastapi.responses import JSONResponse
 from dotenv import load_dotenv
 from starlette import status
 
-from app.api.models import (
+from app.api.models.models import (
     CVJobAnalysisRequest,
     CoverLetterGeneratorRequest,
     CoverLetterResponse,
@@ -29,7 +29,7 @@ from app.utils.gen_ai_utils import (
     generate_cover_letter,
     format_cover_letter_response,
 )
-from app.api.core import gemini_client, google_storage_client
+from app.api.core.core import gemini_client, google_storage_client
 
 # Configure logger
 logger = logging.getLogger(__name__)
@@ -66,7 +66,35 @@ router = APIRouter(
     status_code=status.HTTP_200_OK,
     response_model=CVJobAnalysisResponse,
     responses={
-        200: {"description": "CV analysis completed successfully"},
+        200: {
+            "description": "CV analysis completed successfully",
+            "content": {
+                "application/json": {
+                    "example": {
+                        "cv_relevance_score": 25,
+                        "explaination": [
+                            "CV kamu kurang relevan dengan Job Desc karena kamu belum memiliki pengalaman di bidang Data Science.",
+                            "Skill teknis yang kamu miliki lebih fokus ke Fullstack Web Development, bukan Data Science.",
+                        ],
+                        "skill_identification_dict": {
+                            "Data Processing": 0,
+                            "Python": 0,
+                            "Machine Learning Models": 0,
+                            # Additional skills omitted for brevity
+                        },
+                        "suggestions": [
+                            {
+                                "keypoint": "Pelajari dan perbanyak pengalaman dengan Python dan R",
+                                "penjelasan": "Job requirements menyebutkan Python dan R sebagai skill yang dibutuhkan untuk membangun model machine learning.",
+                            }
+                            # Additional suggestions omitted for brevity
+                        ],
+                        "processing_time_seconds": 4.14,
+                        "model": "gemini-2.5-flash-preview-04-17",
+                    }
+                }
+            },
+        },
         500: {"description": "Error analyzing CV"},
     },
 )
