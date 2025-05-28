@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  ml-service:
+    image: dev-hireon-ml
+    container_name: ml-service
+    ports:
+      - "80:8080"
+    volumes:
+      - ./app:/app/app
+      - ./main.py:/app/main.py
