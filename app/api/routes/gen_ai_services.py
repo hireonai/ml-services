@@ -155,7 +155,19 @@ async def get_cv_job_analysis_flash(
     status_code=status.HTTP_200_OK,
     response_model=CoverLetterResponse,
     responses={
-        200: {"description": "Cover letter generated successfully"},
+        200: {
+            "description": "Cover letter generated successfully",
+            "content": {
+                "application/json": {
+                    "example": {
+                        "pdf_url": "https://storage.googleapis.com/main-storage-hireon/generated_cv/b5fe7892bca548aa99b6213373674f7c.pdf",
+                        "pdf_cloud_path": "generated_cv/b5fe7892bca548aa99b6213373674f7c.pdf",
+                        "processing_time_seconds": 70.31,
+                        "model": "gemini-2.5-pro-preview-05-06",
+                    }
+                }
+            },
+        },
         500: {"description": "Error generating cover letter"},
     },
 )
