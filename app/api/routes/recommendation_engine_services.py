@@ -109,7 +109,12 @@ async def get_status(request: Request):
                                 "job_id": "68341f06d64eecb3953d5adc",
                                 "similarity_score": 0.72,
                             },
-                        ]
+                        ],
+                        "metrics": {
+                            "cv_to_text_response_time": 2.45,
+                            "chroma_query_response_time": 0.32,
+                            "total_response_time": 3.21,
+                        },
                     }
                 }
             },
@@ -143,8 +148,15 @@ async def recommendations(request: Request, req_data: RecommendationsRequest):
                 exc_info=True,
             )
             raise
+
+        # Measure CV to text conversion time
+        cv_to_text_start_time = time.time()
         user_cv_representation = await generate_text_representation_from_cv(
-            request.app.state.gemini_client, gs_link
+            request.app.state.gemini_client_vertex_ai, gs_link
+        )
+        cv_to_text_response_time = time.time() - cv_to_text_start_time
+        logger.info(
+            "CV to text conversion completed in %.2f seconds", cv_to_text_response_time
         )
 
         # Generate embedding for CV
@@ -155,8 +167,13 @@ async def recommendations(request: Request, req_data: RecommendationsRequest):
 
         # Query job descriptions with CV embedding
         logger.info("Querying job descriptions based on CV")
+        chroma_query_start_time = time.time()
         job_desc_results = await query_collection(
             request.app.state.job_desc_collection, cv_embedding
+        )
+        chroma_query_response_time = time.time() - chroma_query_start_time
+        logger.info(
+            "ChromaDB query completed in %.2f seconds", chroma_query_response_time
         )
 
         # Create dataframe from results
@@ -182,7 +199,15 @@ async def recommendations(request: Request, req_data: RecommendationsRequest):
                 )
             )
 
-        return {"recommendations": recommendations_list}
+        total_response_time = time.time() - start_time
+        return {
+            "recommendations": recommendations_list,
+            "metrics": {
+                "cv_to_text_response_time": cv_to_text_response_time,
+                "chroma_query_response_time": chroma_query_response_time,
+                "total_response_time": total_response_time,
+            },
+        }
 
     except Exception as e:
         logger.error("Error generating recommendations: %s", str(e), exc_info=True)

@@ -199,3 +199,4 @@ class RecommendationsResponse(BaseModel):
     """
 
     recommendations: List[JobRecommendation]
+    metrics: Dict[str, float]

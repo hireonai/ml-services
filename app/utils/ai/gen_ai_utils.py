@@ -333,11 +333,12 @@ async def generate_text_representation_from_cv(client, cv_url: str) -> str:
 
     # Configure generation parameters
     generate_content_config = types.GenerateContentConfig(
-        temperature=0.0,  # Low temperature for more deterministic output
+        temperature=0.1,  # Low temperature for more deterministic output
         top_p=1,
         seed=0,  # Fixed seed for reproducible results
         max_output_tokens=65535,
         safety_settings=safety_settings,
+        thinking_config=types.ThinkingConfig(thinking_budget=0),
         system_instruction=[types.Part.from_text(text=CV_TO_TEXT_SYSTEM_PROMPT)],
     )
     logger.debug("Configured generation parameters")

@@ -308,7 +308,7 @@ async def cover_letter_generator(
             "pdf_url": pdf_result["pdf_url"],
             "pdf_cloud_path": pdf_result["pdf_cloud_path"],
             "processing_time_seconds": round(processing_time, 2),
-            "model": "gemini-2.5-pro-preview-05-06",
+            "model": "gemini-2.5-flash-preview-05-20",
         }
 
     except Exception as e:
