@@ -22,7 +22,15 @@ logger = logging.getLogger(__name__)
 
 
 def format_job_details_for_cover_letter_generation(job_details):
-    """Format job details into text format for the model."""
+    """
+    Format job details into text format for the model.
+
+    Args:
+        job_details: Object containing job information
+
+    Returns:
+        str: Formatted job details as text
+    """
     logger.info("Formatting job details for cover letter: %s", job_details.job_position)
     return f"""
     Jobs URL: {job_details.url}
@@ -45,7 +53,7 @@ async def generate_cover_letter(
     cv_url: str,
     job_details_text: str,
     current_date: str,
-    specific_request: str,  # Fixed spelling from "spesific" to "specific"
+    specific_request: str,
 ):
     """
     Generate a cover letter using Gemini model.
@@ -128,7 +136,15 @@ async def generate_cover_letter(
 
 
 def format_job_details_for_ai_jobs_analysis(job_details):
-    """Format job details into text format for the model."""
+    """
+    Format job details into text format for CV analysis.
+
+    Args:
+        job_details: Object containing job information
+
+    Returns:
+        str: Formatted job details as text
+    """
     logger.info("Formatting job details for analysis: %s", job_details.job_position)
 
     return f"""
@@ -143,26 +159,90 @@ def format_job_details_for_ai_jobs_analysis(job_details):
     """
 
 
-async def analyze_cv_with_gemini(client, cv_content, job_details_text):
-    """Send CV and job details to Gemini for analysis."""
+async def analyze_cv_with_gemini(client, cv_url, job_details_text):
+    """
+    Send CV and job details to Gemini for analysis.
+
+    Args:
+        client: Initialized Gemini Vertex AI API client
+        cv_url: URL to the CV PDF document
+        job_details_text: Formatted job details as text
+
+    Returns:
+        Gemini API response containing the CV analysis
+    """
     logger.info("Analyzing CV with Gemini model")
 
-    return await client.aio.models.generate_content(
-        model="gemini-2.5-flash-preview-04-17",
-        contents=[
-            types.Part.from_bytes(data=cv_content, mime_type="application/pdf"),
-            job_details_text,
-        ],
-        config=types.GenerateContentConfig(
-            thinking_config=types.ThinkingConfig(thinking_budget=0),
-            temperature=0.0,
-            system_instruction=CV_JOB_ANALYSIS_SYSTEM_PROMPT,
-        ),
-    )
+    try:
+        # Create PDF document reference from URL
+        cv_document = types.Part.from_uri(file_uri=cv_url, mime_type="application/pdf")
+        logger.debug("Created PDF document reference from URL: %s", cv_url)
+
+        # Prepare content structure for Gemini API
+        contents = [
+            types.Content(
+                role="user",
+                parts=[
+                    types.Part.from_text(text="CV content:"),
+                    cv_document,
+                    types.Part.from_text(text="Job Details json:"),
+                    types.Part.from_text(text=job_details_text),
+                ],
+            )
+        ]
+        logger.debug("Prepared content structure for Gemini API")
+
+        # Define safety settings to allow necessary content generation
+        safety_settings = [
+            types.SafetySetting(category="HARM_CATEGORY_HATE_SPEECH", threshold="OFF"),
+            types.SafetySetting(
+                category="HARM_CATEGORY_DANGEROUS_CONTENT", threshold="OFF"
+            ),
+            types.SafetySetting(
+                category="HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold="OFF"
+            ),
+            types.SafetySetting(category="HARM_CATEGORY_HARASSMENT", threshold="OFF"),
+        ]
+
+        # Configure generation parameters
+        generate_content_config = types.GenerateContentConfig(
+            temperature=0.0,  # Low temperature for more deterministic output
+            top_p=1,
+            seed=0,  # Fixed seed for reproducible results
+            max_output_tokens=65535,
+            safety_settings=safety_settings,
+            system_instruction=[
+                types.Part.from_text(text=CV_JOB_ANALYSIS_SYSTEM_PROMPT)
+            ],
+        )
+        logger.debug("Configured generation parameters")
+
+        # Call Gemini API and return response
+        logger.info("Sending request to Gemini API")
+        response = await client.aio.models.generate_content(
+            model="gemini-2.5-flash-preview-05-20",
+            contents=contents,
+            config=generate_content_config,
+        )
+        logger.info("Successfully received response from Gemini API")
+        return response
+
+    except Exception as e:
+        logger.error("Error analyzing CV: %s", str(e), exc_info=True)
+        raise
 
 
 def process_gemini_response(response_text, processing_time):
-    """Process Gemini response and extract JSON result."""
+    """
+    Process Gemini response and extract JSON result.
+
+    Args:
+        response_text: Raw text response from Gemini
+        processing_time: Time taken to process the request
+
+    Returns:
+        dict: Structured JSON result with processing metadata
+    """
     logger.info("Processing Gemini response, took %.2f seconds", processing_time)
 
     # Remove markdown code block formatting if present
@@ -173,7 +253,7 @@ def process_gemini_response(response_text, processing_time):
 
     # Add processing time to the result
     result["processing_time_seconds"] = round(processing_time, 2)
-    result["model"] = "gemini-2.5-flash-preview-04-17"
+    result["model"] = "gemini-2.5-flash-preview-05-20"
 
     logger.info(
         "Processed response with score: %s", result.get("cv_relevance_score", "N/A")
@@ -194,7 +274,6 @@ def format_cover_letter_response(response_text):
     logger.info("Formatting cover letter response for PDF generation")
 
     # Remove markdown code block formatting if present
-    # This will remove ```html at the start and ``` at the end
     content = response_text.strip()
     if content.startswith("```html"):
         content = content[7:]  # Remove ```html
@@ -213,21 +292,62 @@ def format_cover_letter_response(response_text):
     return content
 
 
-async def generate_text_representation_from_cv(client, cv_content: bytes) -> str:
-    """Generate text representation from CV content using Gemini."""
-    logger.info(
-        "Generating text representation from CV, size: %d bytes", len(cv_content)
-    )
+async def generate_text_representation_from_cv(client, cv_url: str) -> str:
+    """
+    Generate text representation from CV content using Gemini.
 
+    Args:
+        client: Initialized Gemini Vertex AI API client
+        cv_content: Binary content of the CV PDF
+
+    Returns:
+        str: Text representation of CV content
+    """
+    logger.info("Generating text representation from CV, size: %d bytes", len(cv_url))
+    cv_document = types.Part.from_uri(file_uri=cv_url, mime_type="application/pdf")
+    logger.debug("Created PDF document reference from URL: %s", cv_url)
+
+    # Prepare content structure for Gemini API
+    contents = [
+        types.Content(
+            role="user",
+            parts=[
+                types.Part.from_text(text="CV content:"),
+                cv_document,
+            ],
+        )
+    ]
+    logger.debug("Prepared content structure for Gemini API")
+
+    # Define safety settings to allow necessary content generation
+    safety_settings = [
+        types.SafetySetting(category="HARM_CATEGORY_HATE_SPEECH", threshold="OFF"),
+        types.SafetySetting(
+            category="HARM_CATEGORY_DANGEROUS_CONTENT", threshold="OFF"
+        ),
+        types.SafetySetting(
+            category="HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold="OFF"
+        ),
+        types.SafetySetting(category="HARM_CATEGORY_HARASSMENT", threshold="OFF"),
+    ]
+
+    # Configure generation parameters
+    generate_content_config = types.GenerateContentConfig(
+        temperature=0.0,  # Low temperature for more deterministic output
+        top_p=1,
+        seed=0,  # Fixed seed for reproducible results
+        max_output_tokens=65535,
+        safety_settings=safety_settings,
+        system_instruction=[types.Part.from_text(text=CV_TO_TEXT_SYSTEM_PROMPT)],
+    )
+    logger.debug("Configured generation parameters")
+
+    # Call Gemini API and return response
+    logger.info("Sending request to Gemini API")
     response = await client.aio.models.generate_content(
         model="gemini-2.5-flash-preview-05-20",
-        contents=[types.Part.from_bytes(data=cv_content, mime_type="application/pdf")],
-        config=types.GenerateContentConfig(
-            temperature=0.0,
-            thinking_config=types.ThinkingConfig(thinking_budget=0),
-            system_instruction=CV_TO_TEXT_SYSTEM_PROMPT,
-        ),
+        contents=contents,
+        config=generate_content_config,
     )
-
-    logger.info("Successfully generated CV text representation")
+    logger.info("Successfully received response from Gemini API")
     return response

@@ -8,15 +8,6 @@ from typing import List, Dict
 from pydantic import BaseModel, HttpUrl, Field
 
 
-class SkillSuggestion(BaseModel):
-    """
-    Model representing a skill suggestion with a key point and explanation.
-    """
-
-    keypoint: str
-    penjelasan: str
-
-
 class CVJobAnalysisResponse(BaseModel):
     """
     Response model for CV job analysis containing relevance scores and improvement suggestions.
@@ -25,13 +16,14 @@ class CVJobAnalysisResponse(BaseModel):
     cv_relevance_score: int = Field(
         ..., description="Score indicating relevance of CV to job (0-100)"
     )
-    explaination: List[str] = Field(
-        ..., description="List of key insights about CV's relevance to job"
-    )
     skill_identification_dict: Dict[str, int] = Field(
         ..., description="Dictionary of skills with scores (0-100)"
     )
-    suggestions: List[SkillSuggestion] = Field(
+    areas_for_improvement: List[str] = Field(
+        ..., description="Areas for improvement in CV"
+    )
+    analysis_explanation: str = Field(..., description="Analysis explanation")
+    suggestions: List[str] = Field(
         ..., description="Personalized suggestions for CV improvement"
     )
     processing_time_seconds: float = Field(

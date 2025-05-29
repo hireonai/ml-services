@@ -21,7 +21,6 @@ from app.api.models.models import (
     CVJobAnalysisResponse,
 )
 from app.utils.utils import (
-    download_user_cv,
     generate_and_upload_pdf,
     change_link_storage_to_gs,
 )
@@ -80,26 +79,31 @@ router = APIRouter(
             "content": {
                 "application/json": {
                     "example": {
-                        "cv_relevance_score": 25,
-                        "explaination": [
-                            "CV kamu kurang relevan dengan Job Desc karena kamu belum memiliki pengalaman di bidang Data Science.",
-                            "Skill teknis yang kamu miliki lebih fokus ke Fullstack Web Development, bukan Data Science.",
-                        ],
+                        "cv_relevance_score": 18,
                         "skill_identification_dict": {
-                            "Data Processing": 0,
+                            "Data processing and analysis": 20,
+                            "Pattern discovery and insights gathering": 20,
+                            "Predictive analytics": 0,
                             "Python": 0,
-                            "Machine Learning Models": 0,
-                            # Additional skills omitted for brevity
+                            "Machine learning models": 0,
+                            "Analytical skills": 40,
+                            "Statistical skills": 0,
+                            "Logical thinking": 90,
+                            "Communication": 70,
+                            "Database design": 60,
                         },
-                        "suggestions": [
-                            {
-                                "keypoint": "Pelajari dan perbanyak pengalaman dengan Python dan R",
-                                "penjelasan": "Job requirements menyebutkan Python dan R sebagai skill yang dibutuhkan untuk membangun model machine learning.",
-                            }
-                            # Additional suggestions omitted for brevity
+                        "areas_for_improvement": [
+                            "Lack of specific Data Science technical skills (R, Python, Machine Learning, Big Data tools).",
+                            "Experience is primarily in Fullstack Web Development, not Data Science.",
+                            "No mention of projects or experience related to predictive analytics or AI.",
                         ],
-                        "processing_time_seconds": 4.14,
-                        "model": "gemini-2.5-flash-preview-04-17",
+                        "analysis_explanation": "Your CV currently presents a strong profile in Fullstack Web Development, showcasing expertise in various web technologies, project management, and teamwork. However, for a Data Scientist role, there's a significant mismatch in core technical skills and experience.",
+                        "suggestions": [
+                            "Create a dedicated 'Data Science Projects' section to showcase any personal projects using R or Python for data analysis.",
+                            "Enroll in online courses or certifications for Python/R for Data Science, Machine Learning, and Statistical Modeling.",
+                        ],
+                        "processing_time_seconds": 23.85,
+                        "model": "gemini-2.5-flash-preview-05-20",
                     }
                 }
             },
@@ -127,10 +131,10 @@ async def get_cv_job_analysis_flash(
     )
 
     try:
-        # Get file directly from Google Cloud Storage asynchronously
-        logger.info("Downloading CV from: %s", data.cv_url)
-        user_cv_content = await download_user_cv(data.cv_url)
-        logger.info("Successfully downloaded CV, size: %d bytes", len(user_cv_content))
+        # Convert CV URL to Google Storage format
+        logger.info("Converting CV URL to Google Storage format: %s", data.cv_url)
+        gs_link = await change_link_storage_to_gs(data.cv_url)
+        logger.info("Successfully converted CV URL to GS format")
 
         # Format job details as formatted text for the model
         formatted_job_details = format_job_details_for_ai_jobs_analysis(
@@ -140,7 +144,7 @@ async def get_cv_job_analysis_flash(
         # Use the async client for non-blocking requests
         logger.info("Sending CV for analysis with Gemini")
         response = await analyze_cv_with_gemini(
-            request.app.state.gemini_client, user_cv_content, formatted_job_details
+            request.app.state.gemini_client_vertex_ai, gs_link, formatted_job_details
         )
         logger.info("Received response from Gemini")
 

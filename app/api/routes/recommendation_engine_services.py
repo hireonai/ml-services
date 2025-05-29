@@ -7,6 +7,7 @@ based on user CV and search criteria using semantic search and embeddings.
 
 from contextlib import asynccontextmanager
 import logging
+import time
 
 from fastapi import APIRouter, Request
 from fastapi.responses import JSONResponse
@@ -24,7 +25,7 @@ from app.api.core.core import (
     google_storage_client,
     gemini_client_vertex_ai,
 )
-from app.utils.utils import download_user_cv
+from app.utils.utils import change_link_storage_to_gs
 from app.utils.ai.gen_ai_utils import generate_text_representation_from_cv
 from app.utils.recommendation.recommendation_utils import (
     create_embedding,
@@ -84,7 +85,7 @@ router = APIRouter(
 
 
 @router.get("/status")
-async def status(request: Request):
+async def get_status(request: Request):
     """Get ChromaDB server status."""
     heartbeat_status = await request.app.state.chroma_client.heartbeat()
     return {"status": heartbeat_status}
@@ -118,13 +119,32 @@ async def status(request: Request):
 )
 async def recommendations(request: Request, req_data: RecommendationsRequest):
     """Get recommendations for a given user based on their CV."""
+
+    start_time = time.time()
+    request_id = f"req_{int(start_time)}"
+    logger.info(
+        "Starting recommendation generation [%s] for CV URL: %s",
+        request_id,
+        req_data.cv_storage_url,
+    )
+
     try:
         # Get user CV and generate representation
-        logger.info("Downloading CV from: %s", req_data.cv_storage_url)
-        user_cv = await download_user_cv(req_data.cv_storage_url)
-        logger.info("Generating text representation of CV")
+        # Convert CV URL to Google Storage format
+        logger.debug("[%s] Converting CV URL to Google Storage format", request_id)
+        try:
+            gs_link = await change_link_storage_to_gs(req_data.cv_storage_url)
+            logger.debug("[%s] Successfully converted CV URL to GS format", request_id)
+        except Exception as e:
+            logger.error(
+                "[%s] Failed to convert CV URL to Google Storage format: %s",
+                request_id,
+                str(e),
+                exc_info=True,
+            )
+            raise
         user_cv_representation = await generate_text_representation_from_cv(
-            request.app.state.gemini_client, user_cv
+            request.app.state.gemini_client, gs_link
         )
 
         # Generate embedding for CV
