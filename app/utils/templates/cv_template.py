@@ -1,4 +1,5 @@
 CV_TEMPLATE_HTML = """
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -142,4 +143,5 @@ CV_TEMPLATE_HTML = """
     </div>
 </body>
 </html>
+```
 """

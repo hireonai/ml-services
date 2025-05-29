@@ -20,7 +20,11 @@ from app.api.models.models import (
     CoverLetterResponse,
     CVJobAnalysisResponse,
 )
-from app.utils.utils import download_user_cv, generate_and_upload_pdf
+from app.utils.utils import (
+    download_user_cv,
+    generate_and_upload_pdf,
+    change_link_storage_to_gs,
+)
 from app.utils.ai.gen_ai_utils import (
     format_job_details_for_ai_jobs_analysis,
     format_job_details_for_cover_letter_generation,
@@ -29,7 +33,11 @@ from app.utils.ai.gen_ai_utils import (
     generate_cover_letter,
     format_cover_letter_response,
 )
-from app.api.core.core import gemini_client, google_storage_client
+from app.api.core.core import (
+    gemini_client,
+    gemini_client_vertex_ai,
+    google_storage_client,
+)
 
 # Configure logger
 logger = logging.getLogger(__name__)
@@ -47,6 +55,7 @@ async def lifespan(application: APIRouter):
     """
     # Startup logic
     application.state.gemini_client = gemini_client
+    application.state.gemini_client_vertex_ai = gemini_client_vertex_ai
     application.state.google_storage_client = google_storage_client
     logger.info("Gemini client and storage client initialized on gen ai services.")
     yield
@@ -186,45 +195,109 @@ async def cover_letter_generator(
     Returns a JSON object containing the URL to the generated PDF file and processing metadata.
     """
     start_time = time.time()
+    request_id = f"req_{int(start_time)}"
     logger.info(
-        "Starting cover letter generation for job: %s at %s",
+        "Starting cover letter generation [%s] for job: %s at %s",
+        request_id,
         data.job_details.job_position,
         data.job_details.company_name,
     )
 
     try:
-        logger.info("Downloading CV from: %s", data.cv_url)
-        user_cv_content = await download_user_cv(data.cv_url)
-        logger.info("Successfully downloaded CV, size: %d bytes", len(user_cv_content))
+        # Convert CV URL to Google Storage format
+        logger.debug("[%s] Converting CV URL to Google Storage format", request_id)
+        try:
+            gs_link = await change_link_storage_to_gs(data.cv_url)
+            logger.debug("[%s] Successfully converted CV URL to GS format", request_id)
+        except Exception as e:
+            logger.error(
+                "[%s] Failed to convert CV URL to Google Storage format: %s",
+                request_id,
+                str(e),
+                exc_info=True,
+            )
+            raise
 
+        # Format job details for AI processing
+        logger.debug(
+            "[%s] Formatting job details for cover letter generation", request_id
+        )
         formatted_job_details = format_job_details_for_cover_letter_generation(
             data.job_details
         )
 
-        logger.info("Generating cover letter with Gemini")
-        response = await generate_cover_letter(
-            request.app.state.gemini_client,
-            user_cv_content,
-            formatted_job_details,
-            data.current_date if hasattr(data, "current_date") else "23 Mei 2025",
-            data.spesific_request if hasattr(data, "spesific_request") else None,
+        # Generate cover letter with Gemini
+        gen_start_time = time.time()
+        logger.info(
+            "[%s] Sending request to Gemini for cover letter generation", request_id
         )
-        logger.info("Received cover letter from Gemini")
 
-        # Format the response into HTML
+        current_date = (
+            data.current_date
+            if hasattr(data, "current_date") and data.current_date
+            else "None, dont use date."
+        )
+
+        specific_request = (
+            data.spesific_request if hasattr(data, "spesific_request") else None
+        )
+
+        try:
+            response = await generate_cover_letter(
+                request.app.state.gemini_client_vertex_ai,
+                gs_link,
+                formatted_job_details,
+                current_date,
+                specific_request,
+            )
+            gen_time = time.time() - gen_start_time
+            logger.info(
+                "[%s] Received cover letter from Gemini (%.2f seconds)",
+                request_id,
+                gen_time,
+            )
+        except Exception as e:
+            logger.error(
+                "[%s] Error while generating cover letter with Gemini: %s",
+                request_id,
+                str(e),
+                exc_info=True,
+            )
+            raise
+
+        # Format response into HTML
+        logger.debug("[%s] Formatting cover letter response to HTML", request_id)
         html_content = format_cover_letter_response(response.text)
 
         # Generate PDF and upload to Cloud Storage
-        logger.info("Generating PDF and uploading to Cloud Storage")
-        pdf_result = await generate_and_upload_pdf(
-            request.app.state.google_storage_client, html_content
-        )
-        logger.info("PDF generated and uploaded: %s", pdf_result["pdf_url"])
+        pdf_start_time = time.time()
+        logger.info("[%s] Generating PDF and uploading to Cloud Storage", request_id)
+        try:
+            pdf_result = await generate_and_upload_pdf(
+                request.app.state.google_storage_client, html_content
+            )
+            pdf_time = time.time() - pdf_start_time
+            logger.info(
+                "[%s] PDF generated and uploaded successfully: %s (%.2f seconds)",
+                request_id,
+                pdf_result["pdf_url"],
+                pdf_time,
+            )
+        except Exception as e:
+            logger.error(
+                "[%s] Error generating or uploading PDF: %s",
+                request_id,
+                str(e),
+                exc_info=True,
+            )
+            raise
 
-        # Calculate processing time
+        # Calculate processing time and prepare response
         processing_time = time.time() - start_time
         logger.info(
-            "Cover letter generation complete, took %.2f seconds", processing_time
+            "[%s] Cover letter generation complete, took %.2f seconds",
+            request_id,
+            processing_time,
         )
 
         return {
@@ -235,7 +308,15 @@ async def cover_letter_generator(
         }
 
     except Exception as e:
-        logger.error("Error in cover letter generation: %s", str(e), exc_info=True)
+        total_time = time.time() - start_time
+        logger.error(
+            "[%s] Error in cover letter generation (%.2f seconds): %s",
+            request_id,
+            total_time,
+            str(e),
+            exc_info=True,
+        )
         return JSONResponse(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, content={"error": str(e)}
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            content={"error": str(e), "request_id": request_id},
         )

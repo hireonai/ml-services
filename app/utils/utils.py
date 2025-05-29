@@ -92,3 +92,11 @@ async def generate_and_upload_pdf(storage_client, html_content):
     logger.info("PDF generation and upload completed successfully")
 
     return result
+
+async def change_link_storage_to_gs(link: str) -> str:
+    """
+    Change the storage link to Google Cloud Storage.
+    """
+    return link.replace("https://storage.googleapis.com/", "gs://")
+
+
