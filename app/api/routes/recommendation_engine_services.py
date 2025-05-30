@@ -14,14 +14,13 @@ from fastapi.responses import JSONResponse
 from fastapi import status
 
 from app.api.models.models import (
-    RecommendationsRequest,
     RecommendationsResponse,
     JobRecommendation,
+    PostCVEmbeddingsRequest
 )
 
 from app.api.core.core import (
     create_chroma_client,
-    gemini_client,
     google_storage_client,
     gemini_client_vertex_ai,
 )
@@ -46,7 +45,6 @@ async def lifespan(application: APIRouter):
     cleans up resources during the shutdown phase.
     """
     # Startup logic
-    application.state.gemini_client = gemini_client
     application.state.gemini_client_vertex_ai = gemini_client_vertex_ai
     application.state.google_storage_client = google_storage_client
 
@@ -63,6 +61,11 @@ async def lifespan(application: APIRouter):
         application.state.job_desc_collection = (
             await application.state.chroma_client.get_collection(
                 name="job_desc_req_documents"
+            )
+        )
+        application.state.user_cv_embeddings_collection = (
+            await application.state.chroma_client.get_collection(
+                name="user_cv_embeddings"
             )
         )
         logger.info("Successfully loaded existing ChromaDB collections")
@@ -91,7 +94,98 @@ async def get_status(request: Request):
     return {"status": heartbeat_status}
 
 
-@router.post(
+@router.get("/cv_embeddings")
+async def get_cv_embeddings(request: Request, user_id: str):
+    """Get CV embeddings for a given user ID."""
+    cv_embeddings = await request.app.state.user_cv_embeddings_collection.get(ids=user_id, include=["embeddings"])
+    return {'embeddings': cv_embeddings['embeddings'][0].tolist()}
+
+
+@router.post("/cv_embeddings")
+async def post_cv_embeddings(request: Request, req_data: PostCVEmbeddingsRequest):
+    """Get CV embeddings for a given CV URL."""
+    
+    start_time = time.time()
+    request_id = f"req_{int(start_time)}"
+    logger.info(
+        "Getting cv embeddings [%s] for CV URL: %s",
+        request_id,
+        req_data.cv_storage_url,
+    )
+    
+    try:
+        # Get user CV and generate representation
+        # Convert CV URL to Google Storage format
+        logger.debug("[%s] Converting CV URL to Google Storage format", request_id)
+        try:
+            gs_link = await change_link_storage_to_gs(req_data.cv_storage_url)
+            logger.debug("[%s] Successfully converted CV URL to GS format", request_id)
+        except Exception as e:
+            logger.error(
+                "[%s] Failed to convert CV URL to Google Storage format: %s",
+                request_id,
+                str(e),
+                exc_info=True,
+            )
+            raise
+        
+        # Measure CV to text conversion time
+        cv_to_text_start_time = time.time()
+        user_cv_representation = await generate_text_representation_from_cv(
+            request.app.state.gemini_client_vertex_ai, gs_link
+        )
+        cv_to_text_response_time = time.time() - cv_to_text_start_time
+        logger.info(
+            "[%s] CV to text conversion completed in %.2f seconds", 
+            request_id, 
+            cv_to_text_response_time
+        )
+
+        # Generate embedding for CV - measure time separately
+        logger.info("[%s] Creating embedding from CV content", request_id)
+        embedding_start_time = time.time()
+        cv_embedding = await create_embedding(
+            request.app.state.gemini_client_vertex_ai, user_cv_representation.text
+        )
+        embedding_creation_time = time.time() - embedding_start_time
+        logger.info(
+            "[%s] Embedding creation completed in %.2f seconds",
+            request_id,
+            embedding_creation_time
+        )
+        
+        total_response_time = time.time() - start_time
+        logger.info(
+            "[%s] Total CV embeddings processing completed in %.2f seconds",
+            request_id,
+            total_response_time
+        )
+        
+        await request.app.state.user_cv_embeddings_collection.upsert(
+            embeddings=[cv_embedding],
+            ids=[req_data.user_id]
+        )
+        
+        return {
+            "status": 200,
+            "message": f"embedding added for user {req_data.user_id}",
+            "cv_to_text_response_time": cv_to_text_response_time,
+            "embedding_creation_time": embedding_creation_time,
+            "total_response_time": total_response_time,
+        }
+    except Exception as e:
+        logger.error(
+            "[%s] Error getting CV embeddings: %s", 
+            request_id, 
+            str(e), 
+            exc_info=True
+        )
+        return JSONResponse(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, 
+            content={"error": str(e), "request_id": request_id}
+        )
+
+@router.get(
     "/recommendations",
     response_model=RecommendationsResponse,
     responses={
@@ -111,7 +205,6 @@ async def get_status(request: Request):
                             },
                         ],
                         "metrics": {
-                            "cv_to_text_response_time": 2.45,
                             "chroma_query_response_time": 0.32,
                             "total_response_time": 3.21,
                         },
@@ -122,61 +215,36 @@ async def get_status(request: Request):
         500: {"description": "Error generating recommendations"},
     },
 )
-async def recommendations(request: Request, req_data: RecommendationsRequest):
+async def get_recommendations(request: Request, user_id: str):
     """Get recommendations for a given user based on their CV."""
 
     start_time = time.time()
     request_id = f"req_{int(start_time)}"
     logger.info(
-        "Starting recommendation generation [%s] for CV URL: %s",
+        "Starting recommendation generation [%s] for User ID: %s",
         request_id,
-        req_data.cv_storage_url,
+        user_id,
     )
 
     try:
-        # Get user CV and generate representation
-        # Convert CV URL to Google Storage format
-        logger.debug("[%s] Converting CV URL to Google Storage format", request_id)
-        try:
-            gs_link = await change_link_storage_to_gs(req_data.cv_storage_url)
-            logger.debug("[%s] Successfully converted CV URL to GS format", request_id)
-        except Exception as e:
-            logger.error(
-                "[%s] Failed to convert CV URL to Google Storage format: %s",
-                request_id,
-                str(e),
-                exc_info=True,
-            )
-            raise
-
-        # Measure CV to text conversion time
-        cv_to_text_start_time = time.time()
-        user_cv_representation = await generate_text_representation_from_cv(
-            request.app.state.gemini_client_vertex_ai, gs_link
-        )
-        cv_to_text_response_time = time.time() - cv_to_text_start_time
-        logger.info(
-            "CV to text conversion completed in %.2f seconds", cv_to_text_response_time
-        )
-
-        # Generate embedding for CV
-        logger.info("Creating embedding from CV content")
-        cv_embedding = await create_embedding(
-            request.app.state.gemini_client_vertex_ai, user_cv_representation.text
-        )
-
+        cv_embedding = await request.app.state.user_cv_embeddings_collection.get(ids=user_id, include=["embeddings"])
+        cv_embedding = cv_embedding['embeddings'][0]
+    
         # Query job descriptions with CV embedding
-        logger.info("Querying job descriptions based on CV")
+        logger.info("[%s] Querying job descriptions based on CV", request_id)
         chroma_query_start_time = time.time()
         job_desc_results = await query_collection(
             request.app.state.job_desc_collection, cv_embedding
         )
         chroma_query_response_time = time.time() - chroma_query_start_time
         logger.info(
-            "ChromaDB query completed in %.2f seconds", chroma_query_response_time
+            "[%s] ChromaDB query completed in %.2f seconds", 
+            request_id, 
+            chroma_query_response_time
         )
 
         # Create dataframe from results
+        logger.debug("[%s] Processing query results into dataframe", request_id)
         job_desc_df = create_dataframe_from_results(job_desc_results, "job_description")
 
         job_desc_df["match_score"] = (
@@ -190,7 +258,7 @@ async def recommendations(request: Request, req_data: RecommendationsRequest):
         )
 
         # Format the response to match the RecommendationsResponse model
-        logger.info("Preparing response with %d recommendations", len(combined_df))
+        logger.info("[%s] Preparing response with %d recommendations", request_id, len(combined_df))
         recommendations_list = []
         for item in combined_df.to_dict(orient="records"):
             recommendations_list.append(
@@ -200,17 +268,28 @@ async def recommendations(request: Request, req_data: RecommendationsRequest):
             )
 
         total_response_time = time.time() - start_time
+        logger.info(
+            "[%s] Total recommendation processing completed in %.2f seconds",
+            request_id,
+            total_response_time
+        )
+        
         return {
             "recommendations": recommendations_list,
             "metrics": {
-                "cv_to_text_response_time": cv_to_text_response_time,
                 "chroma_query_response_time": chroma_query_response_time,
                 "total_response_time": total_response_time,
             },
         }
 
     except Exception as e:
-        logger.error("Error generating recommendations: %s", str(e), exc_info=True)
+        logger.error(
+            "[%s] Error generating recommendations: %s", 
+            request_id, 
+            str(e), 
+            exc_info=True
+        )
         return JSONResponse(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, content={"error": str(e)}
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, 
+            content={"error": str(e), "request_id": request_id}
         )

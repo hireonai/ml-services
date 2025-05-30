@@ -8,6 +8,58 @@ from typing import List, Dict
 from pydantic import BaseModel, HttpUrl, Field
 
 
+class GetCVEmbeddingsRequest(BaseModel):
+    """
+    Request model for CV embeddings.
+    """
+
+    user_id: str = Field(..., description="User ID")
+
+class PostCVEmbeddingsRequest(BaseModel):
+    """
+    Request model for CV embeddings.
+    """
+
+    cv_storage_url: str = Field(..., description="URL to the CV document in storage")
+    user_id: str = Field(..., description="User ID")
+    class Config:
+        """
+        Configuration for the PostCVEmbeddingsRequest model with example data.
+        """
+
+        arbitrary_types_allowed = True
+        json_schema_extra = {
+            "example": {
+                "cv_storage_url": "https://storage.googleapis.com/main-storage-hireon/user_cv/6831c533f4a50c7c69a2bde9-1748309206886.pdf",
+                "user_id": "123"
+            }
+        }
+
+
+class PostCVEmbeddingsResponse(BaseModel):
+    """
+    Response model for CV embeddings containing embeddings and metadata.
+    """
+
+    embeddings: List[float] = Field(..., description="List of embeddings")
+    metrics: Dict[str, float] = Field(..., description="Metrics")
+
+class EmbeddingQueryRequest(BaseModel):
+    """
+    Request model for embedding query.
+    """
+
+    embeddings: List[float] = Field(..., description="List of embeddings")
+
+
+class EmbeddingQueryResponse(BaseModel):
+    """
+    Response model for embedding query.
+    """
+
+    results: List[Dict[str, float]] = Field(..., description="List of results")
+
+
 class CVJobAnalysisResponse(BaseModel):
     """
     Response model for CV job analysis containing relevance scores and improvement suggestions.
@@ -164,24 +216,6 @@ class CVJobAnalysisRequest(BaseModel):
             }
         }
 
-
-class RecommendationsRequest(BaseModel):
-    """
-    Request model for job recommendations.
-    """
-
-    cv_storage_url: str = Field(..., description="URL to the CV document in storage")
-
-    class Config:
-        """
-        Configuration for the RecommendationsRequest model with example data.
-        """
-
-        json_schema_extra = {
-            "example": {
-                "cv_storage_url": "https://storage.googleapis.com/main-storage-hireon/user_cv/6831c533f4a50c7c69a2bde9-1748309206886.pdf"
-            }
-        }
 
 
 class JobRecommendation(BaseModel):
