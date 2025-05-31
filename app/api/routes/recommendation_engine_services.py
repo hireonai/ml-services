@@ -9,14 +9,14 @@ from contextlib import asynccontextmanager
 import logging
 import time
 
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Request, Depends
 from fastapi.responses import JSONResponse
 from fastapi import status
 
 from app.api.models.models import (
     RecommendationsResponse,
     JobRecommendation,
-    PostCVEmbeddingsRequest
+    PostCVEmbeddingsRequest,
 )
 
 from app.api.core.core import (
@@ -24,6 +24,7 @@ from app.api.core.core import (
     google_storage_client,
     gemini_client_vertex_ai,
 )
+from app.api.core.auth import get_api_key
 from app.utils.utils import change_link_storage_to_gs
 from app.utils.ai.gen_ai_utils import generate_text_representation_from_cv
 from app.utils.recommendation.recommendation_utils import (
@@ -88,23 +89,31 @@ router = APIRouter(
 
 
 @router.get("/status")
-async def get_status(request: Request):
+async def get_status(request: Request, api_key: str = Depends(get_api_key)):
     """Get ChromaDB server status."""
     heartbeat_status = await request.app.state.chroma_client.heartbeat()
     return {"status": heartbeat_status}
 
 
 @router.get("/cv_embeddings")
-async def get_cv_embeddings(request: Request, user_id: str):
+async def get_cv_embeddings(
+    request: Request, user_id: str, api_key: str = Depends(get_api_key)
+):
     """Get CV embeddings for a given user ID."""
-    cv_embeddings = await request.app.state.user_cv_embeddings_collection.get(ids=user_id, include=["embeddings"])
-    return {'embeddings': cv_embeddings['embeddings'][0].tolist()}
+    cv_embeddings = await request.app.state.user_cv_embeddings_collection.get(
+        ids=user_id, include=["embeddings"]
+    )
+    return {"embeddings": cv_embeddings["embeddings"][0].tolist()}
 
 
 @router.post("/cv_embeddings")
-async def post_cv_embeddings(request: Request, req_data: PostCVEmbeddingsRequest):
+async def post_cv_embeddings(
+    request: Request,
+    req_data: PostCVEmbeddingsRequest,
+    api_key: str = Depends(get_api_key),
+):
     """Get CV embeddings for a given CV URL."""
-    
+
     start_time = time.time()
     request_id = f"req_{int(start_time)}"
     logger.info(
@@ -112,7 +121,7 @@ async def post_cv_embeddings(request: Request, req_data: PostCVEmbeddingsRequest
         request_id,
         req_data.cv_storage_url,
     )
-    
+
     try:
         # Get user CV and generate representation
         # Convert CV URL to Google Storage format
@@ -128,7 +137,7 @@ async def post_cv_embeddings(request: Request, req_data: PostCVEmbeddingsRequest
                 exc_info=True,
             )
             raise
-        
+
         # Measure CV to text conversion time
         cv_to_text_start_time = time.time()
         user_cv_representation = await generate_text_representation_from_cv(
@@ -136,9 +145,9 @@ async def post_cv_embeddings(request: Request, req_data: PostCVEmbeddingsRequest
         )
         cv_to_text_response_time = time.time() - cv_to_text_start_time
         logger.info(
-            "[%s] CV to text conversion completed in %.2f seconds", 
-            request_id, 
-            cv_to_text_response_time
+            "[%s] CV to text conversion completed in %.2f seconds",
+            request_id,
+            cv_to_text_response_time,
         )
 
         # Generate embedding for CV - measure time separately
@@ -151,21 +160,20 @@ async def post_cv_embeddings(request: Request, req_data: PostCVEmbeddingsRequest
         logger.info(
             "[%s] Embedding creation completed in %.2f seconds",
             request_id,
-            embedding_creation_time
+            embedding_creation_time,
         )
-        
+
         total_response_time = time.time() - start_time
         logger.info(
             "[%s] Total CV embeddings processing completed in %.2f seconds",
             request_id,
-            total_response_time
+            total_response_time,
         )
-        
+
         await request.app.state.user_cv_embeddings_collection.upsert(
-            embeddings=[cv_embedding],
-            ids=[req_data.user_id]
+            embeddings=[cv_embedding], ids=[req_data.user_id]
         )
-        
+
         return {
             "status": 200,
             "message": f"embedding added for user {req_data.user_id}",
@@ -175,15 +183,13 @@ async def post_cv_embeddings(request: Request, req_data: PostCVEmbeddingsRequest
         }
     except Exception as e:
         logger.error(
-            "[%s] Error getting CV embeddings: %s", 
-            request_id, 
-            str(e), 
-            exc_info=True
+            "[%s] Error getting CV embeddings: %s", request_id, str(e), exc_info=True
         )
         return JSONResponse(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, 
-            content={"error": str(e), "request_id": request_id}
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            content={"error": str(e), "request_id": request_id},
         )
+
 
 @router.get(
     "/recommendations",
@@ -215,7 +221,9 @@ async def post_cv_embeddings(request: Request, req_data: PostCVEmbeddingsRequest
         500: {"description": "Error generating recommendations"},
     },
 )
-async def get_recommendations(request: Request, user_id: str):
+async def get_recommendations(
+    request: Request, user_id: str, api_key: str = Depends(get_api_key)
+):
     """Get recommendations for a given user based on their CV."""
 
     start_time = time.time()
@@ -227,9 +235,11 @@ async def get_recommendations(request: Request, user_id: str):
     )
 
     try:
-        cv_embedding = await request.app.state.user_cv_embeddings_collection.get(ids=user_id, include=["embeddings"])
-        cv_embedding = cv_embedding['embeddings'][0]
-    
+        cv_embedding = await request.app.state.user_cv_embeddings_collection.get(
+            ids=user_id, include=["embeddings"]
+        )
+        cv_embedding = cv_embedding["embeddings"][0]
+
         # Query job descriptions with CV embedding
         logger.info("[%s] Querying job descriptions based on CV", request_id)
         chroma_query_start_time = time.time()
@@ -238,9 +248,9 @@ async def get_recommendations(request: Request, user_id: str):
         )
         chroma_query_response_time = time.time() - chroma_query_start_time
         logger.info(
-            "[%s] ChromaDB query completed in %.2f seconds", 
-            request_id, 
-            chroma_query_response_time
+            "[%s] ChromaDB query completed in %.2f seconds",
+            request_id,
+            chroma_query_response_time,
         )
 
         # Create dataframe from results
@@ -258,7 +268,11 @@ async def get_recommendations(request: Request, user_id: str):
         )
 
         # Format the response to match the RecommendationsResponse model
-        logger.info("[%s] Preparing response with %d recommendations", request_id, len(combined_df))
+        logger.info(
+            "[%s] Preparing response with %d recommendations",
+            request_id,
+            len(combined_df),
+        )
         recommendations_list = []
         for item in combined_df.to_dict(orient="records"):
             recommendations_list.append(
@@ -271,9 +285,9 @@ async def get_recommendations(request: Request, user_id: str):
         logger.info(
             "[%s] Total recommendation processing completed in %.2f seconds",
             request_id,
-            total_response_time
+            total_response_time,
         )
-        
+
         return {
             "recommendations": recommendations_list,
             "metrics": {
@@ -284,12 +298,12 @@ async def get_recommendations(request: Request, user_id: str):
 
     except Exception as e:
         logger.error(
-            "[%s] Error generating recommendations: %s", 
-            request_id, 
-            str(e), 
-            exc_info=True
+            "[%s] Error generating recommendations: %s",
+            request_id,
+            str(e),
+            exc_info=True,
         )
         return JSONResponse(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, 
-            content={"error": str(e), "request_id": request_id}
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            content={"error": str(e), "request_id": request_id},
         )

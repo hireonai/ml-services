@@ -9,7 +9,7 @@ from contextlib import asynccontextmanager
 import time
 import logging
 
-from fastapi import APIRouter, Request, Body, File, UploadFile
+from fastapi import APIRouter, Request, Body, File, UploadFile, Depends
 from fastapi.responses import JSONResponse
 from dotenv import load_dotenv
 from starlette import status
@@ -39,6 +39,7 @@ from app.api.core.core import (
     gemini_client_vertex_ai,
     google_storage_client,
 )
+from app.api.core.auth import get_api_key
 
 # Configure logger
 logger = logging.getLogger(__name__)
@@ -114,7 +115,9 @@ router = APIRouter(
     },
 )
 async def get_cv_job_analysis_flash(
-    request: Request, data: CVJobAnalysisRequest = Body(...)
+    request: Request,
+    data: CVJobAnalysisRequest = Body(...),
+    api_key: str = Depends(get_api_key),
 ):
     """
     Analyze CV against job details using the Gemini AI model.
@@ -189,7 +192,9 @@ async def get_cv_job_analysis_flash(
     },
 )
 async def cover_letter_generator(
-    request: Request, data: CoverLetterGeneratorRequest = Body(...)
+    request: Request,
+    data: CoverLetterGeneratorRequest = Body(...),
+    api_key: str = Depends(get_api_key),
 ):
     """
     Generate a cover letter for a job application.
@@ -379,7 +384,11 @@ async def cover_letter_generator(
         500: {"description": "Error analyzing CV"},
     },
 )
-async def get_general_cv_analysis(request: Request, cv_file: UploadFile = File(...)):
+async def get_general_cv_analysis(
+    request: Request,
+    cv_file: UploadFile = File(...),
+    api_key: str = Depends(get_api_key),
+):
     """
     Analyze a CV and provide a general analysis.
 
