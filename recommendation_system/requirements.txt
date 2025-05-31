@@ -1,5 +1,0 @@
-pymongo
-dotenv
-chromadb
-pandas
-sentence_transformers
