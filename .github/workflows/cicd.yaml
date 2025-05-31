@@ -55,6 +55,7 @@ jobs:
         echo "GOOGLE_GENAI_USE_VERTEXAI=True" >> .env
         echo "CHROMA_SERVER_PORT=${{ secrets.CHROMA_SERVER_PORT }}" >> .env
         echo "CHROMA_SERVER_HOST=${{ secrets.CHROMA_SERVER_HOST }}" >> .env
+        echo "API_SECRET_KEY=${{ secrets.API_SECRET_KEY }}" >> .env
 
     # Build and push Docker image
     - name: 'Build and push'
