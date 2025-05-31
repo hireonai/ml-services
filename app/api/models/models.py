@@ -4,7 +4,7 @@ API data models.
 This module defines Pydantic models for request/response data validation and serialization.
 """
 
-from typing import List, Dict
+from typing import List, Dict, Union
 from pydantic import BaseModel, HttpUrl, Field
 
 
@@ -15,6 +15,7 @@ class GetCVEmbeddingsRequest(BaseModel):
 
     user_id: str = Field(..., description="User ID")
 
+
 class PostCVEmbeddingsRequest(BaseModel):
     """
     Request model for CV embeddings.
@@ -22,6 +23,7 @@ class PostCVEmbeddingsRequest(BaseModel):
 
     cv_storage_url: str = Field(..., description="URL to the CV document in storage")
     user_id: str = Field(..., description="User ID")
+
     class Config:
         """
         Configuration for the PostCVEmbeddingsRequest model with example data.
@@ -31,7 +33,7 @@ class PostCVEmbeddingsRequest(BaseModel):
         json_schema_extra = {
             "example": {
                 "cv_storage_url": "https://storage.googleapis.com/main-storage-hireon/user_cv/6831c533f4a50c7c69a2bde9-1748309206886.pdf",
-                "user_id": "123"
+                "user_id": "123",
             }
         }
 
@@ -43,6 +45,7 @@ class PostCVEmbeddingsResponse(BaseModel):
 
     embeddings: List[float] = Field(..., description="List of embeddings")
     metrics: Dict[str, float] = Field(..., description="Metrics")
+
 
 class EmbeddingQueryRequest(BaseModel):
     """
@@ -217,7 +220,6 @@ class CVJobAnalysisRequest(BaseModel):
         }
 
 
-
 class JobRecommendation(BaseModel):
     """
     Model representing a job recommendation with job details and match score.
@@ -234,3 +236,17 @@ class RecommendationsResponse(BaseModel):
 
     recommendations: List[JobRecommendation]
     metrics: Dict[str, float]
+
+
+class GeneralCVAnalysisResponse(BaseModel):
+    """
+    Response model for general CV analysis.
+    """
+
+    overall_score: int
+    score_breakdown: Dict[str, int]
+    cv_strengths: List[str]
+    areas_for_improvement: List[str]
+    section_analysis: Dict[str, Dict[str, Union[int, str]]]
+    processing_time_seconds: float
+    model: str

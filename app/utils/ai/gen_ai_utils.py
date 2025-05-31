@@ -15,6 +15,7 @@ from app.utils.ai.system_prompt import (
     CV_JOB_ANALYSIS_SYSTEM_PROMPT,
     COVER_LETTER_GENERATION_SYSTEM_PROMPT,
     CV_TO_TEXT_SYSTEM_PROMPT,
+    CV_GENERAL_ANALYSIS_SYSTEM_PROMPT,
 )
 
 # Configure logger
@@ -352,3 +353,74 @@ async def generate_text_representation_from_cv(client, cv_url: str) -> str:
     )
     logger.info("Successfully received response from Gemini API")
     return response
+
+
+async def general_cv_analysis(client, cv_content: bytes) -> str:
+    """
+    Analyze a CV and provide a general analysis.
+
+    Args:
+        client: Initialized Gemini Vertex AI API client
+        cv_content: Binary content of the CV PDF
+        cv_mime_type: MIME type of the CV PDF
+
+    Returns:
+        str: General analysis of the CV
+    """
+    logger.info("Analyzing CV with Gemini model")
+
+    try:
+        # Create PDF document reference from URL
+        cv_document = types.Part.from_bytes(
+            data=cv_content, mime_type="application/pdf"
+        )
+        # Prepare content structure for Gemini API
+        contents = [
+            types.Content(
+                role="user",
+                parts=[
+                    types.Part.from_text(text="CV content:"),
+                    cv_document,
+                ],
+            )
+        ]
+        logger.debug("Prepared content structure for Gemini API")
+
+        # Define safety settings to allow necessary content generation
+        safety_settings = [
+            types.SafetySetting(category="HARM_CATEGORY_HATE_SPEECH", threshold="OFF"),
+            types.SafetySetting(
+                category="HARM_CATEGORY_DANGEROUS_CONTENT", threshold="OFF"
+            ),
+            types.SafetySetting(
+                category="HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold="OFF"
+            ),
+            types.SafetySetting(category="HARM_CATEGORY_HARASSMENT", threshold="OFF"),
+        ]
+
+        # Configure generation parameters
+        generate_content_config = types.GenerateContentConfig(
+            temperature=0.0,  # Low temperature for more deterministic output
+            top_p=1,
+            seed=0,  # Fixed seed for reproducible results
+            max_output_tokens=65535,
+            safety_settings=safety_settings,
+            system_instruction=[
+                types.Part.from_text(text=CV_GENERAL_ANALYSIS_SYSTEM_PROMPT)
+            ],
+        )
+        logger.debug("Configured generation parameters")
+
+        # Call Gemini API and return response
+        logger.info("Sending request to Gemini API")
+        response = await client.aio.models.generate_content(
+            model="gemini-2.5-flash-preview-05-20",
+            contents=contents,
+            config=generate_content_config,
+        )
+        logger.info("Successfully received response from Gemini API")
+        return response
+
+    except Exception as e:
+        logger.error("Error analyzing CV: %s", str(e), exc_info=True)
+        raise

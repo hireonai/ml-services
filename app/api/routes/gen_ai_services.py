@@ -9,7 +9,7 @@ from contextlib import asynccontextmanager
 import time
 import logging
 
-from fastapi import APIRouter, Request, Body
+from fastapi import APIRouter, Request, Body, File, UploadFile
 from fastapi.responses import JSONResponse
 from dotenv import load_dotenv
 from starlette import status
@@ -19,6 +19,7 @@ from app.api.models.models import (
     CoverLetterGeneratorRequest,
     CoverLetterResponse,
     CVJobAnalysisResponse,
+    GeneralCVAnalysisResponse,
 )
 from app.utils.utils import (
     generate_and_upload_pdf,
@@ -31,6 +32,7 @@ from app.utils.ai.gen_ai_utils import (
     process_gemini_response,
     generate_cover_letter,
     format_cover_letter_response,
+    general_cv_analysis,
 )
 from app.api.core.core import (
     gemini_client,
@@ -315,6 +317,119 @@ async def cover_letter_generator(
         total_time = time.time() - start_time
         logger.error(
             "[%s] Error in cover letter generation (%.2f seconds): %s",
+            request_id,
+            total_time,
+            str(e),
+            exc_info=True,
+        )
+        return JSONResponse(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            content={"error": str(e), "request_id": request_id},
+        )
+
+
+@router.post(
+    "/general-cv-analysis",
+    status_code=status.HTTP_200_OK,
+    response_model=GeneralCVAnalysisResponse,
+    responses={
+        200: {
+            "description": "CV analysis completed successfully",
+            "content": {
+                "application/json": {
+                    "example": {
+                        "overall_score": 92,
+                        "score_breakdown": {
+                            "technical_skills": 95,
+                            "experience_relevance": 95,
+                            "education": 90,
+                            "achievement": 90,
+                        },
+                        "cv_strengths": [
+                            "Demonstrated strong leadership and product development experience",
+                            "Extensive technical expertise in AI/ML and Computer Vision",
+                        ],
+                        "areas_for_improvement": [
+                            "Consider categorizing the 'SKILLS' section for improved readability"
+                        ],
+                        "section_analysis": {
+                            "work_experience": {
+                                "score": 95,
+                                "comment": "Strong work experience section showing leadership",
+                            },
+                            "education": {
+                                "score": 90,
+                                "comment": "Solid educational background",
+                            },
+                            "skills": {
+                                "score": 95,
+                                "comment": "Comprehensive technical skills",
+                            },
+                            "achievements": {
+                                "score": 90,
+                                "comment": "Rich with quantifiable achievements",
+                            },
+                        },
+                        "processing_time_seconds": 19.89,
+                        "model": "gemini-2.5-flash-preview-05-20",
+                    }
+                }
+            },
+        },
+        500: {"description": "Error analyzing CV"},
+    },
+)
+async def get_general_cv_analysis(request: Request, cv_file: UploadFile = File(...)):
+    """
+    Analyze a CV and provide a general analysis.
+
+    This endpoint accepts a CV file upload and analyzes it using the Gemini AI model
+    to provide a general assessment of strengths, weaknesses, and improvement areas.
+    """
+    start_time = time.time()
+    request_id = f"req_{int(start_time)}"
+    logger.info(
+        "[%s] Starting general CV analysis for uploaded file: %s",
+        request_id,
+        cv_file.filename,
+    )
+
+    try:
+        # Process uploaded file
+        logger.debug("[%s] Reading CV file content", request_id)
+        cv_content = await cv_file.read()
+
+        # Call Gemini for analysis
+        logger.info("[%s] Sending CV to Gemini for analysis", request_id)
+        gen_start_time = time.time()
+        response = await general_cv_analysis(
+            request.app.state.gemini_client_vertex_ai,
+            cv_content,
+        )
+        gen_time = time.time() - gen_start_time
+        logger.info(
+            "[%s] Received response from Gemini (%.2f seconds)", request_id, gen_time
+        )
+
+        # Process the response
+        logger.debug("[%s] Processing Gemini response", request_id)
+        result = process_gemini_response(response.text, time.time() - start_time)
+
+        # Log results
+        processing_time = time.time() - start_time
+        logger.info(
+            "[%s] CV analysis complete, overall score: %d, took %.2f seconds",
+            request_id,
+            result.get("overall_score", 0),
+            processing_time,
+        )
+
+        return result
+
+    except Exception as e:
+        total_time = time.time() - start_time
+        logger.error(
+            "[%s] Error in general CV analysis (%.2f seconds): %s",
             request_id,
             total_time,
             str(e),
