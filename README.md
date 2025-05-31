@@ -47,10 +47,13 @@ This repository contains the machine learning services for the HireOn platform, 
 ```
 .
 ├── app/                        # Main application package
+│   ├── __init__.py             # Application initialization
 │   ├── api/                    # API routes and models
 │   │   ├── core/               # Core service components
 │   │   ├── models/             # Data models and schemas
 │   │   └── routes/             # API endpoints
+│   │       ├── gen_ai_services.py     # Gen AI endpoints
+│   │       └── recommendation_engine_services.py  # Recommendation endpoints
 │   └── utils/                  # Utility functions
 ├── credentials/                # Service account credentials
 ├── data/                       # Data files
@@ -141,6 +144,7 @@ When the service is running, API documentation is available at:
 | `MONGO_URI` | MongoDB connection string |
 | `CHROMA_CLIENT_HOST` | ChromaDB server host |
 | `CHROMA_CLIENT_PORT` | ChromaDB server port |
+| `API_SECRET_KEY` | Secret key for API security |
 
 ## Development
 
@@ -150,6 +154,16 @@ When the service is running, API documentation is available at:
 2. Define request/response models in `app/api/models/models.py`
 3. Implement utility functions in `app/utils/`
 4. Register the router in `app/__init__.py`
+
+## API Endpoints
+
+### Gen AI Services
+- `/gen-ai/analyze-cv`: Analyze CV against job requirements
+- `/gen-ai/generate-cover-letter`: Generate a personalized cover letter
+
+### Recommendation Engine
+- `/recommendation/get-job-recommendations`: Get job recommendations based on CV
+- `/recommendation/store-cv-embedding`: Store CV embedding for future recommendations
 
 ## License
 

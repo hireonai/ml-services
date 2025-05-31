@@ -6,7 +6,7 @@ using a secret key approach.
 """
 
 import os
-from fastapi import Security, HTTPException, Depends
+from fastapi import Security, HTTPException
 from fastapi.security import APIKeyHeader
 from starlette import status
 from dotenv import load_dotenv
