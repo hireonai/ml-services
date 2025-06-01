@@ -1,5 +1,8 @@
 FROM python:3.12.3-slim
 
+# Install uv.
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
+
 # Set working directory
 WORKDIR /app
 
@@ -25,10 +28,6 @@ RUN apt-get update && apt-get install -y \
     fonts-liberation \
     && rm -rf /var/lib/apt/lists/*
 
-# Install dependencies first (for better caching)
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt --timeout 300 --retries 10
-
 # Create credentials directory
 RUN mkdir -p credentials
 COPY credentials/ ./credentials
@@ -36,16 +35,20 @@ COPY credentials/ ./credentials
 # Copy .env file
 COPY .env .
 
-# Create non-root user for security
-RUN adduser --disabled-password --gecos "" appuser
-
-# Copy application code
+# Copy requirements or project files
+COPY pyproject.toml requirements.txt* ./
 COPY ./app ./app
 COPY main.py .
+
+# Install dependencies using uv
+RUN uv sync
+
+# Create non-root user for security
+RUN adduser --disabled-password --gecos "" appuser
 
 # Set permissions
 RUN chown -R appuser:appuser /app
 USER appuser
 
 # Run the application with PORT environment variable
-CMD ["sh", "-c", "uvicorn main:app --host 0.0.0.0 --port ${PORT:-8080} --reload"]
+CMD ["sh", "-c", "/app/.venv/bin/uvicorn main:app --host 0.0.0.0 --port ${PORT:-8080}"]
