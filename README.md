@@ -24,6 +24,12 @@ This repository contains the machine learning services for the HireOn platform, 
   - Job description and requirements
   - Outputs as a professionally formatted PDF
 
+- **General CV Analysis**: Provides comprehensive evaluation of a CV without job context:
+  - Overall CV score and section-by-section breakdown
+  - Highlights CV strengths and achievements
+  - Identifies areas for improvement
+  - Analyzes each CV section (work experience, education, skills, achievements)
+
 ### Recommendation Engine
 
 - **Job Recommendations**: Provides personalized job recommendations based on:
@@ -91,7 +97,7 @@ This repository contains the machine learning services for the HireOn platform, 
 
 3. Install dependencies:
    ```bash
-   pip install -r requirements.txt
+   uv pip install -r requirements.txt
    ```
 
 4. Configure environment variables:
@@ -107,16 +113,20 @@ This repository contains the machine learning services for the HireOn platform, 
 ### Local Development
 
 ```bash
+# Using system installed uvicorn
 uvicorn main:app --reload
+
+# Or using uvicorn from virtual environment
+.venv/bin/uvicorn main:app --host 0.0.0.0 --port 8080 --reload
 ```
 
-The API will be available at http://localhost:8000
+The API will be available at http://localhost:8080
 
 ### Using Docker
 
 ```bash
 docker build -t hireon-ml-services .
-docker run -p 8000:8000 hireon-ml-services
+docker run -p 8080:8080 hireon-ml-services
 ```
 
 Or with Docker Compose:
@@ -160,6 +170,7 @@ When the service is running, API documentation is available at:
 ### Gen AI Services
 - `/gen-ai/analyze-cv`: Analyze CV against job requirements
 - `/gen-ai/generate-cover-letter`: Generate a personalized cover letter
+- `/gen-ai/general-cv-analysis`: Provide general CV evaluation without job context
 
 ### Recommendation Engine
 - `/recommendation/get-job-recommendations`: Get job recommendations based on CV

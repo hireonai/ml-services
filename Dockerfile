@@ -36,7 +36,7 @@ COPY credentials/ ./credentials
 COPY .env .
 
 # Copy requirements or project files
-COPY pyproject.toml requirements.txt* ./
+COPY pyproject.toml ./
 COPY ./app ./app
 COPY main.py .
 
