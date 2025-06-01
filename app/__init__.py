@@ -23,17 +23,6 @@ app = FastAPI(
     title="ML Services API",
     description="""
     API for AI and recommendation services.
-    
-    ## Authentication
-    
-    All API endpoints require an API key for authentication.
-    
-    Include the API key in the request header as follows:
-    ```
-    X-API-Key: your_api_key_here
-    ```
-    
-    The API key should be set in the .env file as API_SECRET_KEY.
     """,
     version="1.0.0",
 )
