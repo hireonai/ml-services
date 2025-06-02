@@ -51,4 +51,4 @@ RUN chown -R appuser:appuser /app
 USER appuser
 
 # Run the application with PORT environment variable
-CMD ["sh", "-c", "/app/.venv/bin/uvicorn main:app --host 0.0.0.0 --port ${PORT:-8080}"]
+CMD ["sh", "-c", "/app/.venv/bin/uvicorn main:app --host 0.0.0.0 --port ${PORT:-8080} --reload"]

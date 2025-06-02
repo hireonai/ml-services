@@ -106,7 +106,26 @@ async def get_cv_embeddings(
     return {"embeddings": cv_embeddings["embeddings"][0].tolist()}
 
 
-@router.post("/cv_embeddings")
+@router.post(
+    "/cv_embeddings",
+    responses={
+        200: {
+            "description": "Successfully added embedding for user",
+            "content": {
+                "application/json": {
+                    "example": {
+                        "status": 200,
+                        "message": "embedding added for user 123",
+                        "cv_to_text_response_time": 10.49885368347168,
+                        "embedding_creation_time": 1.7401466369628906,
+                        "total_response_time": 12.23932147026062,
+                    }
+                }
+            },
+        },
+        500: {"description": "Error getting CV embeddings"},
+    },
+)
 async def post_cv_embeddings(
     request: Request,
     req_data: PostCVEmbeddingsRequest,
