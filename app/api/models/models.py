@@ -32,7 +32,7 @@ class PostCVEmbeddingsRequest(BaseModel):
         arbitrary_types_allowed = True
         json_schema_extra = {
             "example": {
-                "cv_storage_url": "https://storage.googleapis.com/main-storage-hireon/user_cv/6831c533f4a50c7c69a2bde9-1748309206886.pdf",
+                "cv_storage_url": "https://storage.googleapis.com/main-storage-hireon/user_cv/fake_cv.pdf",
                 "user_id": "123",
             }
         }
@@ -133,7 +133,7 @@ class CoverLetterGeneratorRequest(BaseModel):
         arbitrary_types_allowed = True
         json_schema_extra = {
             "example": {
-                "cv_url": "https://storage.googleapis.com/main-storage-hireon/user_cv/6831c533f4a50c7c69a2bde9-1748309206886.pdf",
+                "cv_url": "https://storage.googleapis.com/main-storage-hireon/user_cv/fake_cv.pdf",
                 "current_date": "2025-05-25",
                 "spesific_request": "Use English language in the cover letter.",
                 "job_details": {
@@ -146,20 +146,10 @@ class CoverLetterGeneratorRequest(BaseModel):
                     "job_desc_list": [
                         "Processing and analyzing various types of data or raw information to discover patterns, gather insights, and achieve business objectives.",
                         "Build predictive analytics and optimization models to drive actionable insights that improve business performance or related key metrics.",
-                        "Explore and develop AI use cases aimed at enhancing productivity, automating processes, and adopting new technologies within the organization.",
-                        "Work closely with cross-functional teams, including business stakeholders, to understand their needs, communicate findings effectively, and implement data-driven solutions.",
-                        "Engage in continuous learning and stay updated on data science methods, use cases, and technology advancements.",
                     ],
                     "job_qualification_list": [
                         "Bachelor in Mathematics, Statistics, or Information Technology from a top university.",
                         "Minimum of 1 year of working or internship experience as a Data Scientist or a related project portfolio.",
-                        "Fresh graduates are welcome to apply",
-                        "Strong analytical and statistical skills with a high sense of logical thinking.",
-                        "Experience in big data analysis, data warehousing, and business intelligence.",
-                        "Proficient in using R and Python to build machine learning models.",
-                        "Experience with Hadoop, Spark, Graph DB, and Gen-AI use cases is an advantage.",
-                        "Ability to work both individually and as part of a team",
-                        "Willing to work on site & full time in Head Office Bintaro",
                     ],
                 },
             }
@@ -193,27 +183,17 @@ class CVJobAnalysisRequest(BaseModel):
         arbitrary_types_allowed = True
         json_schema_extra = {
             "example": {
-                "cv_url": "https://storage.googleapis.com/main-storage-hireon/user_cv/6831c533f4a50c7c69a2bde9-1748309206886.pdf",
+                "cv_url": "https://storage.googleapis.com/main-storage-hireon/user_cv/fake_cv.pdf",
                 "job_details": {
                     "job_position": "Data Scientist",
                     "min_experience": "Min. 1 years of experience",
                     "job_desc_list": [
                         "Processing and analyzing various types of data or raw information to discover patterns, gather insights, and achieve business objectives.",
                         "Build predictive analytics and optimization models to drive actionable insights that improve business performance or related key metrics.",
-                        "Explore and develop AI use cases aimed at enhancing productivity, automating processes, and adopting new technologies within the organization.",
-                        "Work closely with cross-functional teams, including business stakeholders, to understand their needs, communicate findings effectively, and implement data-driven solutions.",
-                        "Engage in continuous learning and stay updated on data science methods, use cases, and technology advancements.",
                     ],
                     "job_qualification_list": [
                         "Bachelor in Mathematics, Statistics, or Information Technology from a top university.",
                         "Minimum of 1 year of working or internship experience as a Data Scientist or a related project portfolio.",
-                        "Fresh graduates are welcome to apply",
-                        "Strong analytical and statistical skills with a high sense of logical thinking.",
-                        "Experience in big data analysis, data warehousing, and business intelligence.",
-                        "Proficient in using R and Python to build machine learning models.",
-                        "Experience with Hadoop, Spark, Graph DB, and Gen-AI use cases is an advantage.",
-                        "Ability to work both individually and as part of a team",
-                        "Willing to work on site & full time in Head Office Bintaro",
                     ],
                 },
             }
