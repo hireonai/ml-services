@@ -5,6 +5,7 @@ Main application package.
 import logging
 import sys
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from app.api.routes import router
 
 # Configure logging
@@ -25,6 +26,15 @@ app = FastAPI(
     API for AI and recommendation services.
     """,
     version="1.0.0",
+)
+
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows all origins
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods including OPTIONS
+    allow_headers=["*"],  # Allows all headers
 )
 
 # Include API router
