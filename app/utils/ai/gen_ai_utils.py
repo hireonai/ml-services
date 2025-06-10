@@ -215,6 +215,7 @@ async def analyze_cv_with_gemini(client, cv_url, job_details_text):
             system_instruction=[
                 types.Part.from_text(text=CV_JOB_ANALYSIS_SYSTEM_PROMPT)
             ],
+            thinking_config=types.ThinkingConfig(thinking_budget=2500),
         )
         logger.debug("Configured generation parameters")
 

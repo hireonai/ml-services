@@ -41,6 +41,8 @@ OUTPUT: CV Optimization Recommendations
 - Map CV skills to job requirements with confidence scoring
 - Identify skill gaps and hidden strengths in CV
 - Assess how to better present existing skills
+- **SELECT TOP 6 MOST RELEVANT SKILLS** based on job requirements priority and CV evidence
+- **RANK SKILLS** from highest to lowest score (100 → 0)
 
 ### Step 2: Experience Relevance Analysis
 - Industry alignment scoring
@@ -77,6 +79,12 @@ Soft Skills & Culture Fit: 10%
 - **30-49**: Beginner with limited experience
 - **0-29**: No evidence or minimal mention
 
+### Top Skills Selection Criteria
+1. **Job Requirement Priority**: Skills mentioned as "required" or "must-have" rank higher
+2. **CV Evidence Strength**: Skills with concrete project examples score higher
+3. **Market Relevance**: Current industry-standard technologies get priority
+4. **Impact Potential**: Skills that significantly affect matching score
+
 ### Match Quality Tiers
 - **Elite (90-100)**: Exceptional match, ready for immediate placement
 - **Strong (75-89)**: High potential, minor CV adjustments needed
@@ -92,7 +100,12 @@ Generate ONLY this JSON structure:
 {
   "cv_relevance_score": [0-100],
   "skill_identification_dict": {
-    "skill_name": [0-100]
+    "skill_name_1": [0-100],
+    "skill_name_2": [0-100],
+    "skill_name_3": [0-100],
+    "skill_name_4": [0-100],
+    "skill_name_5": [0-100],
+    "skill_name_6": [0-100]
   },
   "areas_for_improvement": [
     "Specific CV content gap or weak point (max 5)"
@@ -103,6 +116,12 @@ Generate ONLY this JSON structure:
   ]
 }
 ```
+
+**IMPORTANT**: 
+- `skill_identification_dict` MUST contain exactly 6 skills
+- Skills MUST be ordered from highest score to lowest score
+- Only include the most job-relevant skills based on job posting requirements
+- Prioritize skills that appear in job "requirements" over "nice-to-have"
 
 ## CV Optimization Guidelines
 
@@ -152,12 +171,20 @@ Generate ONLY this JSON structure:
 - Focus on actionable CV changes
 - Example: "Add 'React.js' prominently in your skills section"
 
+### Text Formatting Rules:
+- **NEVER use markdown bold formatting** (****text****)
+- **USE HTML bold tags** (`<strong></strong>`) ONLY in the `suggestions` field
+- For `suggestions` array: Start each suggestion with `<strong>Category Name</strong>:` followed by the recommendation
+- Example format: `"<strong>Content Enhancement</strong>: Add missing technical keywords from job requirements"`
+- Other fields (analysis_explanation, areas_for_improvement) should use plain text without HTML formatting
+
 ### Content Quality Standards:
 1. **Immediately Actionable**: All suggestions can be implemented today
 2. **CV-Specific**: Focus on content, presentation, and structure
 3. **Job-Targeted**: Directly address gaps identified in job posting
 4. **Evidence-Based**: Reference specific sections of current CV
 5. **Impact-Focused**: Prioritize changes with highest matching impact
+6. **HTML Formatting**: Use `<strong></strong>` tags ONLY in the `suggestions` field for category labels
 
 ### Suggestion Framework:
 - **Skills Section**: How to better present technical abilities
@@ -165,6 +192,17 @@ Generate ONLY this JSON structure:
 - **Projects Section**: What to add or emphasize
 - **Keywords**: Specific terms to include for better ATS matching
 - **Structure**: Layout and formatting improvements
+
+**Suggestion Output Format**:
+Each suggestion in the JSON array should follow this pattern:
+```
+"<strong>Category Name</strong>: Specific actionable recommendation"
+```
+
+**Example suggestions**:
+- `"<strong>Content Enhancement</strong>: Add missing technical keywords from job requirements"`
+- `"<strong>Skills Presentation</strong>: Reorganize skills section to match job priorities"`
+- `"<strong>Experience Repositioning</strong>: Reframe current role descriptions to align with target job"`
 
 ## Analysis Focus Areas
 
@@ -199,9 +237,12 @@ Generate ONLY this JSON structure:
 1. **READ** CV and job listing thoroughly
 2. **IDENTIFY** exact keyword and skill gaps
 3. **ANALYZE** how to better present existing experience
-4. **RECOMMEND** specific CV content changes
-5. **PRIORITIZE** suggestions by matching impact
-6. **OUTPUT** structured JSON with actionable CV improvements
+4. **SELECT** top 6 most job-relevant skills for analysis
+5. **RANK** selected skills from highest to lowest score
+6. **RECOMMEND** specific CV content changes
+7. **PRIORITIZE** suggestions by matching impact
+8. **FORMAT** suggestions field using HTML `<strong></strong>` tags for category labels only
+9. **OUTPUT** structured JSON with actionable CV improvements
 
 Remember: Your goal is to help candidates optimize their EXISTING qualifications and experience to better match job requirements through strategic CV enhancement, not skill development.
 """
